@@ -53,8 +53,8 @@
     <!-- Connexion -->
  
         <span class="neuf">
-            <a href="inscription">S'inscrire</a>
-            <a href="connexion">Se Connecter</a>
+            <a data-th-href="@{creer}">S'inscrire</a>
+            <a data-th-href="@{connexion}">Se Connecter</a>
             <!-- ici, mettre la co et déco de façon dynamique -->
         </span>
     </div>
@@ -71,20 +71,21 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link textNav" aria-current="page" href="#">Exemple lien 1</a>
+                <a class="nav-link textNav" aria-current="page" data-th-href="@{nouvelle-vente}">Vendre</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link textNav" href="#">Exemple lien 2</a>
+                <a class="nav-link textNav" data-th-href="@{encherir}">Enchérir</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle textNav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Profil
                 </a>
                 <ul class="dropdown-menu bg-body-secondary-emphasis">
-                  <li><a class="dropdown-item textNav" href="#">S'enregistrer</a></li>
+                  <li><a class="dropdown-item textNav" data-th-href="@{creer}">S'enregistrer</a></li>
                   <li><a class="dropdown-item textNav" data-th-href="@{connexion}">Se connecter</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item textNav" href="#">Mon Profil</a></li>
+                  <li><a class="dropdown-item textNav" data-th-href="@{profil}">Mon Profil</a></li>
+                  <li><a class="dropdown-item textNav" data-th-href="@{acquisition}">Liste des acquisitions</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -102,6 +103,8 @@
 </header>
 
 <body class="bg-white h-100">
+
+<h2>Connexion</h2>
 
 
 </body>
