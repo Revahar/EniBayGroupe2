@@ -1,1 +1,46 @@
-@charset "UTF-8";
+.grid{
+    display : grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 1%;
+    margin-left: 5%;
+    margin-right: 5%;
+    row-gap: 5%;
+}
+
+.neuf {
+    grid-column: 9;
+    grid-row: 1;
+}
+
+.cinq {
+    grid-column: 5;
+    grid-row: 10;
+}
+
+  .titre span:nth-child(1) {
+    color: red;
+  }
+  .titre span:nth-child(2) {
+    color: blue;
+  }
+  
+  .titre span:nth-child(3) {
+    color: yellow;
+  }
+  
+  .titre span:nth-child(4) {
+    color: green;
+  }
+  .titre {
+    word-spacing: -25em;
+  }
+
+body {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+  
+  
+
+
+  
