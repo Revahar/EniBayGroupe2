@@ -4,9 +4,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import fr.eni.EniBay.bll.EnchereService;
+
 @Controller
 public class EniBayController {
 	
+	private EnchereService enchereService;
+	
+	public EniBayController(EnchereService enchereService) {
+		this.enchereService = enchereService;
+	}
 	
 	@GetMapping({"/", "/accueil"})
 	public String afficherAccueil() {
