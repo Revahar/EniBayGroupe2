@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" class="h-100">
+<html lang="fr" class="h-100" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
 
     <script nomodule>window.MSInputMethodContext && document.documentMode && document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-ie11@5/css/bootstrap-ie11.min.css"><script src="https://cdn.jsdelivr.net/npm/ie11-custom-properties@4/ie11CustomProperties.min.js"><\/script>');</script>
     <link rel="stylesheet" href="dark-mode.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" data-th-href="@{/css/style.css}">
 
     <!-- Fin apport bouton mode sombre -->
 
@@ -55,6 +55,7 @@
         <span class="neuf">
             <a href="inscription">S'inscrire</a>
             <a href="connexion">Se Connecter</a>
+            <!-- ici, mettre la co et déco de façon dynamique -->
         </span>
     </div>
 
@@ -63,7 +64,7 @@
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg bg-body-primary-emphasis ">
         <div class="container-fluid">
-          <a class="navbar-brand textNav" href="#" >Accueil</a>
+          <a class="navbar-brand textNav" th:href="@{Accueil}">Accueil</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
