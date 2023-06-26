@@ -103,8 +103,24 @@
 </header>
 
 <body class="bg-white h-100">
+	<div class="grid">
+		<div class="titreListeVide" th:if="${#lists.isEmpty(encheres)}">Aucune enchère n'est actuellement en cours</div>
+		<img class="warning" alt="GIF animé warning" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Blinking_warning.gif">
+	</div>
 
-	<h2>Accueil</h2>
+	<div class="align" th:unless="${#lists.isEmpty(encheres)}">
+	
+		<div class="grid">
+		    <tr data-th-each="item: ${encheres}">
+		        <td>
+		        	<a th:href="@{encherir/{itemId}(itemId=${item.id})}">
+	    				<img class="image" th:src="@{'/Images/' + ${item.id} + '.jpg'}" th:alt="${item.titre}" th:title="${item.titre}">
+					</a>
+		        </td>
+		    </tr>
+		</div>
+	</div>
+	
 
 
 </body>
