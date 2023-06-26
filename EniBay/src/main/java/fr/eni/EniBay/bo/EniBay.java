@@ -1,4 +1,4 @@
-package fr.eni.EniBay;
+package fr.eni.EniBay.bo;
 
 public class EniBay {
 	public EniBay() {
