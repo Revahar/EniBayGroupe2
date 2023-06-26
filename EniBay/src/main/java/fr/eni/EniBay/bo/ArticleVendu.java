@@ -91,5 +91,13 @@ public class ArticleVendu {
 	public void setNo_categorie(Integer no_categorie) {
 		this.no_categorie = no_categorie;
 	}
+
+	@Override
+	public String toString() {
+		return "ArticleVendu [no_article=" + no_article + ", nom_article=" + nom_article + ", desciption=" + desciption
+				+ ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres=" + date_fin_encheres
+				+ ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente + ", no_utilisateur=" + no_utilisateur
+				+ ", no_categorie=" + no_categorie + "]";
+	}
 	
 }
