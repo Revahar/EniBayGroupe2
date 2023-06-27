@@ -62,7 +62,8 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/profil")
-	public String afficherProfil() {
+	public String afficherProfil(@RequestParam Utilisateur utilisateur, Model model) {
+		model.addAttribute("utilisateur", utilisateur);
 		return "Profil";
 	}
 	
