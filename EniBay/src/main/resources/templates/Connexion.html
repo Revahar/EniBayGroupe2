@@ -13,34 +13,19 @@
     <script nomodule>window.MSInputMethodContext && document.documentMode && document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-ie11@5/css/bootstrap-ie11.min.css"><script src="https://cdn.jsdelivr.net/npm/ie11-custom-properties@4/ie11CustomProperties.min.js"><\/script>');</script>
     <link rel="stylesheet" href="dark-mode.css">
     <link rel="stylesheet" data-th-href="@{/css/style.css}">
+    <link rel="stylesheet" data-th-href="@{/css/sign-in.css}">
 
     <!-- Fin apport bouton mode sombre -->
 
 </head>
 
 <header >
-     
-     <!-- Bouton mode sombre  
-    <div class="grid">
-        <div class="neuf">
-            <div class="container d-flex p-3 mx-auto w-100 flex-column">
-                <header class="mb-auto">
-                    <div class="nav-link">
-                        <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input" id="darkSwitch">
-                            <label class="custom-control-label" for="darkSwitch">🌓 Thème</label>
-                            </div>
-                        <script src="dark-mode-switch.min.js"></script>
-                        </div>
-                    </div>
-                </header>
-            </div> 
-        </div>
-    </div>
-    Fin bouton mode sombre -->
-    
+     <!-- Bouton mode sombre  -->
 
+   <!-- Fin bouton mode sombre -->
+    
     <!-- Titre -->
+    <br><br>
     <div class="grid">
         <h1 class="titre">
             <span>E</span>
@@ -51,14 +36,12 @@
     <!-- Fin titre -->
 
     <!-- Connexion -->
- 
         <span class="neuf">
             <a data-th-href="@{creer}">S'inscrire</a>
             <a data-th-href="@{connexion}">Se Connecter</a>
             <!-- ici, mettre la co et déco de façon dynamique -->
         </span>
     </div>
-
     <!-- Fin connexion -->
 
     <!-- NavBar -->
@@ -103,8 +86,33 @@
 </header>
 
 <body class="bg-white h-100">
+    
+<main class="form-signin w-100 m-auto">
+  <form>
+    <h2 class="h3 mb-3 fw-normal">Se connecter</h2>
 
-<h2>Connexion</h2>
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="nom@exemple.com">
+      <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe">
+      <label for="floatingPassword">Mot de passe</label>
+    </div>
+
+    <div class="form-check text-start my-3">
+      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Se souvenir de moi
+      </label>
+    </div>
+    <button class="btn btn-primary w-100 py-2" type="submit">Se connecter</button>
+  </form>
+  <br>
+  	<a class="nav-link textNav" aria-current="page" data-th-href="@{creer}">
+  		<button class="btn btn-secondary w-100 py-2" type="submit" >Créer un compte</button>
+  	</a>
+</main>
 
 
 </body>

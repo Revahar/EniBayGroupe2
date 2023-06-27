@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Création De Compte</title>
+    <title>Création de compte</title>
 
     <!-- Pour le bouton mode sombre -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -13,34 +13,19 @@
     <script nomodule>window.MSInputMethodContext && document.documentMode && document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-ie11@5/css/bootstrap-ie11.min.css"><script src="https://cdn.jsdelivr.net/npm/ie11-custom-properties@4/ie11CustomProperties.min.js"><\/script>');</script>
     <link rel="stylesheet" href="dark-mode.css">
     <link rel="stylesheet" data-th-href="@{/css/style.css}">
+    <link rel="stylesheet" data-th-href="@{/css/sign-in.css}">
 
     <!-- Fin apport bouton mode sombre -->
 
 </head>
 
 <header >
-     
-     <!-- Bouton mode sombre  
-    <div class="grid">
-        <div class="neuf">
-            <div class="container d-flex p-3 mx-auto w-100 flex-column">
-                <header class="mb-auto">
-                    <div class="nav-link">
-                        <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input" id="darkSwitch">
-                            <label class="custom-control-label" for="darkSwitch">🌓 Thème</label>
-                            </div>
-                        <script src="dark-mode-switch.min.js"></script>
-                        </div>
-                    </div>
-                </header>
-            </div> 
-        </div>
-    </div>
-    Fin bouton mode sombre -->
-    
+     <!-- Bouton mode sombre  -->
 
+   <!-- Fin bouton mode sombre -->
+    
     <!-- Titre -->
+    <br><br>
     <div class="grid">
         <h1 class="titre">
             <span>E</span>
@@ -51,14 +36,12 @@
     <!-- Fin titre -->
 
     <!-- Connexion -->
- 
         <span class="neuf">
             <a data-th-href="@{creer}">S'inscrire</a>
             <a data-th-href="@{connexion}">Se Connecter</a>
             <!-- ici, mettre la co et déco de façon dynamique -->
         </span>
     </div>
-
     <!-- Fin connexion -->
 
     <!-- NavBar -->
@@ -103,8 +86,64 @@
 </header>
 
 <body class="bg-white h-100">
-
-<h2>Création de compte</h2>
+    
+<main class="form-signin w-100 m-auto">
+  <form>
+    <h2 class="h3 mb-3 fw-normal">Création de compte :</h2>
+    <div class="form-row">
+    	<div class="form-group col">
+    		<label for="firstName">Prénom</label>
+      		<input type="text" class="form-control" id="firstName" placeholder="Prénom" required>
+    	</div>
+    	
+    	<div class="form-group col">
+    		<label for="name">Nom</label>
+      		<input type="text" class="form-control" id="name" placeholder="Nom" required>
+    	</div>
+    	
+    	<div class="form-group col">
+    		<label for="pseudo">Pseudo</label>
+      		<input type="text" class="form-control" id="pseudo" placeholder="Pseudo" required>
+    	</div>
+    	
+    	<div class="form-group col">
+      		<label for="inputEmail4">Email</label>
+      		<input type="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+    	</div>
+    	
+    	<div class="form-group col">
+      		<label for="inputPassword4">Mot de passe </label>
+      		<input type="password" class="form-control" id="inputPassword4" placeholder="Mot de passe" required>
+    	</div>
+    	
+    	<div class="form-group col">
+    		<label for="inputAddress">Adresse</label>
+    		<input type="text" class="form-control" id="inputAddress" placeholder="1 rue de la soif" required>
+  		</div>
+  		
+  		<div class="form-group col">
+      		<label for="inputCity">Ville</label>
+      		<input type="text" class="form-control" id="inputCity" placeholder="Pétaouchnok" required>
+    	</div>
+    	
+    	<div class="form-group col">
+      		<label for="inputZip">Code postal</label>
+      		<input type="text" class="form-control" id="inputZip" placeholder="01000" required>
+    	</div>
+    	
+    	<div class="form-check">
+      		<input class="form-check-input" type="checkbox" id="gridCheck" required>
+      		<label class="form-check-label" for="gridCheck">
+        	Accepter les CGUs
+      		</label>
+    	</div>
+    	
+    	<a class="nav-link textNav" aria-current="page" data-th-href="@{creer}">
+  			<button class="btn btn-primary w-100 py-2" type="submit" >Créer un compte</button>
+  		</a>	
+  	</div>
+  </form>
+</main>
 
 
 </body>

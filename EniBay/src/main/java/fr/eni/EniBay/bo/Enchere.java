@@ -14,6 +14,14 @@ public class Enchere {
 	@NotBlank
 	private Integer montant;
 	
+	public Enchere() {	
+	}
+	
+	public Enchere(Integer no_article, Integer no_utilisateur) {
+		this.no_article = no_article;
+		this.no_utilisateur = no_utilisateur;
+	}
+	
 	public Enchere(@NotBlank Integer no_utilisateur, @NotBlank Integer no_article, @NotBlank Date date_enchere,
 			@NotBlank Integer montant) {
 		this.no_utilisateur = no_utilisateur;
@@ -33,9 +41,14 @@ public class Enchere {
 	public Integer getNo_article() {
 		return no_article;
 	}
+	
+    public void setNo_article(Integer no_article) {
+        this.no_article = no_article;
+    }
 
-	public void setNo_article(Integer no_article) {
+	public void setNo_article(Integer no_article, Integer no_utilisateur) {
 		this.no_article = no_article;
+		this.no_utilisateur = no_utilisateur;
 	}
 
 	public Date getDate_enchere() {
@@ -53,5 +66,7 @@ public class Enchere {
 	public void setMontant(Integer montant) {
 		this.montant = montant;
 	}
+
+
 	
 }

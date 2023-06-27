@@ -3,7 +3,7 @@
     grid-template-columns: repeat(9, 1fr);
     gap: 1%;
     row-gap: 5%;
-  grid-auto-rows: minmax(10%, auto);
+  	grid-auto-rows: minmax(10%, auto);
 }
 
 .neuf {
@@ -26,8 +26,10 @@
     font-size: 300%;
 }
 
-
-
+.creationCompteTitre {
+	grid-column: 2/6;
+    grid-row: 2;
+}
 
 .cinq {
     grid-column: 5;
@@ -36,36 +38,44 @@
 
   .titre span:nth-child(1) {
     color: red;
+    font-size: 150%;
   }
   .titre span:nth-child(2) {
     color: blue;
+    font-size: 150%;
   }
   
   .titre span:nth-child(3) {
-    color: yellow;
+    color: gold;
+    font-size: 150%;
   }
   
   .titre span:nth-child(4) {
     color: green;
+    font-size: 150%;
   }
   .titre {
     word-spacing: -25em;
   }
 
-body {
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 2%;
-}
-
-header {
-    margin-top: 2%;
-    background-color: #d1d1d1;
-}
-
 .textNav {
     color: grey;
 }
+
+.titrePage {
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+}
+
+.profilColonneUne{
+	grid-column: 2;
+}
+
+.profilColonneDeux{
+	grid-column: 4;
+}
+
   
   
 

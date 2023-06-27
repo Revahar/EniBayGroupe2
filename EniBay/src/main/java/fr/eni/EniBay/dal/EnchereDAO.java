@@ -10,4 +10,10 @@ public interface EnchereDAO {
 
 	void save(Enchere enchere);
 
+	Enchere findById(Integer no_article, Integer no_utilisateur);
+
+	Enchere read(Integer no_article, Integer no_utilisateur);
+
+	void delete(Integer no_article, Integer no_utilisateur);
+
 }
