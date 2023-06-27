@@ -76,7 +76,8 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/nouvelle-vente")
-	public String versNouvelleVente(Model model) {
+	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
+		//model.addAttribute("utilisateur", utilisateur);
 		model.addAttribute("article", new ArticleVendu());
 		return "NouvelleVente";
 	}

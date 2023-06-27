@@ -106,6 +106,53 @@
 
 <h2>Nouvelle vente</h2>
 
+<form th:action="@{/enregistrer-nouvelle-vente}" th:object="${article}" method="post">
+	<div>
+		<label for="inputNomArticle">Article: </label>
+		<input type="text" id="inputNomArticle" th:field="*{nom_article}" data-th-value="article.nom_article">
+	</div>
+	<div>
+		<label for="inputDescription">Description</label>
+		<textarea rows="5" cols="20" id="inputDescription" th:field="*{description}"></textarea>
+	</div>
+	<!-- <div>
+		<label for="inputCategorie">Cétégorie</label>
+		<select th:field="*{categorie}" id="inputCategorie" required>
+			<option th:each="categorie : ${@CategorieService.getListCategories()}" th:value="${categorie.no_categorie}" th:text="${categorie.libelle}">
+		</select>
+	</div>-->
+	<div>
+		<label for="inputPrix">Mise à prix: </label>
+		<input type="number" id="inputPrix" th:field="*{prix_initial}">
+	</div>
+	<div>
+		<label for="inputDateDebut">Début de l'enchère: </label>
+		<input type="date" id="inputDateDebut" th:field="*{date_debut_encheres}">
+	</div>
+	<div>
+		<label for="inputDateFin">Fin de l'enchère</label>
+		<input type="date" id="inputDateFin" th:field="*{date_fin_encheres}">
+	</div>
+	<!-- <fieldset>
+		<legend>Retrait</legend>
+		<div>
+			<label for="inputRue">Rue: </label>
+			<input type="text" id="inputRue" th:field="*{}" data-th-value="${utilisateur.getRue()}">
+		</div>
+		<div>
+			<label for="intputCode">Code postal: </label>
+			<input type="text" id="inputCode" data-th-value="${utilisateur.getCode_postal()}">
+		</div>
+		<div>
+			<label id="inputVille">Ville: </label>
+			<input type="text" id="inputVille" data-th-value="${utilisateur.getVille}">
+		</div>
+	</fieldset>-->
+	
+	<button type="submit">Enregistrer</button>	
+</form>
+
+
 
 </body>
 
