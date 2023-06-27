@@ -1,22 +1,31 @@
 package fr.eni.EniBay.ihm;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import fr.eni.EniBay.bll.EnchereService;
+import fr.eni.EniBay.bll.*;
+import fr.eni.EniBay.bo.*;
 
 @Controller
 public class EniBayController {
 	
-	private EnchereService enchereService;
+	private CategorieService categorieService;
+	private RetraitService retraitService;
 	
-	public EniBayController(EnchereService enchereService) {
-		this.enchereService = enchereService;
+	public EniBayController(CategorieService categorieService, RetraitService retraitService) {
+		this.categorieService = categorieService;
+		this.retraitService = retraitService;
 	}
 	
 	@GetMapping({"/", "/accueil"})
-	public String afficherAccueil() {
+	public String afficherAccueil(Model model) {
+		List<Retrait> lstCategorie = retraitService.getRetraits();
+		
+		model.addAttribute("retrait", lstCategorie);
 		return "Accueil";
 	}
 	

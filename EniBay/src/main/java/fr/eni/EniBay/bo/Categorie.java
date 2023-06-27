@@ -8,6 +8,8 @@ public class Categorie {
 	@NotBlank
 	private String libelle;
 	
+	public Categorie() {}
+
 	public Categorie(@NotBlank Integer no_categorie, @NotBlank String libelle) {
 		this.no_categorie = no_categorie;
 		this.libelle = libelle;
