@@ -12,31 +12,16 @@
     <script nomodule>window.MSInputMethodContext && document.documentMode && document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-ie11@5/css/bootstrap-ie11.min.css"><script src="https://cdn.jsdelivr.net/npm/ie11-custom-properties@4/ie11CustomProperties.min.js"><\/script>');</script>
     <link rel="stylesheet" href="dark-mode.css">
     <link rel="stylesheet" data-th-href="@{/css/style.css}">
+    <link rel="stylesheet" data-th-href="@{/css/carousel.css}">
     <!-- Fin apport bouton mode sombre -->
 
 </head>
 
 <header >
-     <!-- Bouton mode sombre  
-    <div class="grid">
-        <div class="neuf">
-            <div class="container d-flex p-3 mx-auto w-100 flex-column">
-                <header class="mb-auto">
-                    <div class="nav-link">
-                        <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input" id="darkSwitch">
-                            <label class="custom-control-label" for="darkSwitch">🌓 Thème</label>
-                            </div>
-                        <script src="dark-mode-switch.min.js"></script>
-                        </div>
-                    </div>
-                </header>
-            </div> 
-        </div>
-    </div>
-    Fin bouton mode sombre -->
-    
+     <!-- Bouton mode sombre  -->
 
+   <!-- Fin bouton mode sombre -->
+    
     <!-- Titre -->
     <div class="grid">
         <h1 class="titre">
@@ -98,26 +83,193 @@
 </header>
 
 
-<body class="bg-white h-100">
-	<!-- Si aucune enchère n'est en cours -->
-	<div class="grid">
-		<div class="titreListeVide" th:if="${#lists.isEmpty(encheres)}">Aucune enchère n'est actuellement en cours</div>
-		<img class="warning" alt="GIF animé warning" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Blinking_warning.gif">
-	</div>
-	
-	<!-- Si il y a au moins 1 enchère -->
-	<div class="align" th:unless="${#lists.isEmpty(encheres)}">
-		<div class="grid">
-		    <tr data-th-each="item: ${encheres}">
-		        <td>
-		        	<a th:href="@{encherir/{itemId}(itemId=${item.id})}">
-	    				<img class="image" th:src="@{'/Images/' + ${item.id} + '.jpg'}" th:alt="${item.titre}" th:title="${item.titre}">
-					</a>
-		        </td>
-		    </tr>
-		</div>
-	</div>
-</body>
+<body>
+
+	<!-- Carousel -->
+  <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-theme="light">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h2>Exemple enchère 1</h2>
+            <p class="opacity-75">Ici on intègre la description de l'enchère</p>
+            <p><a class="btn btn-lg btn-primary" href="#">Ici on met un bouton pour accéder à l'enchère</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        <div class="container">
+          <div class="carousel-caption">
+            <h2>Exemple enchère 2</h2>
+           <p class="opacity-75">Ici on intègre la description de l'enchère</p>
+            <p><a class="btn btn-lg btn-primary" href="#">Ici on met un bouton pour accéder à l'enchère</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        <div class="container">
+          <div class="carousel-caption text-end">
+             <h2>Exemple enchère 3</h2>
+            <p class="opacity-75">Ici on intègre la description de l'enchère</p>
+            <p><a class="btn btn-lg btn-primary" href="#">Ici on met un bouton pour accéder à l'enchère</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Précédent</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Suivant</span>
+    </button>
+  </div>
+  <!-- Fin Carousel -->
+  
+  <!-- Liste enchères -->
+  
+   <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+       <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+<div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+     <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+       <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+     <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <div class="card-body">
+              <p class="card-text">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </div>
+                <small class="text-body-secondary">ici, un petit texte</small>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+  <!-- Fin liste des enchères -->
+ </body>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
