@@ -13,6 +13,10 @@ public class Categorie {
 		this.libelle = libelle;
 	}
 
+	public Categorie(Integer no_categorie) {
+		this.no_categorie = no_categorie;
+	}
+
 	public Integer getNo_categorie() {
 		return no_categorie;
 	}
