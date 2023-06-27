@@ -10,7 +10,7 @@ public class ArticleVendu {
 	@NotBlank
 	private String nom_article;
 	@NotBlank
-	private String desciption;
+	private String description;
 	@NotBlank
 	private Date date_debut_encheres;
 	@NotBlank
@@ -26,13 +26,13 @@ public class ArticleVendu {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ArticleVendu(@NotBlank Integer no_article, @NotBlank String nom_article, @NotBlank String desciption,
+	public ArticleVendu(@NotBlank Integer no_article, @NotBlank String nom_article, @NotBlank String description,
 			@NotBlank Date date_debut_encheres, @NotBlank Date date_fin_encheres, Integer prix_initial,
 			Integer prix_vente, @NotBlank Integer no_utilisateur, @NotBlank Integer no_categorie) {
 		super();
 		this.no_article = no_article;
 		this.nom_article = nom_article;
-		this.desciption = desciption;
+		this.description = description;
 		this.date_debut_encheres = date_debut_encheres;
 		this.date_fin_encheres = date_fin_encheres;
 		this.prix_initial = prix_initial;
@@ -53,11 +53,11 @@ public class ArticleVendu {
 	public void setNom_article(String nom_article) {
 		this.nom_article = nom_article;
 	}
-	public String getDesciption() {
-		return desciption;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesciption(String desciption) {
-		this.desciption = desciption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public Date getDate_debut_encheres() {
 		return date_debut_encheres;
@@ -98,7 +98,7 @@ public class ArticleVendu {
 
 	@Override
 	public String toString() {
-		return "ArticleVendu [no_article=" + no_article + ", nom_article=" + nom_article + ", desciption=" + desciption
+		return "ArticleVendu [no_article=" + no_article + ", nom_article=" + nom_article + ", description=" + description
 				+ ", date_debut_encheres=" + date_debut_encheres + ", date_fin_encheres=" + date_fin_encheres
 				+ ", prix_initial=" + prix_initial + ", prix_vente=" + prix_vente + ", no_utilisateur=" + no_utilisateur
 				+ ", no_categorie=" + no_categorie + "]";
