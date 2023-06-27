@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.EniBay.bll.*;
 import fr.eni.EniBay.bo.*;
@@ -45,7 +47,7 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-nouveau-profil")
-	public String enregistrerNouveauProfil() {
+	public String enregistrerNouveauProfil(@ModelAttribute Utilisateur utilisateur) {
 		return "redirect:/accueil";
 	}
 	
@@ -54,7 +56,7 @@ public class EniBayController {
 		return "EncheresConnecte";
 	}
 	
-	@GetMapping("mes-ventes")
+	@GetMapping("/mes-ventes")
 	public String mesVentes() {
 		return "MesVentes";
 	}
@@ -70,7 +72,7 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/modifier-profil")
-	public String versModifProfil() {
+	public String versModifProfil(@RequestParam Integer no_utilisateur, Model model) {
 		return "ModifProfil";
 	}
 	
@@ -80,12 +82,13 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/nouvelle-vente")
-	public String versNouvelleVente() {
+	public String versNouvelleVente(Model model) {
+		model.addAttribute("article", new ArticleVendu());
 		return "NouvelleVente";
 	}
 	
 	@PostMapping("/enregistrer-nouvelle-vente")
-	public String enregistrerNouvelleVente() {
+	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article) {
 		return "redirect:/accueil";
 	}
 	
@@ -111,6 +114,11 @@ public class EniBayController {
 	
 	@GetMapping("/supprimer-profil")
 	public String supprimerProfil() {
+		return "redirect:/accueil";
+	}
+	
+	@GetMapping("/retrait-article")
+	public String retraitArticle() {
 		return "redirect:/accueil";
 	}
 }
