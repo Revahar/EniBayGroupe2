@@ -27,6 +27,10 @@ public class Utilisateur  {
 	@NotBlank
 	private Boolean administrateur;
 	
+	public Utilisateur() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Utilisateur(Integer no_utilisateur, @NotBlank String pseudo, @NotBlank String nom, @NotBlank String prenom,
 			@NotBlank String email, String telephone, @NotBlank String rue, @NotBlank String code_postal,
 			@NotBlank String ville, @NotBlank String mot_de_passe, @NotBlank Integer credit, @NotBlank Boolean administrateur) {

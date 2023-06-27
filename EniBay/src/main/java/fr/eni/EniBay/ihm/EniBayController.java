@@ -67,7 +67,8 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/profil")
-	public String afficherProfil() {
+	public String afficherProfil(@RequestParam Utilisateur utilisateur, Model model) {
+		model.addAttribute("utilisateur", utilisateur);
 		return "Profil";
 	}
 	
@@ -87,7 +88,8 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/nouvelle-vente")
-	public String versNouvelleVente(Model model) {
+	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
+		//model.addAttribute("utilisateur", utilisateur);
 		model.addAttribute("article", new ArticleVendu());
 		return "NouvelleVente";
 	}
