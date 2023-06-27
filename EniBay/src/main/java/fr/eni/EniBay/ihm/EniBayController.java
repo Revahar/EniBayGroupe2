@@ -17,6 +17,7 @@ public class EniBayController {
 	
 	private CategorieService categorieService;
 	private RetraitService retraitService;
+	private UtilisateurService utilisateurService;
 	
 	public EniBayController(CategorieService categorieService, RetraitService retraitService) {
 		this.categorieService = categorieService;
@@ -37,7 +38,11 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/connecter")
-	public String connexionProfil() {
+	public String connexionProfil(
+			@RequestParam String identifiant,
+			@RequestParam String password) {
+		
+		utilisateurService.signIn(identifiant, password);
 		return "redirect:/accueil";
 	}
 	

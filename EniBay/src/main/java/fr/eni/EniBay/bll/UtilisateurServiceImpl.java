@@ -30,4 +30,10 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     public void afficher(Utilisateur utilisateur) {
     	utilisateurDAO.save(utilisateur);
     }
+    
+    @Override
+    public void signIn(String identifiant, String password) {
+    	System.out.println("true");
+    	return;
+    }
 }

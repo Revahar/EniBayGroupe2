@@ -88,15 +88,17 @@
 <body class="bg-white h-100">
     
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form action="/connecter" method="post">
     <h2 class="h3 mb-3 fw-normal">Se connecter</h2>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="nom@exemple.com">
+      <input type="email" class="form-control" id="floatingInput" placeholder="nom@exemple.com"
+      required data-th-value="${identifiant}">
       <label for="floatingInput">Email</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe"
+      required data-th-value="${password}">
       <label for="floatingPassword">Mot de passe</label>
     </div>
 
