@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -15,6 +16,10 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	
 	private final static String SELECT_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS";
 	private final static String FIND_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_article= :no_article";
+	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS (no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
+			+ "VALUES (:no_article, :nom_artiste, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
+	
+	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article= :no_article";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -40,11 +45,8 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 			article.setNo_categorie(rs.getInt("no_categorie"));
 			
 			return article;
-		}
-		
-	}
-	
-	
+		}		
+	}	
 
 	@Override
 	public ArticleVendu findById(Integer idArticleVendu) {
@@ -58,5 +60,14 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 		List<ArticleVendu> listArticles;
 		listArticles = namedParameterJdbcTemplate.query(SELECT_ALL, new ArticleRowMapper());
 		return listArticles;
+	}
+
+	@Override
+	public void save(ArticleVendu articleVendu) {		
+	}
+
+	@Override
+	public void delete(ArticleVendu articleVendu) {
+		namedParameterJdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(articleVendu));
 	}
 }
