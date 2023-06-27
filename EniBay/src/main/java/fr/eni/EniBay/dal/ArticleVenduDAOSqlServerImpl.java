@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import fr.eni.EniBay.bo.ArticleVendu;
 
@@ -16,9 +18,10 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	
 	private final static String SELECT_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS";
 	private final static String FIND_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_article= :no_article";
-	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS (no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie "
-			+ "VALUES (:no_article, :nom_artiste, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
+	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) "
+			+ "VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
 	
+	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article= :nom_article, description= :description, date_debut_encheres= :date_debut_encheres, date_fin_encheres= :date_fin_encheres, prix_initial= :prix_initial, prix_vente= :prix_vente, no_utilisateur= :no_utilisateur, no_categorie= :no_categorie";
 	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article= :no_article";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -32,7 +35,7 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 
 		@Override
 		public ArticleVendu mapRow(ResultSet rs, int rowNum) throws SQLException {
-			ArticleVendu article = new ArticleVendu(null, null, null, null, null, null, null, null, null);
+			ArticleVendu article = new ArticleVendu();
 			
 			article.setNo_article(rs.getInt("no_article"));
 			article.setNom_article(rs.getString("nom_article"));
@@ -63,7 +66,24 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	}
 
 	@Override
-	public void save(ArticleVendu articleVendu) {		
+	public void save(ArticleVendu article) {
+		if(article.getNo_article() == null) {
+			KeyHolder keyHolder = new GeneratedKeyHolder();
+			
+			MapSqlParameterSource mapSrc = new MapSqlParameterSource("nom_article", article.getNom_article());			
+			mapSrc.addValue("description", article.getDesciption());
+			mapSrc.addValue("date_debut_encheres", article.getDate_debut_encheres());
+			mapSrc.addValue("date_fin_encheres", article.getDate_fin_encheres());
+			mapSrc.addValue("prix_initial", article.getPrix_initial());
+			mapSrc.addValue("prix_vente", article.getPrix_vente());
+			mapSrc.addValue("no_utilisateur", article.getNo_utilisateur());
+			mapSrc.addValue("no_categorie", article.getNo_categorie());
+			
+			namedParameterJdbcTemplate.update(INSERT, mapSrc, keyHolder);			
+			article.setNo_article(keyHolder.getKey().intValue());
+		} else {
+			namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(article));
+		}
 	}
 
 	@Override

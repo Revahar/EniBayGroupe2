@@ -22,6 +22,9 @@ public class ArticleVendu {
 	@NotBlank
 	private Integer no_categorie;
 
+	public ArticleVendu() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public ArticleVendu(@NotBlank Integer no_article, @NotBlank String nom_article, @NotBlank String desciption,
 			@NotBlank Date date_debut_encheres, @NotBlank Date date_fin_encheres, Integer prix_initial,
