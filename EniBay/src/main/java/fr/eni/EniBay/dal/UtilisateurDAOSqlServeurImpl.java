@@ -87,6 +87,11 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 			namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(utilisateur));
 		}
 	}
+	
+	@Override
+	public void delete(Utilisateur utilisateur) {
+		namedParameterJdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(utilisateur));
+	}
 
 	public UtilisateurDAO getUtilisateurDAO() {
 		return utilisateurDAO;
