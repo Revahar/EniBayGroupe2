@@ -11,9 +11,11 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import fr.eni.EniBay.bo.ArticleVendu;
 
+@Repository
 public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	
 	private final static String SELECT_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS";
@@ -39,7 +41,7 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 			
 			article.setNo_article(rs.getInt("no_article"));
 			article.setNom_article(rs.getString("nom_article"));
-			article.setDesciption(rs.getString("description"));
+			article.setDescription(rs.getString("description"));
 			article.setDate_debut_encheres(rs.getDate("date_debut_encheres"));
 			article.setDate_fin_encheres(rs.getDate("date_fin_encheres"));
 			article.setPrix_initial(rs.getInt("prix_initial"));
@@ -71,7 +73,7 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			
 			MapSqlParameterSource mapSrc = new MapSqlParameterSource("nom_article", article.getNom_article());			
-			mapSrc.addValue("description", article.getDesciption());
+			mapSrc.addValue("description", article.getDescription());
 			mapSrc.addValue("date_debut_encheres", article.getDate_debut_encheres());
 			mapSrc.addValue("date_fin_encheres", article.getDate_fin_encheres());
 			mapSrc.addValue("prix_initial", article.getPrix_initial());
