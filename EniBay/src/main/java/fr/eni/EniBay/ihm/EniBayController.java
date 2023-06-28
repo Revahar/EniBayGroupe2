@@ -41,7 +41,6 @@ public class EniBayController {
 	@PostMapping("/connecter")
 	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
 		
-		utilisateurService.checkSignIn(loginForm.getEmail(), loginForm.getPassword());
 		return "redirect:/accueil";
 	}
 	
