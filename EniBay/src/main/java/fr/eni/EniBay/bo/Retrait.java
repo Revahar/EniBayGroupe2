@@ -12,6 +12,8 @@ public class Retrait {
 	@NotBlank
 	private String ville;
 	
+	public Retrait() {}
+
 	public Retrait(@NotBlank Integer no_article, @NotBlank String rue, @NotBlank String code_postal,
 			@NotBlank String ville) {
 		this.no_article = no_article;

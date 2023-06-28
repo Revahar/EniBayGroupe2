@@ -10,4 +10,6 @@ public interface UtilisateurDAO {
 	Utilisateur findById(Integer id);
 	
 	void save(Utilisateur utilisateur);
+	
+	void delete(Utilisateur utilisateur);
 }

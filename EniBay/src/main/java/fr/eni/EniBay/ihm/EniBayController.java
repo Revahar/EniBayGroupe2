@@ -1,5 +1,7 @@
 package fr.eni.EniBay.ihm;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,31 +9,38 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fr.eni.EniBay.bll.EnchereService;
-import fr.eni.EniBay.bo.ArticleVendu;
-import fr.eni.EniBay.bo.Utilisateur;
+import fr.eni.EniBay.bll.*;
+import fr.eni.EniBay.bo.*;
 
 @Controller
 public class EniBayController {
 	
-	private EnchereService enchereService;
+	private CategorieService categorieService;
+	private RetraitService retraitService;
+	private UtilisateurService utilisateurService;
 	
-	public EniBayController(EnchereService enchereService) {
-		this.enchereService = enchereService;
+	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService) {
+		this.categorieService = categorieService;
+		this.retraitService = retraitService;
+		this.utilisateurService = utilisateurService;
 	}
 	
 	@GetMapping({"/", "/accueil"})
-	public String afficherAccueil() {
+	public String afficherAccueil(Model model) {
+		List<Retrait> lstCategorie = retraitService.getRetraits();
+		
+		model.addAttribute("retrait", lstCategorie);
 		return "Accueil";
 	}
 	
 	@GetMapping("/connexion")
-	public String versConnexion() {
+	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
 		return "Connexion";
 	}
 	
 	@PostMapping("/connecter")
-	public String connexionProfil() {
+	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
+		
 		return "redirect:/accueil";
 	}
 	
@@ -56,7 +65,8 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/profil")
-	public String afficherProfil() {
+	public String afficherProfil(@RequestParam Utilisateur utilisateur, Model model) {
+		model.addAttribute("utilisateur", utilisateur);
 		return "Profil";
 	}
 	
@@ -76,7 +86,8 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/nouvelle-vente")
-	public String versNouvelleVente(Model model) {
+	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
+		//model.addAttribute("utilisateur", utilisateur);
 		model.addAttribute("article", new ArticleVendu());
 		return "NouvelleVente";
 	}

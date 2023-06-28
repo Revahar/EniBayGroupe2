@@ -7,9 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import fr.eni.EniBay.bo.Retrait;
 
+@Repository
 public class RetraitDAOSqlServeurImpl implements RetraitDAO{
 	
 	private final static String SELECT_ALL = "SELECT no_article, rue, code_postal, ville FROM RETRAITS";

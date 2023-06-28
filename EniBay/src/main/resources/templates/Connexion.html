@@ -18,20 +18,25 @@
 <body>
     
 <main class="form-signin w-100 m-auto">
+<<<<<<< HEAD
   <form>
     <h2 class="h3 mb-3 fw-normal">Se connecter</h2><hr>
+=======
+  <form th:action="@{/connecter}" method="post" th:object="${loginForm}">
+    <h2 class="h3 mb-3 fw-normal">Se connecter</h2>
+>>>>>>> branch 'main' of https://github.com/Revahar/EniBayGroupe2.git
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="nom@exemple.com">
+      <input type="email" class="form-control" id="floatingInput" placeholder="nom@exemple.com" th:field="*{email}">
       <label for="floatingInput">Email</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe" th:field="*{password}">
       <label for="floatingPassword">Mot de passe</label>
     </div>
 
     <div class="form-check text-start my-3">
-      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" th:field="*{rememberMe}">
       <label class="form-check-label" for="flexCheckDefault">
         Se souvenir de moi
       </label>
