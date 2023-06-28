@@ -18,13 +18,9 @@
 <body>
     
 <main class="form-signin w-100 m-auto">
-<<<<<<< HEAD
-  <form>
-    <h2 class="h3 mb-3 fw-normal">Se connecter</h2><hr>
-=======
+
   <form th:action="@{/connecter}" method="post" th:object="${loginForm}">
     <h2 class="h3 mb-3 fw-normal">Se connecter</h2>
->>>>>>> branch 'main' of https://github.com/Revahar/EniBayGroupe2.git
 
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="nom@exemple.com" th:field="*{email}">
