@@ -1,114 +1,113 @@
 <!doctype html>
-<html lang="fr" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Nouvelle vente</title>
+    <title>Ajouter une vente</title>
 
-    <!-- Pour le bouton mode sombre -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-    <script nomodule>window.MSInputMethodContext && document.documentMode && document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-ie11@5/css/bootstrap-ie11.min.css"><script src="https://cdn.jsdelivr.net/npm/ie11-custom-properties@4/ie11CustomProperties.min.js"><\/script>');</script>
-    <link rel="stylesheet" href="dark-mode.css">
+ 	
     <link rel="stylesheet" data-th-href="@{/css/style.css}">
-
-    <!-- Fin apport bouton mode sombre -->
-
+    <link rel="stylesheet" data-th-href="@{/css/sign-in.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 
-<header >
-     
-     <!-- Bouton mode sombre  
-    <div class="grid">
-        <div class="neuf">
-            <div class="container d-flex p-3 mx-auto w-100 flex-column">
-                <header class="mb-auto">
-                    <div class="nav-link">
-                        <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input" id="darkSwitch">
-                            <label class="custom-control-label" for="darkSwitch">🌓 Thème</label>
-                            </div>
-                        <script src="dark-mode-switch.min.js"></script>
-                        </div>
-                    </div>
-                </header>
-            </div> 
-        </div>
-    </div>
-    Fin bouton mode sombre -->
-    
+<div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
 
-    <!-- Titre -->
-    <div class="grid">
-        <h1 class="titre">
-            <span>E</span>
-            <span>ni</span>
-            <span>B</span>
-            <span>ay</span>
-        </h1>
-    <!-- Fin titre -->
-
-    <!-- Connexion -->
- 
-        <span class="neuf">
-            <a data-th-href="@{creer}">S'inscrire</a>
-            <a data-th-href="@{connexion}">Se Connecter</a>
-            <!-- ici, mettre la co et déco de façon dynamique -->
-        </span>
-    </div>
-
-    <!-- Fin connexion -->
-
-    <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg bg-body-primary-emphasis ">
-        <div class="container-fluid">
-          <a class="navbar-brand textNav" data-th-href="@{accueil}">Accueil</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link textNav" aria-current="page" data-th-href="@{nouvelle-vente}">Vendre</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link textNav" data-th-href="@{encherir}">Enchérir</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle textNav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Profil
-                </a>
-                <ul class="dropdown-menu bg-body-secondary-emphasis">
-                  <li><a class="dropdown-item textNav" data-th-href="@{creer}">S'enregistrer</a></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{connexion}">Se connecter</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{profil}">Mon Profil</a></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{acquisition}">Liste des acquisitions</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link textNav disabled">Exemple de lien désactivé</a>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="..." aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Rechercher</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-    <!-- Fin NavBar -->
-</header>
-
-<body class="bg-white h-100">
-
-<h2>Nouvelle vente</h2>
-
+<body>
+   <div class="container">
+     	<div class="row justify-content-center align-items-center vh-100">
+    		<div class="py-5 text-center">
+      			<h2>Nouvelle vente</h2>
+      			<hr>
+    		</div>
+		    <div class="col-md-5 col-lg-7">
+		        <form class="needs-validation" novalidate>
+		            <div class="row g-3 ">
+			            <div class="col-sm-6">
+			            	<label for="article" class="input-group-text">Article</label>
+			            	<input type="text" class="form-control" id="article" placeholder="nom de l'article" value="" required>
+			            </div>
+			            <div class="col-sm-6">
+			               <label for="desc" class="input-group-text">Description</label>
+			               <textarea class="form-control" aria-label="With textarea" placeholder="Description de l'article" required></textarea>
+			            </div>
+			            <div class="col-sm-6">
+			             	<label class="input-group-text" for="categorie">Catégorie</label>
+			 				<select class="form-select" id="categorie" required>
+			   					<option selected>Choisir...</option>
+			   						<option value="1">1</option>
+			   						<option value="2">2</option>
+			   						<option value="3">3</option>
+			 				</select>
+			            </div>
+						<div class="col-12">
+							<label class="input-group-text" for="inputGroupFile01">Importer une image</label>
+							<input type="file" class="form-control" id="inputGroupFile01" required>
+						</div>
+						<div class="col-12">
+						<label class="input-group-text" for="prix">Mise à prix</label>
+						<input type="number" class="form-control" placeholder="Prix de l'article" required>
+						</div>
+						<div class="col-sm-6">
+						    <label for="debutEnchere" class="input-group-text">Début de l'enchère</label>
+						    <input type="date" class="form-control" id="debutEnchere" placeholder="Date de début" value="" required>
+						</div>
+						<div class="col-sm-6">
+						    <label for="finEnchere" class="input-group-text">Fin de l'enchère</label>
+						    <input type="date" class="form-control" id="finEnchere" placeholder="Date de fin" value="" required>
+						</div>
+						<style>
+							.border-overlay {
+								  position: absolute;
+								  top: -12px;
+								  left: 12px;
+								  background-color: white;
+								  padding: 0 8px;
+								  font-weight: bold;
+								  z-index: 1;
+							}
+						</style>
+						<div class="border border-secondary rounded position-relative">
+	  						<span class="border-overlay">Retrait</span><br>
+	          				<div class="col-md-12">
+	              				<label for="adresse" class="form-label">Adresse</label>
+	              				<input type="text" class="form-control" id="adresse" placeholder="1 rue de la soif" required>
+	           				</div>
+	           				<div class="col-md-12">
+	              				<label for="ville" class="form-label">Ville</label>
+	              				<input type="text" class="form-control" id="ville" placeholder="Pétaouchnok" required>
+	           				</div>
+	           				<div class="col-md-12">
+	              				<label for="zip" class="form-label">Code postal</label>
+	              				<input type="text" class="form-control" id="zip" placeholder="01000" required>
+	           				</div>
+	           				<br>
+        				</div>
+        			</div>
+			 		<div class="col-12 mt-3">
+			        	<div class="row">
+			        		<div class="col-md-6">
+			            		<a class="nav-link textNav" aria-current="page" data-th-href="@{accueil}"> <!-- Attention : href à définir ! -->
+			                		<button class="btn btn-primary w-100 py-2" type="submit">Ajouter</button>
+            					</a>
+        					</div>
+        					<div class="col-md-6">
+            					<a class="nav-link textNav" aria-current="page" data-th-href="@{accueil}"> <!-- Attention : href à définir ! -->
+                					<button class="btn btn-secondary w-100 py-2" type="submit">Annuler</button>
+            					</a>
+        					</div>
+    					</div>
+					</div>	
+        		</form>
+      		</div>
+    	</div>
+    	<br><br><hr>
+	</div>
 
 </body>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+	<div data-th-replace="~{fragments/fragment-footer :: fragment-footer}"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </html>
