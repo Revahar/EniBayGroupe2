@@ -15,7 +15,7 @@
 
 <div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
 
-<<<<<<< HEAD
+
 <body>
    <div class="container">
      	<div class="row justify-content-center align-items-center vh-100">
@@ -106,121 +106,6 @@
     	</div>
     	<br><br><hr>
 	</div>
-=======
-    <!-- Titre -->
-    <div class="grid">
-        <h1 class="titre">
-            <span>E</span>
-            <span>ni</span>
-            <span>B</span>
-            <span>ay</span>
-        </h1>
-    <!-- Fin titre -->
-
-    <!-- Connexion -->
- 
-        <span class="neuf">
-            <a data-th-href="@{creer}">S'inscrire</a>
-            <a data-th-href="@{connexion}">Se Connecter</a>
-            <!-- ici, mettre la co et déco de façon dynamique -->
-        </span>
-    </div>
-
-    <!-- Fin connexion -->
-
-    <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg bg-body-primary-emphasis ">
-        <div class="container-fluid">
-          <a class="navbar-brand textNav" data-th-href="@{accueil}">Accueil</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link textNav" aria-current="page" data-th-href="@{nouvelle-vente}">Vendre</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link textNav" data-th-href="@{encherir}">Enchérir</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle textNav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Profil
-                </a>
-                <ul class="dropdown-menu bg-body-secondary-emphasis">
-                  <li><a class="dropdown-item textNav" data-th-href="@{creer}">S'enregistrer</a></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{connexion}">Se connecter</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{profil}">Mon Profil</a></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{acquisition}">Liste des acquisitions</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link textNav disabled">Exemple de lien désactivé</a>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="..." aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Rechercher</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-    <!-- Fin NavBar -->
-</header>
-
-<body class="bg-white h-100">
-
-<h2>Nouvelle vente</h2>
-
-<form th:action="@{/enregistrer-nouvelle-vente}" th:object="${article}" method="post">
-	<div>
-		<label for="inputNomArticle">Article: </label>
-		<input type="text" id="inputNomArticle" th:field="*{nom_article}" data-th-value="article.nom_article">
-	</div>
-	<div>
-		<label for="inputDescription">Description</label>
-		<textarea rows="5" cols="20" id="inputDescription" th:field="*{description}"></textarea>
-	</div>
-	<!-- <div>
-		<label for="inputCategorie">Cétégorie</label>
-		<select th:field="*{categorie}" id="inputCategorie" required>
-			<option th:each="categorie : ${@CategorieService.getListCategories()}" th:value="${categorie.no_categorie}" th:text="${categorie.libelle}">
-		</select>
-	</div>-->
-	<div>
-		<label for="inputPrix">Mise à prix: </label>
-		<input type="number" id="inputPrix" th:field="*{prix_initial}">
-	</div>
-	<div>
-		<label for="inputDateDebut">Début de l'enchère: </label>
-		<input type="date" id="inputDateDebut" th:field="*{date_debut_encheres}">
-	</div>
-	<div>
-		<label for="inputDateFin">Fin de l'enchère</label>
-		<input type="date" id="inputDateFin" th:field="*{date_fin_encheres}">
-	</div>
-	<!-- <fieldset>
-		<legend>Retrait</legend>
-		<div>
-			<label for="inputRue">Rue: </label>
-			<input type="text" id="inputRue" th:field="*{}" data-th-value="${utilisateur.getRue()}">
-		</div>
-		<div>
-			<label for="intputCode">Code postal: </label>
-			<input type="text" id="inputCode" data-th-value="${utilisateur.getCode_postal()}">
-		</div>
-		<div>
-			<label id="inputVille">Ville: </label>
-			<input type="text" id="inputVille" data-th-value="${utilisateur.getVille}">
-		</div>
-	</fieldset>-->
-	
-	<button type="submit">Enregistrer</button>	
-</form>
-
-
->>>>>>> branch 'main' of https://github.com/Revahar/EniBayGroupe2.git
 
 </body>
 
