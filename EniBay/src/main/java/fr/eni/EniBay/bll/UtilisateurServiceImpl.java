@@ -21,13 +21,20 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     }
     
     @Override
-    public void ajouterUtilisateur(Utilisateur categorie) {
-    	lstUtilisateurs.add(categorie);
-        afficher(categorie);
+    public void ajouterUtilisateur(Utilisateur utilisateur) {
+    	lstUtilisateurs.add(utilisateur);
+        save(utilisateur);
     }
 
     @Override
-    public void afficher(Utilisateur utilisateur) {
+    public void save(Utilisateur utilisateur) {
     	utilisateurDAO.save(utilisateur);
     }
+    
+    @Override
+    public void signIn(String identifiant, String password) {
+    	System.out.println("true");
+    	return;
+    }
 }
+

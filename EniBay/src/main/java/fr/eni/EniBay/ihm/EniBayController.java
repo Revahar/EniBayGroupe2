@@ -17,10 +17,12 @@ public class EniBayController {
 	
 	private CategorieService categorieService;
 	private RetraitService retraitService;
+	private UtilisateurService utilisateurService;
 	
-	public EniBayController(CategorieService categorieService, RetraitService retraitService) {
+	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService) {
 		this.categorieService = categorieService;
 		this.retraitService = retraitService;
+		this.utilisateurService = utilisateurService;
 	}
 	
 	@GetMapping({"/", "/accueil"})
@@ -32,12 +34,13 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/connexion")
-	public String versConnexion() {
+	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
 		return "Connexion";
 	}
 	
 	@PostMapping("/connecter")
-	public String connexionProfil() {
+	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
+		
 		return "redirect:/accueil";
 	}
 	

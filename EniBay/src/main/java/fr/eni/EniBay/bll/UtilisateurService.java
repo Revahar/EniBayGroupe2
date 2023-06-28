@@ -9,5 +9,7 @@ public interface UtilisateurService {
 
 	void ajouterUtilisateur(Utilisateur utilisateur);
 
-	void afficher(Utilisateur utilisateur);
+	void save(Utilisateur utilisateur);
+
+	void signIn(String identifiant, String password);
 }
