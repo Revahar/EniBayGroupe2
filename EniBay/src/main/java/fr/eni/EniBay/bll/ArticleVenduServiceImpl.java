@@ -3,9 +3,12 @@ package fr.eni.EniBay.bll;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import fr.eni.EniBay.bo.ArticleVendu;
 import fr.eni.EniBay.dal.ArticleVenduDAO;
 
+@Service
 public class ArticleVenduServiceImpl implements ArticleVenduService{
 	 private final ArticleVenduDAO articleVenduDAO;
 	    private final List<ArticleVendu> lstArticlesVendus;

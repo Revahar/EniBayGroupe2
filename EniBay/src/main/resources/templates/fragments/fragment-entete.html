@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<header xmlns:th="http://www.thymeleaf.org" data-th-fragment="fragment-entete">
+
+    <!-- Titre -->
+    <div class="row align-items-center">
+	    <div class="col">
+	        <h1 class="titre">
+	            <span>E</span>
+	            <span>ni</span>
+	            <span>B</span>
+	            <span>ay</span>
+	        </h1>
+	      </div>
+    <!-- Fin titre -->
+
+    <!-- Connexion -->
+        <span class="col-2">
+            <a data-th-href="@{creer}">Inscription</a>
+            <a data-th-href="@{connexion}">Connection</a>
+            <!-- ici, mettre la co et déco de façon dynamique -->
+        </span>
+    </div>
+    <!-- Fin connexion -->
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg bg-body-primary-emphasis ">
+        <div class="container-fluid">
+          <a class="navbar-brand textNav" data-th-href="@{accueil}">Accueil</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link textNav" aria-current="page" data-th-href="@{nouvelle-vente}">Vendre</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link textNav" data-th-href="@{encherir}">Enchérir</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle textNav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Profil
+                </a>
+                <ul class="dropdown-menu bg-body-secondary-emphasis">
+                  <li><a class="dropdown-item textNav" data-th-href="@{creer}">S'enregistrer</a></li>
+                  <li><a class="dropdown-item textNav" data-th-href="@{connexion}">Se connecter</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item textNav" data-th-href="@{profil}">Mon Profil</a></li>
+                  <li><a class="dropdown-item textNav" data-th-href="@{acquisition}">Liste des acquisitions</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link textNav disabled">Exemple de lien désactivé</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="..." aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Rechercher</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    <!-- Fin NavBar -->
+</header>
+
+<body>
+
+</body>
+</html>

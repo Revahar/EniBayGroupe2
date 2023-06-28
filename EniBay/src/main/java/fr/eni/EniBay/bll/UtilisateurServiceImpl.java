@@ -3,9 +3,12 @@ package fr.eni.EniBay.bll;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import fr.eni.EniBay.bo.Utilisateur;
 import fr.eni.EniBay.dal.UtilisateurDAO;
 
+@Service
 public class UtilisateurServiceImpl implements UtilisateurService{
  	private final UtilisateurDAO utilisateurDAO;
     private final List<Utilisateur> lstUtilisateurs;
