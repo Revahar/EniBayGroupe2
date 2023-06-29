@@ -83,7 +83,7 @@ public class EniBayController {
 	@GetMapping("/mon-profil")
 	public String afficherMonProfil() {
 		System.out.println("afficher mon profil");
-		return "MonProfil";
+		return "Profil";
 	}
 	
 	@GetMapping("/modifier-profil")
