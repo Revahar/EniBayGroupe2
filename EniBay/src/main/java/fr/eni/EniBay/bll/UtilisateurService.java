@@ -2,6 +2,7 @@ package fr.eni.EniBay.bll;
 
 import java.util.List;
 
+import fr.eni.EniBay.bo.LoginForm;
 import fr.eni.EniBay.bo.Utilisateur;
 
 public interface UtilisateurService {
@@ -16,4 +17,6 @@ public interface UtilisateurService {
 	Utilisateur findById(Integer id);
 
 	void delete(Utilisateur utilisateur);
+
+	boolean verifierConnexion(LoginForm loginForm);
 }

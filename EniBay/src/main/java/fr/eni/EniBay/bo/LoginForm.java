@@ -31,4 +31,11 @@ public class LoginForm {
 	public void setRememberMe(boolean rememberMe) {
 		this.rememberMe = rememberMe;
 	}
+
+	@Override
+	public String toString() {
+		return "LoginForm [email=" + email + ", password=" + password + ", rememberMe=" + rememberMe + "]";
+	}
+
+
 }
