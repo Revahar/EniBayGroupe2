@@ -21,9 +21,10 @@
 
     <!-- Connexion -->
         <span class="col-2">
-            <a data-th-href="@{creer}">Inscription</a>
-            <a data-th-href="@{connexion}">Connection</a>
-            <!-- ici, mettre la co et déco de façon dynamique -->
+            <a data-th-href="@{creer}" th:unless="${isConnected}">Inscription</a>
+            <a data-th-href="@{connexion}" th:unless="${isConnected}">Connexion</a>
+            <a data-th-href="@{deconnexion}" th:if="${isConnected}">Déconnexion</a>
+
         </span>
     </div>
     <!-- Fin connexion -->

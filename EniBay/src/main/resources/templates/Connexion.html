@@ -12,7 +12,7 @@
     <link rel="stylesheet" data-th-href="@{/css/sign-in.css}">
 
 </head>
-
+<br><br>
 <div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
 
 <body>
@@ -38,7 +38,8 @@
         Se souvenir de moi
       </label>
     </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Se connecter</button>
+    <button class="btn btn-primary w-100 py-2" th:type="submit">Se connecter</button>
+
   </form>
   <br>
   	<a class="nav-link textNav" aria-current="page" data-th-href="@{creer}">
