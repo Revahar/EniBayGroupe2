@@ -15,6 +15,7 @@ public interface UtilisateurService {
 	void signIn(String identifiant, String password);
 
 	Utilisateur findById(Integer id);
+	Utilisateur findByName(String id);
 
 	void delete(Utilisateur utilisateur);
 

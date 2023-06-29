@@ -45,6 +45,10 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     public Utilisateur findById(Integer id) {
         return utilisateurDAO.findById(id);
     }
+    @Override
+    public Utilisateur findByName(String id) {
+        return utilisateurDAO.findByName(id);
+    }
 
     @Override
     public void delete(Utilisateur utilisateur) { utilisateurDAO.delete(utilisateur); }
