@@ -33,17 +33,51 @@ public class EniBayController {
 		return "Accueil";
 	}
 	
+
 	@GetMapping("/connexion")
 	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
 		System.out.println("arrivée connexion");
 		return "Connexion";
 	}
 	
+
 	@PostMapping("/connecter")
-	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
-		System.out.println("connecter");
-		return "redirect:/accueil";
+	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
+	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
+	    if (utilisateurService.verifierConnexion(loginForm)) {
+	        System.out.println("connexion ok");
+	        return "redirect:/accueil";
+	    } else {
+	        model.addAttribute("error", "Identifiants incorrects"); // Ajouter un message d'erreur au modèle
+	        System.out.println("erreur");
+	        return "Connexion";
+	    }
+
+//	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
+//		System.out.println("connecter");
+//		return "redirect:/accueil";
+//
 	}
+
+
+	@GetMapping("/connexion")
+	public String versConnexion(Model model) {
+	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm
+	    return "Connexion";
+	}
+
+	
+//	@GetMapping("/connexion")
+//	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
+//		System.out.println("arrivée connexion");
+//		return "Connexion";
+//	}
+	
+//	@PostMapping("/connecter")
+//	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
+//		System.out.println("connecter");
+//		return "redirect:/accueil";
+//	}
 	
 	@GetMapping("/creer")
 	public String versCreation(Model model) {
