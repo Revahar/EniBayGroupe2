@@ -38,7 +38,7 @@ public class EniBayController {
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
 	        System.out.println("connexion ok");
-			Utilisateur test = utilisateurService.findByName(loginForm);
+			Utilisateur test = utilisateurService.findByName(loginForm.getEmail());
 	        return "redirect:/accueil";
 	    } else {
 	        model.addAttribute("error", "Identifiants incorrects"); // Ajouter un message d'erreur au modèle
