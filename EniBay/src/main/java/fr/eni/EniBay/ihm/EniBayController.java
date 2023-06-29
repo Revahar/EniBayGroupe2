@@ -32,14 +32,7 @@ public class EniBayController {
 		model.addAttribute("retrait", lstCategorie);
 		return "Accueil";
 	}
-	
 
-	@GetMapping("/connexion")
-	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
-		System.out.println("arrivée connexion");
-		return "Connexion";
-	}
-	
 
 	@PostMapping("/connecter")
 	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
