@@ -12,7 +12,7 @@
     <link rel="stylesheet" data-th-href="@{/css/sign-in.css}">
 
 </head>
-<br><br>
+
 <div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
 
 <body>
@@ -22,6 +22,9 @@
   <form th:action="@{/connecter}" method="post" th:object="${loginForm}">
     <h2 class="h3 mb-3 fw-normal">Se connecter</h2>
 
+<div th:if="${messageErreur}" class="alert alert-danger">
+    <p th:text="${messageErreur}"></p>
+</div>
 
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="nom@exemple.com" th:field="*{email}">
@@ -39,7 +42,6 @@
       </label>
     </div>
     <button class="btn btn-primary w-100 py-2" th:type="submit">Se connecter</button>
-
   </form>
   <br>
   	<a class="nav-link textNav" aria-current="page" data-th-href="@{creer}">
