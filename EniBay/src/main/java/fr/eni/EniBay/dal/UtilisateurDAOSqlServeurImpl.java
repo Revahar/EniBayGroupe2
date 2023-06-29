@@ -29,7 +29,7 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 	
 	@Autowired
 	public void setUtilisateurDAO(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-				this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 	
 	class UtilisateurRowMapper implements RowMapper<Utilisateur>{
