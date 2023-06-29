@@ -33,14 +33,6 @@ public class EniBayController {
 		return "Accueil";
 	}
 	
-
-	@GetMapping("/connexion")
-	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
-		System.out.println("arrivée connexion");
-		return "Connexion";
-	}
-	
-
 	@PostMapping("/connecter")
 	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
@@ -52,11 +44,6 @@ public class EniBayController {
 	        System.out.println("erreur");
 	        return "Connexion";
 	    }
-
-//	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
-//		System.out.println("connecter");
-//		return "redirect:/accueil";
-//
 	}
 
 
