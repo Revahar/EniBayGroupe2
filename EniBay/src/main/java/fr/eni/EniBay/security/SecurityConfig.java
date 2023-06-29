@@ -28,17 +28,18 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/connexion").permitAll()
 					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
 					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
+					.requestMatchers(HttpMethod.POST,"/enregistrer-nouveau-profil").permitAll()
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
 					.anyRequest().authenticated();
 		});
 		
-		http.formLogin(Customizer.withDefaults());
+		//http.formLogin(Customizer.withDefaults());
 		
-		/*http.formLogin(form -> form
+		http.formLogin(form -> form
 				.loginPage("/connexion")
 				.permitAll()
-				);*/
+				);
 		
 		http.logout(logout -> 
 				logout

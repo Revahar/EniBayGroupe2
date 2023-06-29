@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -25,10 +26,14 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 	private final static String UPDATE = "UPDATE UTILISATEURS SET pseudo= :pseudo, nom= :nom, prenom= :prenom, email= :email, telephone= :telephone, rue= :rue, code_postal= :code_postal, ville= :ville, mot_de_passe= :mot_de_passe, credit= :credit, administrateur= :administrateur WHERE no_utilisateur= :no_utilisateur";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	private UtilisateurDAO utilisateurDAO;
+	
+	@Autowired
+	public void setUtilisateurDAO(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+				this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+	}
 	
 	class UtilisateurRowMapper implements RowMapper<Utilisateur>{
-
+			
 		@Override
 		public Utilisateur mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Utilisateur utilisateur = new Utilisateur();
@@ -44,10 +49,9 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 			utilisateur.setMot_de_passe(rs.getString("mot_de_passe"));
 			utilisateur.setCredit(rs.getInt("credit"));
 			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
-			
+			System.out.println(utilisateur);
 			return utilisateur;
 		}
-		
 	}
 	
 	@Override
@@ -83,6 +87,7 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 			
 			namedParameterJdbcTemplate.update(INSERT, mapSrc, keyHolder);
 			utilisateur.setNo_utilisateur(keyHolder.getKey().intValue());
+			System.out.println(utilisateur);
 		} else {
 			namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(utilisateur));
 		}
@@ -93,11 +98,5 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 		namedParameterJdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(utilisateur));
 	}
 
-	public UtilisateurDAO getUtilisateurDAO() {
-		return utilisateurDAO;
-	}
-
-	public void setUtilisateurDAO(UtilisateurDAO utilisateurDAO) {
-		this.utilisateurDAO = utilisateurDAO;
-	}
+	
 }

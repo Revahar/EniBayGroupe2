@@ -17,47 +17,47 @@
 <body >
     
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form th:action="@{enregistrer-nouveau-profil}" method="post" th:object="${utilisateur}">
     <h2 class="h3 mb-3 fw-normal">Création de compte :</h2><hr>
     <div class="form-row">
     	<div class="form-group col">
     		<label for="firstName">Prénom</label>
-      		<input type="text" class="form-control" id="firstName" placeholder="Prénom" required>
+      		<input type="text" th:field="*{prenom}" data-th-value="${utilisateur.prenom}" class="form-control" id="firstName" placeholder="Prénom" required>
     	</div>
     	
     	<div class="form-group col">
     		<label for="name">Nom</label>
-      		<input type="text" class="form-control" id="name" placeholder="Nom" required>
+      		<input type="text" th:field="*{nom}" data-th-value="${utilisateur.nom}" class="form-control" id="name" placeholder="Nom" required>
     	</div>
     	
     	<div class="form-group col">
     		<label for="pseudo">Pseudo</label>
-      		<input type="text" class="form-control" id="pseudo" placeholder="Pseudo" required>
+      		<input type="text" th:field="*{pseudo}" data-th-value="${utilisateur.pseudo}" class="form-control" id="pseudo" placeholder="Pseudo" required>
     	</div>
     	
     	<div class="form-group col">
       		<label for="inputEmail4">Email</label>
-      		<input type="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+      		<input type="email" th:field="*{email}" data-th-value="${utilisateur.email}" class="form-control" id="inputEmail4" placeholder="Email" required>
     	</div>
     	
     	<div class="form-group col">
       		<label for="inputPassword4">Mot de passe </label>
-      		<input type="password" class="form-control" id="inputPassword4" placeholder="Mot de passe" required>
+      		<input type="password" th:field="*{mot_de_passe}" data-th-value="${utilisateur.mot_de_passe}" class="form-control" id="inputPassword4" placeholder="Mot de passe" required>
     	</div>
     	
     	<div class="form-group col">
     		<label for="inputAddress">Adresse</label>
-    		<input type="text" class="form-control" id="inputAddress" placeholder="1 rue de la soif" required>
+    		<input type="text" th:field="*{rue}" data-th-value="${utilisateur.rue}" class="form-control" id="inputAddress" placeholder="1 rue de la soif" required>
   		</div>
   		
   		<div class="form-group col">
       		<label for="inputCity">Ville</label>
-      		<input type="text" class="form-control" id="inputCity" placeholder="Pétaouchnok" required>
+      		<input type="text" th:field="*{ville}" data-th-value="${utilisateur.ville}" class="form-control" id="inputCity" placeholder="Pétaouchnok" required>
     	</div>
     	
     	<div class="form-group col">
       		<label for="inputZip">Code postal</label>
-      		<input type="text" class="form-control" id="inputZip" placeholder="01000" required>
+      		<input type="text" th:field="*{code_postal}" data-th-value="${utilisateur.code_postal}" class="form-control" id="inputZip" placeholder="01000" required>
     	</div>
     	
     	<div class="form-check">
