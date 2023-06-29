@@ -72,7 +72,7 @@ public class EniBayController {
 	
 	@GetMapping("/mon-profil")
 	public String afficherMonProfil() {
-		return "MonProfil";
+		return "Profil";
 	}
 	
 	@GetMapping("/modifier-profil")
