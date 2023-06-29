@@ -19,60 +19,60 @@
 <div class="grid">
 	<h2 class="profilTitre">Mon Profil</h2>
 </div>
-<div class="grid">
+<div class="grid" th:object="${utilisateur}">
 	<div class="profilColonneUne">
 		<label>Pseudo :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>Le pseudo a intégrer</label>
+		<label th:field="*{pseudo}"></label>
 	</div>
 	<div class="profilColonneUne">
 		<label>Nom :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>Le nom a intégrer</label>
+		<label th:field="*{nom}">Le nom a intégrer</label>
 	</div>
 	<div class="profilColonneUne">
 		<label>Prénom :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>Le prénom a intégrer</label>
+		<label th:field="*{prenom}">Le prénom a intégrer</label>
 	</div>
 	<div class="profilColonneUne">
 		<label>Email :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>Le mail a intégrer</label>
+		<label th:field="*{email}">Le mail a intégrer</label>
 	</div>
 		<div class="profilColonneUne">
 		<label>Téléphone :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>Le téléphone a intégrer</label>
+		<label th:field="*{telephone}">Le téléphone a intégrer</label>
 	</div>
 	<div class="profilColonneUne">
 		<label>Adresse :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>L'adresse à intégrer</label>
+		<label th:field="*{rue}">L'adresse à intégrer</label>
 	</div>
 	<div class="profilColonneUne">
 		<label>Code Postal :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>Le code postal à intégrer</label>
+		<label th:field="*{code_postal}">Le code postal à intégrer</label>
 	</div>
 	<div class="profilColonneUne">
 		<label>Ville :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>La ville a intégrer</label>
+		<label th:field="*{ville}">La ville a intégrer</label>
 	</div>
 	<div class="profilColonneUne">
 		<label>Crédits :</label>
 	</div>
 	<div class="profilColonneDeux">
-		<label>Le nombre de crédits</label>
+		<label th:field="*{credit}">Le nombre de crédits</label>
 	</div>
 
 	<a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{modifier-profil}">

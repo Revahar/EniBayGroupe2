@@ -32,31 +32,19 @@ public class EniBayController {
 		model.addAttribute("retrait", lstCategorie);
 		return "Accueil";
 	}
-	
-
-	@GetMapping("/connexion")
-	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
-		System.out.println("arrivée connexion");
-		return "Connexion";
-	}
-	
 
 	@PostMapping("/connecter")
 	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
 	        System.out.println("connexion ok");
+			Utilisateur test = utilisateurService.findByName(loginForm.getEmail());
 	        return "redirect:/accueil";
 	    } else {
 	        model.addAttribute("error", "Identifiants incorrects"); // Ajouter un message d'erreur au modèle
 	        System.out.println("erreur");
 	        return "Connexion";
 	    }
-
-//	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
-//		System.out.println("connecter");
-//		return "redirect:/accueil";
-//
 	}
 
 
@@ -115,21 +103,30 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/mon-profil")
-	public String afficherMonProfil() {
+	public String afficherMonProfil(Model model) {
 		System.out.println("afficher mon profil");
+		model.addAttribute("utilisateur", utilisateurService.findById(1));
 		return "Profil";
 	}
 	
 	@GetMapping("/modifier-profil")
 	public String versModifProfil(@RequestParam Integer no_utilisateur, Model model) {
-		System.out.println("arrivee modif profil");
+		model.addAttribute("utilisateur", utilisateurService.findById(no_utilisateur));
 		return "ModifProfil";
 	}
 	
 	@PostMapping("/enregistrer-modifs")
-	public String enregistrerModifsProfil() {
+	public String enregistrerModifsProfil(Utilisateur utilisateur) {
+		utilisateurService.save(utilisateur);
 		System.out.println("enregistrer modifs profil");
-		return "redirect:/profil";
+		return "redirect:/mon-profil";
+	}
+
+	@PostMapping("/supprimer-profil")
+	public String supprimerProfil(Utilisateur utilisateur) {
+		utilisateurService.delete(utilisateur);
+		System.out.println("supprimer profil");
+		return "redirect:/accueil";
 	}
 	
 	@GetMapping("/nouvelle-vente")
@@ -168,12 +165,6 @@ public class EniBayController {
 	public String detailsFinEnchere() {
 		System.out.println("details fin enchere");
 		return "DetailsFinEnchere";
-	}
-	
-	@GetMapping("/supprimer-profil")
-	public String supprimerProfil() {
-		System.out.println("supprimer profil");
-		return "redirect:/accueil";
 	}
 	
 	@GetMapping("/retrait-article")

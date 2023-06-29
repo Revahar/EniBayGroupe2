@@ -38,6 +38,7 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/connecter").permitAll()
 					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
 					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
+					.requestMatchers(HttpMethod.GET, "/mon-profil").permitAll()
 					.requestMatchers(HttpMethod.POST,"/enregistrer-nouveau-profil").permitAll()
 					.requestMatchers(HttpMethod.POST,"/connecter").permitAll()
 					.requestMatchers("/").permitAll()

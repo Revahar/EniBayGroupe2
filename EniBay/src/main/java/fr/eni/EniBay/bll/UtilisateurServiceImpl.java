@@ -41,6 +41,18 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     	return;
     }
 
+    @Override
+    public Utilisateur findById(Integer id) {
+        return utilisateurDAO.findById(id);
+    }
+    @Override
+    public Utilisateur findByName(String id) {
+        return utilisateurDAO.findByName(id);
+    }
+
+    @Override
+    public void delete(Utilisateur utilisateur) { utilisateurDAO.delete(utilisateur); }
+
 	@Override
 	public boolean verifierConnexion(LoginForm loginForm) {
 	    String email = loginForm.getEmail();
