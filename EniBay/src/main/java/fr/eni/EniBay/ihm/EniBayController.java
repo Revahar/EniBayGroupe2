@@ -60,11 +60,11 @@ public class EniBayController {
 	}
 
 
-	@GetMapping("/connexion")
-	public String versConnexion(Model model) {
-	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm
-	    return "Connexion";
-	}
+//	@GetMapping("/connexion")
+//	public String versConnexion(Model model) {
+//	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm
+//	    return "Connexion";
+//	}
 
 	
 //	@GetMapping("/connexion")
