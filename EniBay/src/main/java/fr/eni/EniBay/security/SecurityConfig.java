@@ -43,13 +43,15 @@ public class SecurityConfig {
 		
 		//http.formLogin(Customizer.withDefaults());
 		
-		http.sessionManagement(session -> session
-		        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-		        .invalidSessionUrl("/connexion")
-		        .maximumSessions(1)
-		        .sessionRegistry(sessionRegistry()));
+
+//		http.sessionManagement(session -> session
+//		        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//		        .invalidSessionUrl("/connexion")
+//		        .maximumSessions(1)
+//		        .sessionRegistry(sessionRegistry()));
 
 		
+
 		http.formLogin(form -> form
 				.loginPage("/connexion")
 				.permitAll()

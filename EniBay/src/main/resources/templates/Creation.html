@@ -18,7 +18,10 @@
     
 <main class="form-signin w-100 m-auto">
   <form th:action="@{enregistrer-nouveau-profil}" method="post" th:object="${utilisateur}">
+
     <h2 class="h3 mb-3 fw-normal">Création de compte :</h2>
+
+>>>>>>> branch 'main' of https://github.com/Revahar/EniBayGroupe2.git
     <div class="form-row">
     	<div class="form-group col">
     		<label for="firstName">Prénom</label>
@@ -38,11 +41,14 @@
     	<div class="form-group col">
       		<label for="inputEmail4">Email</label>
       		<input type="email" th:field="*{email}" data-th-value="${utilisateur.email}" class="form-control" id="inputEmail4" placeholder="Email" required>
+<<<<<<< HEAD
     	</div>
     	
     	<div class="form-group col">
       		<label for="telephone">Téléphone</label>
       		<input type="text" th:field="*{telephone}" data-th-value="${utilisateur.telephone}" class="form-control" id="telephone" placeholder="Téléphone" required>
+=======
+>>>>>>> branch 'main' of https://github.com/Revahar/EniBayGroupe2.git
     	</div>
     	
     	<div class="form-group col">
@@ -63,7 +69,11 @@
     	<div class="form-group col">
       		<label for="inputZip">Code postal</label>
       		<input type="text" th:field="*{code_postal}" data-th-value="${utilisateur.code_postal}" class="form-control" id="inputZip" placeholder="01000" required>
+<<<<<<< HEAD
     	</div><br>
+=======
+    	</div>
+>>>>>>> branch 'main' of https://github.com/Revahar/EniBayGroupe2.git
     	
     	<div class="form-check">
       		<input class="form-check-input" type="checkbox" id="gridCheck" required>
