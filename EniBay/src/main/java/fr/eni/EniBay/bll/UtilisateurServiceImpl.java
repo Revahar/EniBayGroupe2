@@ -39,5 +39,13 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     	System.out.println("true");
     	return;
     }
+
+    @Override
+    public Utilisateur findById(Integer id) {
+        return utilisateurDAO.findById(id);
+    }
+
+    @Override
+    public void delete(Utilisateur utilisateur) { utilisateurDAO.delete(utilisateur); }
 }
 

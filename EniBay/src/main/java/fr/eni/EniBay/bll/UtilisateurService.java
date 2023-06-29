@@ -12,4 +12,8 @@ public interface UtilisateurService {
 	void save(Utilisateur utilisateur);
 
 	void signIn(String identifiant, String password);
+
+	Utilisateur findById(Integer id);
+
+	void delete(Utilisateur utilisateur);
 }

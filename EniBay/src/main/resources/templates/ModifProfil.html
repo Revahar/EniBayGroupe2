@@ -16,9 +16,74 @@
 
 <body class="bg-white h-100">
 
-<h2>Modification de profil</h2>
+<form th:object="${utilisateur}" method="post">
+    <h2>Modification de profil</h2>
+    <div class="grid">
+        <input type="hidden" th:field="*{no_utilisateur}"  />
+        <div class="profilColonneUne">
+            <label>Pseudo :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{pseudo}">
+        </div>
+        <div class="profilColonneUne">
+            <label>Nom :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{nom}">
+        </div>
+        <div class="profilColonneUne">
+            <label>Prénom :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{prenom}">
+        </div>
+        <div class="profilColonneUne">
+            <label>Email :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{email}">
+        </div>
+        <div class="profilColonneUne">
+            <label>Téléphone :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{telephone}">
+        </div>
+        <div class="profilColonneUne">
+            <label>Adresse :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{rue}">
+        </div>
+        <div class="profilColonneUne">
+            <label>Code Postal :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{code_postal}">
+        </div>
+        <div class="profilColonneUne">
+            <label>Ville :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{ville}">
+        </div>
+        <div class="profilColonneUne">
+            <label>Crédits :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="number" th:field="*{credit}">
+        </div>
+        <input type="hidden" th:field="*{administrateur}"  />
 
-
+        <a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{enregistrer-modifs}">
+            <button type="button" class="btn btn-outline-primary btn-lg">Enregistrer</button>
+        </a>
+        <a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{supprimer-profil}">
+            <button type="button" class="btn btn-outline-primary btn-lg">Supprimer mon compte</button>
+        </a>
+    </div>
+</form>
 </body>
 
 	<div data-th-replace="~{fragments/fragment-footer :: fragment-footer}"></div>

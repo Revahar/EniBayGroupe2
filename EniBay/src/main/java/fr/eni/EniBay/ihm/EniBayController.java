@@ -81,21 +81,30 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/mon-profil")
-	public String afficherMonProfil() {
+	public String afficherMonProfil(Model model) {
 		System.out.println("afficher mon profil");
+		model.addAttribute("utilisateur", utilisateurService.findById(1));
 		return "Profil";
 	}
 	
 	@GetMapping("/modifier-profil")
 	public String versModifProfil(@RequestParam Integer no_utilisateur, Model model) {
-		System.out.println("arrivee modif profil");
+		model.addAttribute("utilisateur", utilisateurService.findById(no_utilisateur));
 		return "ModifProfil";
 	}
 	
 	@PostMapping("/enregistrer-modifs")
-	public String enregistrerModifsProfil() {
+	public String enregistrerModifsProfil(Utilisateur utilisateur) {
+		utilisateurService.save(utilisateur);
 		System.out.println("enregistrer modifs profil");
-		return "redirect:/profil";
+		return "redirect:/mon-profil";
+	}
+
+	@PostMapping("/supprimer-profil")
+	public String supprimerProfil(Utilisateur utilisateur) {
+		utilisateurService.delete(utilisateur);
+		System.out.println("supprimer profil");
+		return "redirect:/accueil";
 	}
 	
 	@GetMapping("/nouvelle-vente")
@@ -134,12 +143,6 @@ public class EniBayController {
 	public String detailsFinEnchere() {
 		System.out.println("details fin enchere");
 		return "DetailsFinEnchere";
-	}
-	
-	@GetMapping("/supprimer-profil")
-	public String supprimerProfil() {
-		System.out.println("supprimer profil");
-		return "redirect:/accueil";
 	}
 	
 	@GetMapping("/retrait-article")
