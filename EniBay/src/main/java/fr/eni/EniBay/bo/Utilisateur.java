@@ -23,9 +23,9 @@ public class Utilisateur  {
 	@NotBlank
 	private String mot_de_passe;
 	@NotBlank
-	private Integer credit;
+	private Integer credit = 0;
 	@NotBlank
-	private Boolean administrateur;
+	private Boolean administrateur = false;
 	
 	public Utilisateur() {
 		// TODO Auto-generated constructor stub

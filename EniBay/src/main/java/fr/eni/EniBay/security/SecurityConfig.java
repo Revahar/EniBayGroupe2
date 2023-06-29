@@ -4,20 +4,25 @@ package fr.eni.EniBay.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
+
+
 @Configuration
 @EnableWebSecurity
+
 public class SecurityConfig {
 
 	@Bean
@@ -26,19 +31,29 @@ public class SecurityConfig {
 			auth
 					.requestMatchers(HttpMethod.GET, "/accueil").permitAll()
 					.requestMatchers(HttpMethod.GET, "/connexion").permitAll()
+					.requestMatchers(HttpMethod.POST, "/connecter").permitAll()
+					.requestMatchers(HttpMethod.GET, "/connecter").permitAll()
 					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
 					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
+					.requestMatchers(HttpMethod.POST,"/enregistrer-nouveau-profil").permitAll()
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
 					.anyRequest().authenticated();
 		});
 		
-		http.formLogin(Customizer.withDefaults());
+		//http.formLogin(Customizer.withDefaults());
 		
-		/*http.formLogin(form -> form
+		http.sessionManagement(session -> session
+		        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+		        .invalidSessionUrl("/connexion")
+		        .maximumSessions(1)
+		        .sessionRegistry(sessionRegistry()));
+
+		
+		http.formLogin(form -> form
 				.loginPage("/connexion")
 				.permitAll()
-				);*/
+				);
 		
 		http.logout(logout -> 
 				logout
@@ -72,4 +87,10 @@ public class SecurityConfig {
 	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
+	
+	@Bean
+	public SessionRegistry sessionRegistry() {
+	    return new SessionRegistryImpl();
+	}
+
 }
