@@ -23,23 +23,20 @@
       			<hr>
     		</div>
 		    <div class="col-md-5 col-lg-7">
-		        <form class="needs-validation" novalidate>
+		        <form th:action="@{enregistrer-nouvelle-vente}" method="post" th:object="article" class="needs-validation" novalidate>
 		            <div class="row g-3 ">
 			            <div class="col-sm-6">
 			            	<label for="article" class="input-group-text">Article</label>
-			            	<input type="text" class="form-control" id="article" placeholder="nom de l'article" value="" required>
+			            	<input type="text" th:field="*{nom_article}" class="form-control" id="article" placeholder="nom de l'article" data-th-value="${article.nom_article}" required>
 			            </div>
 			            <div class="col-sm-6">
 			               <label for="desc" class="input-group-text">Description</label>
-			               <textarea class="form-control" aria-label="With textarea" placeholder="Description de l'article" required></textarea>
+			               <textarea th:field="*{description}" data-th-value="${article.description}" class="form-control" aria-label="With textarea" placeholder="Description de l'article" required></textarea>
 			            </div>
 			            <div class="col-sm-6">
 			             	<label class="input-group-text" for="categorie">Catégorie</label>
-			 				<select class="form-select" id="categorie" required>
-			   					<option selected>Choisir...</option>
-			   						<option value="1">1</option>
-			   						<option value="2">2</option>
-			   						<option value="3">3</option>
+			 				<select th:field="*{categorie}" class="form-select" id="categorie" required>
+			 					<option th:each="categorie : ${@CategorieService.getListCategories()}" th:value="${categorie.id}" th:text="${categorie.libelle}"></option>
 			 				</select>
 			            </div>
 						<div class="col-12">
@@ -48,15 +45,15 @@
 						</div>
 						<div class="col-12">
 						<label class="input-group-text" for="prix">Mise à prix</label>
-						<input type="number" class="form-control" placeholder="Prix de l'article" required>
+						<input type="number" th:field="*{prix_initial}" data-th-value="${article.prix_initial}" class="form-control" placeholder="Prix de l'article" required>
 						</div>
 						<div class="col-sm-6">
 						    <label for="debutEnchere" class="input-group-text">Début de l'enchère</label>
-						    <input type="date" class="form-control" id="debutEnchere" placeholder="Date de début" value="" required>
+						    <input type="date" th:field="*{date_debut_encheres}" data-th-value="${article.date_debut_encheres}" class="form-control" id="debutEnchere" placeholder="Date de début" value="" required>
 						</div>
 						<div class="col-sm-6">
 						    <label for="finEnchere" class="input-group-text">Fin de l'enchère</label>
-						    <input type="date" class="form-control" id="finEnchere" placeholder="Date de fin" value="" required>
+						    <input type="date" th:field="*{date_fin_encheres}" data-th-value="${article.date_fin_encheres}" class="form-control" id="finEnchere" placeholder="Date de fin" value="" required>
 						</div>
 						<style>
 							.border-overlay {
@@ -73,15 +70,15 @@
 	  						<span class="border-overlay">Retrait</span><br>
 	          				<div class="col-md-12">
 	              				<label for="adresse" class="form-label">Adresse</label>
-	              				<input type="text" class="form-control" id="adresse" placeholder="1 rue de la soif" required>
+	              				<input type="text" data-th-value="${utilisateur.rue}" class="form-control" id="adresse" placeholder="1 rue de la soif" required>
 	           				</div>
 	           				<div class="col-md-12">
 	              				<label for="ville" class="form-label">Ville</label>
-	              				<input type="text" class="form-control" id="ville" placeholder="Pétaouchnok" required>
+	              				<input type="text" data-th-value="${utilisateur.ville}" class="form-control" id="ville" placeholder="Pétaouchnok" required>
 	           				</div>
 	           				<div class="col-md-12">
 	              				<label for="zip" class="form-label">Code postal</label>
-	              				<input type="text" class="form-control" id="zip" placeholder="01000" required>
+	              				<input type="text" data-th-value="utilisateur.code_postal" class="form-control" id="zip" placeholder="01000" required>
 	           				</div>
 	           				<br>
         				</div>

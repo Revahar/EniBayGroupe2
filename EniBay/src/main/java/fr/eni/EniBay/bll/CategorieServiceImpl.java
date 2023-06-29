@@ -20,7 +20,7 @@ public class CategorieServiceImpl implements CategorieService{
     }
     
     @Override
-    public List<Categorie> getCategories() {
+    public List<Categorie> getListCategories() {
         return categorieDAO.findAll();
     }
     

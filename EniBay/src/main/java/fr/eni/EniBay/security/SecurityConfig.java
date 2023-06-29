@@ -1,5 +1,6 @@
 package fr.eni.EniBay.security;
 
+import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -29,6 +32,7 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
 					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
 					.requestMatchers(HttpMethod.POST,"/enregistrer-nouveau-profil").permitAll()
+					.requestMatchers(HttpMethod.POST,"/connecter").permitAll()
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
 					.anyRequest().authenticated();

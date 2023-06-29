@@ -5,7 +5,7 @@ import java.util.List;
 import fr.eni.EniBay.bo.Categorie;
 
 public interface CategorieService {
-	List<Categorie> getCategories();
+	List<Categorie> getListCategories();
 
 	void ajouterCategorie(Categorie categorie);
 
