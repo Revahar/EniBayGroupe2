@@ -1,19 +1,19 @@
 package fr.eni.EniBay.bo;
 
 public class LoginForm {
-	private String email;
+	private String username;
 	private String password;
 	private boolean rememberMe;
 	
 	
 	public LoginForm() {}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String email) {
+		this.username = email;
 	}
 
 	public String getPassword() {
@@ -34,7 +34,7 @@ public class LoginForm {
 
 	@Override
 	public String toString() {
-		return "LoginForm [email=" + email + ", password=" + password + ", rememberMe=" + rememberMe + "]";
+		return "LoginForm [username=" + username + ", password=" + password + ", rememberMe=" + rememberMe + "]";
 	}
 
 
