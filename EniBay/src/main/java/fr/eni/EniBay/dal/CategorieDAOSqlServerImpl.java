@@ -1,6 +1,8 @@
 package fr.eni.EniBay.dal;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,6 +24,8 @@ public class CategorieDAOSqlServerImpl implements CategorieDAO{
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	private CategorieDAO categorieDAO;
+	
+	private List<Categorie> categories;
 
 	@Autowired
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -55,5 +59,12 @@ public class CategorieDAOSqlServerImpl implements CategorieDAO{
 
 	public void setCategorieDAO(CategorieDAO categorieDAO) {
 		this.categorieDAO = categorieDAO;
+	}
+
+	@Override
+	public Map<Integer, Categorie> getMapCategories() {
+		var mapCategories = new HashMap<Integer, Categorie>();
+		categories.forEach(categorie -> mapCategories.put(categorie.getNo_categorie(), categorie));
+		return mapCategories;
 	}
 }

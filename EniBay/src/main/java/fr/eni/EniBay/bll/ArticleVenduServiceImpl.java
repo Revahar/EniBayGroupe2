@@ -26,11 +26,11 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 	    @Override
 	    public void ajouterArticleVendu(ArticleVendu articleVendu) {
 	        lstArticlesVendus.add(articleVendu);
-	        afficher(articleVendu);
+	        save(articleVendu);
 	    }
 
 	    @Override
-	    public void afficher(ArticleVendu articleVendu) {
+	    public void save(ArticleVendu articleVendu) {
 	    	articleVenduDAO.save(articleVendu);
 	    }
 }

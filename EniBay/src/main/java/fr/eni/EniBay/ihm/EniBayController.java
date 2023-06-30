@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +13,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+
+
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+
 import fr.eni.EniBay.bll.*;
 import fr.eni.EniBay.bo.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @Controller
 public class EniBayController {
@@ -21,25 +32,47 @@ public class EniBayController {
 	private CategorieService categorieService;
 	private RetraitService retraitService;
 	private UtilisateurService utilisateurService;
+	private ArticleVenduService articleVenduService;
 	
-	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService) {
+	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, ArticleVenduService articleVenduService) {
 		this.categorieService = categorieService;
 		this.retraitService = retraitService;
 		this.utilisateurService = utilisateurService;
+		this.articleVenduService = articleVenduService;
 	}
 	
-	@GetMapping({"/", "/accueil"})
-	public String afficherAccueil(Model model, Principal principal) {
-		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (principal != null) {
-			System.out.println(principal.getName());
-		}
-		List<Retrait> lstCategorie = retraitService.getRetraits();
-		
-		model.addAttribute("retrait", lstCategorie);
-		return "Accueil";
-	}
+	//Méthode de vérifiaction de connexion (sert à rendre dynamique les liens) 
+    private boolean isConnected() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.isAuthenticated();
+    }
+    
+    //Méthode pour se déconnecter
+    @GetMapping("/deconnexion")
+    public String deconnexion(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
+        return "accueil";
+    }
 
+	
+    @GetMapping({"/", "/accueil"})
+    public String afficherAccueil(Model model, Principal principal) {
+        boolean isConnected = isConnected();
+        if (isConnected) {
+            System.out.println(isConnected);
+            //System.out.println(principal.getName());
+        }
+        List<Retrait> lstCategorie = retraitService.getRetraits();
+
+        model.addAttribute("retrait", lstCategorie);
+        model.addAttribute("isConnected", isConnected);
+        return "Accueil";
+    }
+	
+	
 	@PostMapping("/connecter")
 	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
@@ -59,10 +92,14 @@ public class EniBayController {
 	@GetMapping("/connexion")
 	public String versConnexion(Model model) {
 	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm
+	    
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    boolean isConnected = authentication.isAuthenticated();
+	    model.addAttribute("isConnected", isConnected); // Ajout de la variable isConnected
+	    
 	    return "Connexion";
 	}
 
-	
 //	@GetMapping("/connexion")
 //	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
 //		System.out.println("arrivée connexion");
@@ -83,7 +120,7 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-nouveau-profil")
-	public String enregistrerNouveauProfil(@ModelAttribute Utilisateur utilisateur) {
+	public String enregistrerNouveauProfil(@Valid @ModelAttribute Utilisateur utilisateur) {
 		System.out.println("enregistrer nouveau profil");
 		utilisateurService.ajouterUtilisateur(utilisateur);
 		
@@ -104,9 +141,9 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/profil")
-	public String afficherProfil(@RequestParam Utilisateur utilisateur, Model model) {
+	public String afficherProfil(/*@RequestParam Utilisateur utilisateur, Model model*/) {
 		System.out.println("afficher profil");
-		model.addAttribute("utilisateur", utilisateur);
+		//model.addAttribute("utilisateur", utilisateur);
 		return "Profil";
 	}
 	
@@ -140,7 +177,7 @@ public class EniBayController {
 		return "redirect:/accueil";
 	}
 	
-	@GetMapping("/nouvelle-vente")
+	@GetMapping("/NouvelleVente")
 	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
 		//model.addAttribute("utilisateur", utilisateur);
 		System.out.println("arrivee nouvelle vente");
@@ -151,6 +188,7 @@ public class EniBayController {
 	@PostMapping("/enregistrer-nouvelle-vente")
 	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article) {
 		System.out.println("enregistrer nouvelle vente");
+		articleVenduService.ajouterArticleVendu(article);
 		return "redirect:/accueil";
 	}
 	
