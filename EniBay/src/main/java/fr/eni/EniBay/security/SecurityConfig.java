@@ -52,12 +52,14 @@ public class SecurityConfig {
 					.requestMatchers("/connecter").permitAll()
 					.requestMatchers(HttpMethod.GET, "/connecter").permitAll()
 					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
-					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
-					.requestMatchers(HttpMethod.GET, "/mon-profil").permitAll()
+					.requestMatchers(HttpMethod.GET, "/profil").authenticated()
+					.requestMatchers(HttpMethod.GET, "/mon-profil").authenticated()
 					.requestMatchers(HttpMethod.GET, "/NouvelleVente").authenticated()
 					.requestMatchers("/enregistrer-nouveau-profil").permitAll()
 					.requestMatchers("/").permitAll()
-					.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
+					.requestMatchers("/css/style.css").permitAll()
+					.requestMatchers("/css/*").permitAll()
+					.requestMatchers("/images/*").permitAll()
 					//.anyRequest().authenticated()
 					;
 		});
