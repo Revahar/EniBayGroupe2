@@ -12,6 +12,8 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -32,15 +34,14 @@ public class SecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http.authorizeHttpRequests(auth -> {
 			auth
-					.requestMatchers(HttpMethod.GET, "/accueil").permitAll()
-					.requestMatchers(HttpMethod.GET, "/connexion").permitAll()
-					.requestMatchers(HttpMethod.POST, "/connecter").permitAll()
-					.requestMatchers(HttpMethod.GET, "/connecter").permitAll()
-					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
-					.requestMatchers(HttpMethod.GET, "/profil").permitAll()
-					.requestMatchers(HttpMethod.GET, "/mon-profil").permitAll()
-					.requestMatchers(HttpMethod.POST,"/enregistrer-nouveau-profil").permitAll()
-					.requestMatchers(HttpMethod.POST,"/connecter").permitAll()
+					.requestMatchers("/accueil").permitAll()
+					.requestMatchers("/connexion").permitAll()
+					.requestMatchers("/connecter").permitAll()
+					.requestMatchers("/connecter").permitAll()
+					.requestMatchers("/creer").permitAll()
+					.requestMatchers("/profil").permitAll()
+					.requestMatchers("/mon-profil").permitAll()
+					.requestMatchers("/enregistrer-nouveau-profil").permitAll()
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
 					.anyRequest().authenticated();
@@ -86,7 +87,8 @@ public class SecurityConfig {
         UserDetails admin = User.withUsername("admin")
             .password(passwordEncoder().encode("adminPass"))
             .roles("ADMIN")
-            .build();
+            .build();       
+        
         return new InMemoryUserDetailsManager(user1, user2, admin);
     }
 	
@@ -99,5 +101,5 @@ public class SecurityConfig {
 	public SessionRegistry sessionRegistry() {
 	    return new SessionRegistryImpl();
 	}
-
+	
 }

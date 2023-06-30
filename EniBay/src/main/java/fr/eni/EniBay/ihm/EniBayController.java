@@ -8,21 +8,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.EniBay.bll.*;
 import fr.eni.EniBay.bo.*;
 
 @Controller
+@SessionAttributes("utilisateurConnecte")
 public class EniBayController {
 	
 	private CategorieService categorieService;
 	private RetraitService retraitService;
 	private UtilisateurService utilisateurService;
+	private ArticleVenduService articleVenduService;
 	
-	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService) {
+	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, ArticleVenduService articleVenduService) {
 		this.categorieService = categorieService;
 		this.retraitService = retraitService;
 		this.utilisateurService = utilisateurService;
+		this.articleVenduService = articleVenduService;
 	}
 	
 	@GetMapping({"/", "/accueil"})
@@ -34,7 +38,7 @@ public class EniBayController {
 	}
 
 	@PostMapping("/connecter")
-	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
+	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, @ModelAttribute Utilisateur utilisateur, Model model) {
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
 	        System.out.println("connexion ok");
@@ -48,13 +52,12 @@ public class EniBayController {
 	}
 
 
-//	@GetMapping("/connexion")
-//	public String versConnexion(Model model) {
-//	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm
-//	    return "Connexion";
-//	}
+	@GetMapping("/connexion")
+	public String versConnexion(Model model) {
+	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm
+	    return "Connexion";
+	}
 
-	
 //	@GetMapping("/connexion")
 //	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
 //		System.out.println("arrivée connexion");
@@ -140,6 +143,7 @@ public class EniBayController {
 	@PostMapping("/enregistrer-nouvelle-vente")
 	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article) {
 		System.out.println("enregistrer nouvelle vente");
+		articleVenduService.ajouterArticleVendu(article);
 		return "redirect:/accueil";
 	}
 	
