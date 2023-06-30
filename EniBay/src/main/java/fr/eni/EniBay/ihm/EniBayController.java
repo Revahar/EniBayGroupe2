@@ -17,7 +17,6 @@ import fr.eni.EniBay.bll.*;
 import fr.eni.EniBay.bo.*;
 
 @Controller
-@SessionAttributes("utilisateurConnecte")
 public class EniBayController {
 	
 	private CategorieService categorieService;
@@ -45,7 +44,7 @@ public class EniBayController {
 	}
 
 	@PostMapping("/connecter")
-	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, @ModelAttribute Utilisateur utilisateur, Model model) {
+	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
 	        System.out.println("connexion ok");
