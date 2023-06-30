@@ -23,7 +23,7 @@
       			<hr>
     		</div>
 		    <div class="col-md-5 col-lg-7">
-		        <form th:action="@{enregistrer-nouvelle-vente}" method="post" th:object="article" class="needs-validation" novalidate>
+		        <form th:action="@{enregistrer-nouvelle-vente}" method="post" th:object="${article}" class="needs-validation" novalidate>
 		            <div class="row g-3 ">
 			            <div class="col-sm-6">
 			            	<label for="article" class="input-group-text">Article</label>
@@ -45,7 +45,7 @@
 						</div>
 						<div class="col-12">
 						<label class="input-group-text" for="prix">Mise à prix</label>
-						<input type="number" th:field="*{prix_initial}" data-th-value="${article.prix_initial}" class="form-control" placeholder="Prix de l'article" required>
+						<input type="number" th:field="*{prix_initial}" data-th-value="${article.prix_initial}" class="form-control" placeholder="Prix de l'article">
 						</div>
 						<div class="col-sm-6">
 						    <label for="debutEnchere" class="input-group-text">Début de l'enchère</label>
