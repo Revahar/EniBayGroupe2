@@ -1,7 +1,10 @@
 package fr.eni.EniBay.ihm;
 
+import java.security.Principal;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +33,11 @@ public class EniBayController {
 	}
 	
 	@GetMapping({"/", "/accueil"})
-	public String afficherAccueil(Model model) {
+	public String afficherAccueil(Model model, Principal principal) {
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (principal != null) {
+			System.out.println(principal.getName());
+		}
 		List<Retrait> lstCategorie = retraitService.getRetraits();
 		
 		model.addAttribute("retrait", lstCategorie);
@@ -42,7 +49,8 @@ public class EniBayController {
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
 	        System.out.println("connexion ok");
-			Utilisateur test = utilisateurService.findByName(loginForm.getEmail());
+	        System.out.println(loginForm.getUsername());
+			Utilisateur test = utilisateurService.findByName(loginForm.getUsername());
 	        return "redirect:/accueil";
 	    } else {
 	        model.addAttribute("error", "Identifiants incorrects"); // Ajouter un message d'erreur au modèle
@@ -107,6 +115,9 @@ public class EniBayController {
 	
 	@GetMapping("/mon-profil")
 	public String afficherMonProfil(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(authentication.getName());
+		
 		System.out.println("afficher mon profil");
 		model.addAttribute("utilisateur", utilisateurService.findById(1));
 		return "Profil";

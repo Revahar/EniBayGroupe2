@@ -3,6 +3,7 @@ package fr.eni.EniBay.bll;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fr.eni.EniBay.bo.LoginForm;
@@ -13,10 +14,12 @@ import fr.eni.EniBay.dal.UtilisateurDAO;
 public class UtilisateurServiceImpl implements UtilisateurService{
  	private final UtilisateurDAO utilisateurDAO;
     private final List<Utilisateur> lstUtilisateurs;
+    private final PasswordEncoder passwordEncoder;
 
-    public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO) {
+    public UtilisateurServiceImpl(UtilisateurDAO utilisateurDAO, PasswordEncoder passwordEncoder) {
         this.utilisateurDAO = utilisateurDAO;
         this.lstUtilisateurs = new ArrayList<>();
+		this.passwordEncoder = passwordEncoder;
     }
     
     @Override
@@ -26,6 +29,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     
     @Override
     public void ajouterUtilisateur(Utilisateur utilisateur) {
+    	utilisateur.setMot_de_passe(passwordEncoder.encode(utilisateur.getMot_de_passe()));
     	lstUtilisateurs.add(utilisateur);
         save(utilisateur);
     }
@@ -55,22 +59,15 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 
 	@Override
 	public boolean verifierConnexion(LoginForm loginForm) {
-	    String email = loginForm.getEmail();
+	    String email = loginForm.getUsername();
 	    String motDePasse = loginForm.getPassword();
 	    
 	    // Effectuez ici la logique de vérification des informations de connexion
 	    // Vérifiez si les informations de connexion sont valides en les comparant à celles stockées dans la base de données
 	    
 	    Utilisateur utilisateur = utilisateurDAO.findByName(email); // Supposons que vous avez une méthode findByPseudo dans votre DAO
-	    
-	    if (utilisateur != null && utilisateur.getMot_de_passe().equals(motDePasse)) {
-	    	System.out.println("login ok");
-	        return true; // Les informations de connexion sont valides
-	        
-	    } else {
-	    	System.out.println("pas le bon login");
-	        return false; // Les informations de connexion sont incorrectes
-	    }
+
+	    return true;
 	}
 
 }

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Connexion</title>
 
+	<link rel="icon" type="image/x-icon" href="/images/Logo.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" data-th-href="@{/css/style.css}">
     <link rel="stylesheet" data-th-href="@{/css/sign-in.css}">
@@ -16,6 +17,7 @@
 <div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
 
 <body>
+
     
 <main class="form-signin w-100 m-auto">
 
@@ -27,7 +29,7 @@
 </div>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="nom@exemple.com" th:field="*{email}">
+      <input type="email" name="username" class="form-control" id="floatingInput" placeholder="nom@exemple.com" th:field="*{username}">
       <label for="floatingInput">Email</label>
     </div>
     <div class="form-floating">
