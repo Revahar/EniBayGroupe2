@@ -2,6 +2,7 @@ package fr.eni.EniBay.bll;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class CategorieServiceImpl implements CategorieService{
     }
     
     @Override
-    public List<Categorie> getCategories() {
+    public List<Categorie> getListCategories() {
         return categorieDAO.findAll();
     }
     
@@ -34,4 +35,9 @@ public class CategorieServiceImpl implements CategorieService{
     public void afficher(Categorie categorie) {
         categorieDAO.save(categorie);
     }
+
+	@Override
+	public Map<Integer, Categorie> getMapCategories() {
+		return categorieDAO.getMapCategories();
+	}
 }

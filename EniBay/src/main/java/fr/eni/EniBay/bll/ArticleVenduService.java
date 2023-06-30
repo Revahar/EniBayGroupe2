@@ -9,5 +9,5 @@ public interface ArticleVenduService {
 
 	void ajouterArticleVendu(ArticleVendu articleVendu);
 
-	void afficher(ArticleVendu articleVendu);
+	void save(ArticleVendu articleVendu);
 }

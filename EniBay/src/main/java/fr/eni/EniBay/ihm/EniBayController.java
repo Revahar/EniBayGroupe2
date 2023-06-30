@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.security.Principal;
+
+
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import fr.eni.EniBay.bll.*;
@@ -28,11 +32,13 @@ public class EniBayController {
 	private CategorieService categorieService;
 	private RetraitService retraitService;
 	private UtilisateurService utilisateurService;
+	private ArticleVenduService articleVenduService;
 	
-	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService) {
+	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, ArticleVenduService articleVenduService) {
 		this.categorieService = categorieService;
 		this.retraitService = retraitService;
 		this.utilisateurService = utilisateurService;
+		this.articleVenduService = articleVenduService;
 	}
 	
 	//Méthode de vérifiaction de connexion (sert à rendre dynamique les liens) 
@@ -94,8 +100,6 @@ public class EniBayController {
 	    return "Connexion";
 	}
 
-
-	
 //	@GetMapping("/connexion")
 //	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
 //		System.out.println("arrivée connexion");
@@ -137,9 +141,9 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/profil")
-	public String afficherProfil(@RequestParam Utilisateur utilisateur, Model model) {
+	public String afficherProfil(/*@RequestParam Utilisateur utilisateur, Model model*/) {
 		System.out.println("afficher profil");
-		model.addAttribute("utilisateur", utilisateur);
+		//model.addAttribute("utilisateur", utilisateur);
 		return "Profil";
 	}
 	
@@ -184,6 +188,7 @@ public class EniBayController {
 	@PostMapping("/enregistrer-nouvelle-vente")
 	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article) {
 		System.out.println("enregistrer nouvelle vente");
+		articleVenduService.ajouterArticleVendu(article);
 		return "redirect:/accueil";
 	}
 	

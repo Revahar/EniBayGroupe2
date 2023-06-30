@@ -1,5 +1,6 @@
 package fr.eni.EniBay.security;
 
+import javax.sql.DataSource;
 
 import javax.sql.DataSource;
 
@@ -18,10 +19,12 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -56,6 +59,7 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/mon-profil").authenticated()
 					.requestMatchers(HttpMethod.GET, "/NouvelleVente").authenticated()
 					.requestMatchers("/enregistrer-nouveau-profil").permitAll()
+					.requestMatchers("/error").permitAll()
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/css/style.css").permitAll()
 					.requestMatchers("/css/*").permitAll()
@@ -163,5 +167,5 @@ public class SecurityConfig {
 	public SessionRegistry sessionRegistry() {
 	    return new SessionRegistryImpl();
 	}
-
+	
 }
