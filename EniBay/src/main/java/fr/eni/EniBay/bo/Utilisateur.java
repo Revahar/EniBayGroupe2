@@ -1,30 +1,32 @@
 package fr.eni.EniBay.bo;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public class Utilisateur  {
 	private Integer no_utilisateur;
-	@NotBlank
+	@NotBlank(message = "ne doit pas être null")
+	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "le pseudo doit être alphanuméric")
 	private String pseudo;
-	@NotBlank
+	@NotBlank(message = "ne doit pas être null")
 	private String nom;
-	@NotBlank
+	@NotBlank(message = "ne doit pas être null")
 	private String prenom;
-	@NotBlank
+	@NotBlank(message = "ne doit pas être null")
 	private String email;
 
 	private String telephone;
-	@NotBlank
+	@NotBlank(message = "ne doit pas être null")
 	private String rue;
-	@NotBlank
+	@NotBlank(message = "ne doit pas être null")
 	private String code_postal;
-	@NotBlank
+	@NotBlank(message = "ne doit pas être null")
 	private String ville;
-	@NotBlank
+	@NotBlank(message = "ne doit pas être null")
 	private String mot_de_passe;
-	@NotBlank
+	@NotNull
 	private Integer credit = 0;
-	@NotBlank
 	private Boolean administrateur = false;
 	
 	public Utilisateur() {
