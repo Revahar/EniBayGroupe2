@@ -74,11 +74,12 @@ public class EniBayController {
 	
 	@PostMapping("/connecter")
 	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
+		boolean isConnected = isConnected();
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
-	        System.out.println("connexion ok");
-	        System.out.println(loginForm.getUsername());
-			Utilisateur test = utilisateurService.findByName(loginForm.getUsername());
+	        System.out.println("connexion ok, username = " + loginForm.getUsername() + " & isConnected = " + isConnected);
+	        model.addAttribute("isConnected", isConnected);
+			Utilisateur utilisateur = utilisateurService.findByName(loginForm.getUsername());
 	        return "redirect:/accueil";
 	    } else {
 	        model.addAttribute("error", "Identifiants incorrects"); // Ajouter un message d'erreur au modèle
@@ -113,7 +114,8 @@ public class EniBayController {
 	
 	@GetMapping("/creer")
 	public String versCreation(Model model) {
-		System.out.println("arrivée creer");
+		boolean isConnected = isConnected();
+		model.addAttribute("isConnected", isConnected);
 		model.addAttribute("utilisateur", new Utilisateur());
 		return "Creation";
 	}
@@ -186,7 +188,10 @@ public class EniBayController {
 	@GetMapping("/nouvelle-vente")
 	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
 		//model.addAttribute("utilisateur", utilisateur);
+		boolean isConnected = isConnected();
 		System.out.println("arrivee nouvelle vente");
+		model.addAttribute("isConnected", isConnected);
+		System.out.println(isConnected);
 		model.addAttribute("article", new ArticleVendu());
 		return "NouvelleVente";
 	}

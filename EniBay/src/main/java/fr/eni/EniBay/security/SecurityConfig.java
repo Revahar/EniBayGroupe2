@@ -84,10 +84,6 @@ public class SecurityConfig {
 	    .maximumSessions(1)
 	    .sessionRegistry(sessionRegistry());
 
-
-
-		
-
 		http.formLogin(form -> form
 				.loginPage("/connexion")
 				.permitAll()
@@ -103,13 +99,6 @@ public class SecurityConfig {
 		
 		return http.build();
 	}
-	
-//	http.logout()
-//    .invalidateHttpSession(true)
-//    .clearAuthentication(true)
-//    .deleteCookies("JSESSIONID")
-//    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//    .logoutSuccessUrl("/deconnexion").permitAll();
 
 	
 	@Bean
