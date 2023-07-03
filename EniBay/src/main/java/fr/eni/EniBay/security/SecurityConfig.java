@@ -57,7 +57,7 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
 					.requestMatchers(HttpMethod.GET, "/profil").authenticated()
 					.requestMatchers(HttpMethod.GET, "/mon-profil").authenticated()
-					.requestMatchers(HttpMethod.GET, "/NouvelleVente").authenticated()
+					.requestMatchers(HttpMethod.GET, "/nouvelle-vente").authenticated()
 					.requestMatchers("/enregistrer-nouveau-profil").permitAll()
 					.requestMatchers("/error").permitAll()
 					.requestMatchers("/").permitAll()

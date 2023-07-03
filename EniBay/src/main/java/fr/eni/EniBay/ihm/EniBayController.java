@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -120,11 +121,14 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-nouveau-profil")
-	public String enregistrerNouveauProfil(@Valid @ModelAttribute Utilisateur utilisateur) {
+	public String enregistrerNouveauProfil(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
+										   BindingResult bindingResult) {
 		System.out.println("enregistrer nouveau profil");
+		if (bindingResult.hasErrors()) {
+			return "Creation";
+		}
 		utilisateurService.ajouterUtilisateur(utilisateur);
 		
-		//System.out.println(utilisateur);
 		return "redirect:/accueil";
 	}
 	
@@ -164,7 +168,11 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-modifs")
-	public String enregistrerModifsProfil(Utilisateur utilisateur) {
+	public String enregistrerModifsProfil(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
+										  BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "ModifProfil";
+		}
 		utilisateurService.save(utilisateur);
 		System.out.println("enregistrer modifs profil");
 		return "redirect:/mon-profil";
