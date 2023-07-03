@@ -1,21 +1,22 @@
 package fr.eni.EniBay.bo;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 public class Utilisateur  {
 	private Integer no_utilisateur;
 	@NotBlank(message = "ne doit pas être null")
-	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "le pseudo doit être alphanuméric")
+	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "le pseudo doit être alphanumérique")
 	private String pseudo;
 	@NotBlank(message = "ne doit pas être null")
 	private String nom;
 	@NotBlank(message = "ne doit pas être null")
 	private String prenom;
 	@NotBlank(message = "ne doit pas être null")
+	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "email non valid")
 	private String email;
 
+	@Size(min = 9, max = 15, message = "taille du numéro invalid")
+	@Pattern(regexp = "^(?:[0-9]|)+$", message = "character invalide")
 	private String telephone;
 	@NotBlank(message = "ne doit pas être null")
 	private String rue;
@@ -25,7 +26,6 @@ public class Utilisateur  {
 	private String ville;
 	@NotBlank(message = "ne doit pas être null")
 	private String mot_de_passe;
-	@NotNull
 	private Integer credit = 0;
 	private Boolean administrateur = false;
 	
@@ -35,7 +35,7 @@ public class Utilisateur  {
 	
 	public Utilisateur(Integer no_utilisateur, @NotBlank String pseudo, @NotBlank String nom, @NotBlank String prenom,
 			@NotBlank String email, String telephone, @NotBlank String rue, @NotBlank String code_postal,
-			@NotBlank String ville, @NotBlank String mot_de_passe, @NotBlank Integer credit, @NotBlank Boolean administrateur) {
+			@NotBlank String ville, @NotBlank String mot_de_passe, Integer credit, Boolean administrateur) {
 		this.no_utilisateur = no_utilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;

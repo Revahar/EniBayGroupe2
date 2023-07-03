@@ -24,55 +24,63 @@
             <label>Pseudo :</label>
         </div>
         <div class="profilColonneDeux">
-            <input type="text" th:field="*{pseudo}">
+            <input type="text" th:field="*{pseudo}"/>
+            <span th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></span>
         </div>
         <div class="profilColonneUne">
             <label>Nom :</label>
         </div>
         <div class="profilColonneDeux">
             <input type="text" th:field="*{nom}">
+            <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
         </div>
         <div class="profilColonneUne">
             <label>Prénom :</label>
         </div>
         <div class="profilColonneDeux">
             <input type="text" th:field="*{prenom}">
+            <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
         </div>
         <div class="profilColonneUne">
             <label>Email :</label>
         </div>
         <div class="profilColonneDeux">
             <input type="text" th:field="*{email}">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </div>
         <div class="profilColonneUne">
             <label>Téléphone :</label>
         </div>
         <div class="profilColonneDeux">
-            <input type="text" th:field="*{telephone}">
+            <input type="tel" pattern="([0-9]{2} ){4}[0-9]{2}" th:field="*{telephone}">
+            <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
         </div>
         <div class="profilColonneUne">
             <label>Adresse :</label>
         </div>
         <div class="profilColonneDeux">
             <input type="text" th:field="*{rue}">
+            <span th:if="${#fields.hasErrors('rue')}" th:errors="*{rue}"></span>
+        </div>
+            <div class="profilColonneUne">
+            <label>Ville :</label>
+        </div>
+        <div class="profilColonneDeux">
+            <input type="text" th:field="*{ville}">
+            <span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}"></span>
         </div>
         <div class="profilColonneUne">
             <label>Code Postal :</label>
         </div>
         <div class="profilColonneDeux">
             <input type="text" th:field="*{code_postal}">
-        </div>
-        <div class="profilColonneUne">
-            <label>Ville :</label>
-        </div>
-        <div class="profilColonneDeux">
-            <input type="text" th:field="*{ville}">
+            <span th:if="${#fields.hasErrors('code_postal')}" th:errors="*{code_postal}"></span>
         </div>
         <div class="profilColonneUne">
             <label>Crédits :</label>
         </div>
         <div class="profilColonneDeux">
-            <input type="number" th:field="*{credit}">
+            <input type="hidden" th:field="*{credit}">
         </div>
         <input type="hidden" th:field="*{administrateur}"  />
 
