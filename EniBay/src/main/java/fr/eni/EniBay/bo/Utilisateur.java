@@ -1,21 +1,23 @@
 package fr.eni.EniBay.bo;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 public class Utilisateur  {
 	private Integer no_utilisateur;
 	@NotBlank(message = "ne doit pas être null")
-	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "le pseudo doit être alphanuméric")
+	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "le pseudo doit être alphanumérique")
 	private String pseudo;
 	@NotBlank(message = "ne doit pas être null")
 	private String nom;
 	@NotBlank(message = "ne doit pas être null")
 	private String prenom;
 	@NotBlank(message = "ne doit pas être null")
+	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "email non valid")
 	private String email;
 
+	@Min(value = 9, message = "numéro trop court")
+	@Max(value = 15, message = "numéro trop long")
+	@Pattern(regexp = "^(?:[0-9]|)+$", message = "character invalide")
 	private String telephone;
 	@NotBlank(message = "ne doit pas être null")
 	private String rue;
