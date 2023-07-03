@@ -185,7 +185,7 @@ public class EniBayController {
 		return "redirect:/accueil";
 	}
 	
-	@GetMapping("/NouvelleVente")
+	@GetMapping("/nouvelle-vente")
 	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
 		//model.addAttribute("utilisateur", utilisateur);
 		System.out.println("arrivee nouvelle vente");
