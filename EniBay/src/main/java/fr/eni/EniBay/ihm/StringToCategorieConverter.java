@@ -18,8 +18,8 @@ public class StringToCategorieConverter implements Converter<String, Categorie>{
 	}
 	
 	@Override
-	public Categorie convert(String source) {
-		Integer theId = Integer.parseInt(source);
+	public Categorie convert(String id) {
+		Integer theId = Integer.parseInt(id);
 		return service.getMapCategories().get(theId);
 	}
 	

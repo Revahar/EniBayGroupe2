@@ -16,14 +16,13 @@ import fr.eni.EniBay.bo.Categorie;
 public class CategorieDAOSqlServerImpl implements CategorieDAO{
 	
 	private final static String SELECT_ALL = "SELECT no_categorie, libelle FROM CATEGORIES";
-	private final static String SELECT_BY_ID = "SELECT no_categorie, libelle FROM CATEGORIES WHERE no_categorie = :no_categorie";
+	private final static String SELECT_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie = :no_categorie";
 	private final static String INSERT = "INSERT INTO CATEGORIES (no_categorie, libelle) VALUES (:no_categorie, :libelle)";
 	private final static String UPDATE = "UPDATE CATEGORIES SET no_categorie = :no_categorie, libelle = :libelle";
 	private final static String DELETE = "delete  CATEGORIES where no_categorie = :no_categorie" ;
 
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	private CategorieDAO categorieDAO;
 	
 	private List<Categorie> categories;
 
@@ -42,29 +41,28 @@ public class CategorieDAOSqlServerImpl implements CategorieDAO{
 	
 	@Override
 	public Categorie findById(Integer no_categorie) {
-		return namedParameterJdbcTemplate.queryForObject(
+		Map<String, Object> params = new HashMap<>();
+		params.put("no_categorie", no_categorie);
+		
+		Categorie categorie = null;
+		
+		categorie = namedParameterJdbcTemplate.queryForObject(
 				SELECT_BY_ID, 
-				new BeanPropertySqlParameterSource(new Categorie(no_categorie)),
+				params,
 				new BeanPropertyRowMapper<>(Categorie.class));
+		
+		return categorie;
 	}
-
-	@Override
-	public void save(Categorie categorie) {
-		// TODO Auto-generated method stub	
-	}
-
-	public CategorieDAO getCategorieDAO() {
-		return categorieDAO;
-	}
-
-	public void setCategorieDAO(CategorieDAO categorieDAO) {
-		this.categorieDAO = categorieDAO;
-	}
-
+	
 	@Override
 	public Map<Integer, Categorie> getMapCategories() {
 		var mapCategories = new HashMap<Integer, Categorie>();
 		categories.forEach(categorie -> mapCategories.put(categorie.getNo_categorie(), categorie));
 		return mapCategories;
 	}
+	
+	@Override
+	public void save(Categorie categorie) {
+		// TODO Auto-generated method stub	
+	}	
 }

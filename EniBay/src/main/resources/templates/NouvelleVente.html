@@ -35,7 +35,7 @@
 			            </div>
 			            <div class="col-sm-6">
 			             	<label class="input-group-text" for="categorie">Catégorie</label>
-			 				<select th:field="*{categorie}" class="form-select" id="categorie" required>
+			 				<select th:field="*{no_categorie}" class="form-select" id="categorie" required>
 			 					<option th:each="categorie : ${@CategorieService.getListCategories()}" th:value="${categorie.id}" th:text="${categorie.libelle}"></option>
 			 				</select>
 			            </div>
@@ -66,7 +66,7 @@
 								  z-index: 1;
 							}
 						</style>
-						<div class="border border-secondary rounded position-relative">
+						<div class="border border-secondary rounded position-relative" th:if="${utilisateur}">
 	  						<span class="border-overlay">Retrait</span><br>
 	          				<div class="col-md-12">
 	              				<label for="adresse" class="form-label">Adresse</label>

@@ -10,14 +10,13 @@ import fr.eni.EniBay.bo.Categorie;
 import fr.eni.EniBay.dal.CategorieDAO;
 
 
-@Service
+@Service("CategorieService")
 public class CategorieServiceImpl implements CategorieService{
-    private final CategorieDAO categorieDAO;
-    private final List<Categorie> lstCategories;
+    private CategorieDAO categorieDAO;
+    private List<Categorie> lstCategories;
 
     public CategorieServiceImpl(CategorieDAO categorieDAO) {
         this.categorieDAO = categorieDAO;
-        this.lstCategories = new ArrayList<>();
     }
     
     @Override
