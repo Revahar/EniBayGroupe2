@@ -26,31 +26,41 @@
 		<div class="form-group col">
 			<label for="pseudo">Pseudo</label>
 			<input type="text" th:field="*{pseudo}" data-th-value="${utilisateur.pseudo}" class="form-control" id="pseudo" placeholder="Pseudo" required>
-			<span th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></span>
+			<div class="message-erreur" th:style="'color: ' + ${utilisateur.messageErreurColor} + ';'">	<!-- cette div sert à afficher la span contenant le message d'erreur en rouge -->
+   		 		<span th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></span>
+			</div>
 		</div>
 
     	<div class="form-group col">
     		<label for="firstName">Prénom</label>
       		<input type="text" th:field="*{prenom}" data-th-value="${utilisateur.prenom}" class="form-control" id="firstName" placeholder="Prénom" required>
-			<span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+      		<div class="message-erreur" th:style="'color: ' + ${utilisateur.messageErreurColor} + ';'">
+				<span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+			</div>
 		</div>
     	
     	<div class="form-group col">
     		<label for="name">Nom</label>
       		<input type="text" th:field="*{nom}" data-th-value="${utilisateur.nom}" class="form-control" id="name" placeholder="Nom" required>
-			<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+      		<div class="message-erreur" th:style="'color: ' + ${utilisateur.messageErreurColor} + ';'">
+				<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+			</div>
     	</div>
     	
     	<div class="form-group col">
       		<label for="inputEmail4">Email</label>
       		<input type="email" th:field="*{email}" data-th-value="${utilisateur.email}" class="form-control" id="inputEmail4" placeholder="Email" required>
-			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+      		<div class="message-erreur" th:style="'color: ' + ${utilisateur.messageErreurColor} + ';'">
+				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+			</div>
 		</div>
 
     	<div class="form-group col">
       		<label for="telephone">Téléphone</label>
       		<input type="tel" th:field="*{telephone}" data-th-value="${utilisateur.telephone}" class="form-control" id="telephone" placeholder="Téléphone">
-			<span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+      		<div class="message-erreur" th:style="'color: ' + ${utilisateur.messageErreurColor} + ';'">
+				<span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+			</div>
 		</div>
 
     	<div class="form-group col">
@@ -61,19 +71,25 @@
     	<div class="form-group col">
     		<label for="inputAddress">Adresse</label>
     		<input type="text" th:field="*{rue}" data-th-value="${utilisateur.rue}" class="form-control" id="inputAddress" placeholder="1 rue de la soif" required>
-			<span th:if="${#fields.hasErrors('rue')}" th:errors="*{rue}"></span>
+    		<div class="message-erreur" th:style="'color: ' + ${utilisateur.messageErreurColor} + ';'">
+				<span th:if="${#fields.hasErrors('rue')}" th:errors="*{rue}"></span>
+			</div>
 		</div>
   		
   		<div class="form-group col">
       		<label for="inputCity">Ville</label>
       		<input type="text" th:field="*{ville}" data-th-value="${utilisateur.ville}" class="form-control" id="inputCity" placeholder="Pétaouchnok" required>
-			<span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}"></span>
+      		<div class="message-erreur" th:style="'color: ' + ${utilisateur.messageErreurColor} + ';'">
+				<span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}"></span>
+			</div>
 		</div>
     	
     	<div class="form-group col">
       		<label for="inputZip">Code postal</label>
       		<input type="text" th:field="*{code_postal}" data-th-value="${utilisateur.code_postal}" class="form-control" id="inputZip" placeholder="01000" required>
-			<span th:if="${#fields.hasErrors('code_postal')}" th:errors="*{code_postal}"></span>
+      		<div class="message-erreur" th:style="'color: ' + ${utilisateur.messageErreurColor} + ';'">
+				<span th:if="${#fields.hasErrors('code_postal')}" th:errors="*{code_postal}"></span>
+			</div>
 		</div><br>
 
     	<div class="form-check">
