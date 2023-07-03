@@ -14,10 +14,10 @@
 
 <div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
 
-<body>
+<body class="content">
 	
 	<!-- Carousel -->
-  <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-theme="light">
+  <div id="myCarousel" class="carousel slide mb-6 content" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -67,7 +67,7 @@
   <!-- Fin Carousel -->
   
   <!-- Liste enchères -->
-   <div class="album py-5 bg-body-tertiary">
+   <div class="album py-5 bg-body-tertiary content">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -201,6 +201,7 @@
     </div>
   </div>
   <!-- Fin liste des enchères -->
+  <div data-th-replace="~{fragments/Script :: Script}"></div>
  </body>
 	<div data-th-replace="~{fragments/fragment-footer :: fragment-footer}"></div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

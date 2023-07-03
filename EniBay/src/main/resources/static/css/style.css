@@ -85,6 +85,31 @@
     grid-column: 5;
 }
 
+/* Light Theme */
+.light-body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Dark Theme */
+.dark-body {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+/* Appliquer le style Light Theme lorsque l'option "light" est sélectionnée */
+#theme-select option[value="light"]:checked ~ .content {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Appliquer le style Dark Theme lorsque l'option "dark" est sélectionnée */
+#theme-select option[value="dark"]:checked ~ .content {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+
 
 
 

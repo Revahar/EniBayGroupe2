@@ -34,4 +34,13 @@ public class EnchereServiceImpl implements EnchereService{
     public void afficher(Enchere enchere) {
         enchereDAO.save(enchere);
     }
+
+    
+    //pour afficher les enchères dans le carousel
+	@Override
+	public List<Enchere> getTroisDernieresEncheres() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+   
 }

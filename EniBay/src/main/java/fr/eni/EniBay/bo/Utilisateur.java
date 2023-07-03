@@ -22,9 +22,9 @@ public class Utilisateur  {
 	private String ville;
 	@NotBlank
 	private String mot_de_passe;
-	@NotBlank
+	
 	private Integer credit = 0;
-	@NotBlank
+
 	private Boolean administrateur = false;
 	
 	public Utilisateur() {
@@ -33,7 +33,7 @@ public class Utilisateur  {
 	
 	public Utilisateur(Integer no_utilisateur, @NotBlank String pseudo, @NotBlank String nom, @NotBlank String prenom,
 			@NotBlank String email, String telephone, @NotBlank String rue, @NotBlank String code_postal,
-			@NotBlank String ville, @NotBlank String mot_de_passe, @NotBlank Integer credit, @NotBlank Boolean administrateur) {
+			@NotBlank String ville, @NotBlank String mot_de_passe, Integer credit, Boolean administrateur) {
 		this.no_utilisateur = no_utilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;

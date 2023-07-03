@@ -3,12 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" data-th-href="@{/css/style.css}">
+    
 </head>
 
 <header xmlns:th="http://www.thymeleaf.org" data-th-fragment="fragment-entete">
 
     <!-- Titre -->
-    <div class="row align-items-center">
+    <div class="row align-items-center content">
 	    <div class="col">
 	    	<a data-th-href="@{accueil}" style="text-decoration: none;">
 		        <h1 class="titre">
@@ -22,16 +25,25 @@
     <!-- Fin titre -->
 
 <!-- Connexion -->
-		<span class="col-2">
+		<span class="col-2 content">
 		    <a data-th-href="@{creer}" th:unless="${isConnected}">Inscription</a>
 		    <a data-th-href="@{connexion}" th:unless="${isConnected}">Connexion</a>
 		    <a data-th-href="@{logout}" th:if="${isConnected}">Déconnexion</a>
+		    <div class="form-group">
+				<select class="form-select form-select-sm" aria-label=".form-select-sm example" id="theme-select">
+				  	<option selected>Thème</option>
+ 					<option value="light">Light</option>
+ 					<option value="dark">Dark</option>
+				</select>
+			</div>
 		</span>
+		
+
 <!-- Fin connexion -->
     </div>
 
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg bg-body-primary-emphasis ">
+    <nav class="navbar navbar-expand-lg bg-body-primary-emphasis content">
         <div class="container-fluid">
           <a class="navbar-brand textNav" data-th-href="@{accueil}">Accueil</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,6 +81,8 @@
         </div>
       </nav>
     <!-- Fin NavBar -->
+
+    
 </header>
 
 <body>
