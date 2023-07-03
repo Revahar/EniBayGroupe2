@@ -36,7 +36,7 @@
 			            <div class="col-sm-6">
 			             	<label class="input-group-text" for="categorie">Catégorie</label>
 			 				<select th:field="*{no_categorie}" class="form-select" id="categorie" required>
-			 					<option th:each="categorie : ${@CategorieService.getListCategories()}" th:value="${categorie.id}" th:text="${categorie.libelle}"></option>
+			 					<option th:each="categorie : ${@CategorieService.getListCategories()}" th:value="${categorie.no_categorie}" th:text="${categorie.libelle}"></option>
 			 				</select>
 			            </div>
 						<div class="col-12">
