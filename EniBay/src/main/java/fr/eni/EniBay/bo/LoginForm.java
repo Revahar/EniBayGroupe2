@@ -7,6 +7,17 @@ public class LoginForm {
 	
 	
 	public LoginForm() {}
+	
+	
+
+	public LoginForm(String username, String password, boolean rememberMe) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.rememberMe = rememberMe;
+	}
+
+
 
 	public String getUsername() {
 		return username;

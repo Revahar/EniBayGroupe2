@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
-
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 
 import fr.eni.EniBay.bll.*;
 import fr.eni.EniBay.bo.*;
