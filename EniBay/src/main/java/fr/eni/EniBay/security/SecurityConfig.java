@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -40,7 +41,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 @Configuration
 @EnableWebSecurity
 
-public class SecurityConfig {
+public class SecurityConfig{
 	protected final Log logger = LogFactory.getLog(getClass());
 	private final String SELECT_USER = "select email, password ,1 from UTILISATEURS where email=?";
 	private final String SELECT_ROLES = "select email, 'admin' from UTILISATEURS where email=?";

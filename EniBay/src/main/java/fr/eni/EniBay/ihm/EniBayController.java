@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.security.Principal;
 
@@ -28,6 +29,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @Controller
+@SessionAttributes("user")
 public class EniBayController {
 	
 	private CategorieService categorieService;
@@ -60,7 +62,7 @@ public class EniBayController {
 
 	
     @GetMapping({"/", "/accueil"})
-    public String afficherAccueil(Model model, Principal principal) {
+    public String afficherAccueil(@SessionAttribute("user") String username, Model model, Principal principal) {
         boolean isConnected = isConnected();
         if (isConnected) {
             System.out.println(isConnected);
@@ -70,6 +72,7 @@ public class EniBayController {
 
         model.addAttribute("retrait", lstCategorie);
         model.addAttribute("isConnected", isConnected);
+        System.out.println(username);
         return "Accueil";
     }
 	
@@ -81,6 +84,7 @@ public class EniBayController {
 	        System.out.println("connexion ok");
 	        System.out.println(loginForm.getUsername());
 			Utilisateur test = utilisateurService.findByName(loginForm.getUsername());
+			model.addAttribute("user", loginForm.getUsername());
 	        return "redirect:/accueil";
 	    } else {
 	        model.addAttribute("error", "Identifiants incorrects"); // Ajouter un message d'erreur au modèle
@@ -152,7 +156,7 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/mon-profil")
-	public String afficherMonProfil(Model model) {
+	public String afficherMonProfil(Model model, @SessionAttribute("user") String username) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getName());
 		
@@ -186,8 +190,7 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/nouvelle-vente")
-	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
-		//model.addAttribute("utilisateur", utilisateur);
+	public String versNouvelleVente(Model model) {
 		System.out.println("arrivee nouvelle vente");
 		model.addAttribute("article", new ArticleVendu());
 		return "NouvelleVente";
