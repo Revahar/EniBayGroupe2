@@ -15,8 +15,7 @@ public class Utilisateur  {
 	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "email non valid")
 	private String email;
 
-	@Min(value = 9, message = "numéro trop court")
-	@Max(value = 15, message = "numéro trop long")
+	@Size(min = 9, max = 15, message = "taille du numéro invalid")
 	@Pattern(regexp = "^(?:[0-9]|)+$", message = "character invalide")
 	private String telephone;
 	@NotBlank(message = "ne doit pas être null")
