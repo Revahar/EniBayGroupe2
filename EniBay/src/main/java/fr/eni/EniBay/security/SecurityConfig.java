@@ -54,8 +54,9 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.GET, "/connexion").permitAll()
 					.requestMatchers("/connecter").permitAll()
 					.requestMatchers(HttpMethod.GET, "/connecter").permitAll()
-					.requestMatchers(HttpMethod.GET, "/creer").permitAll().
-					requestMatchers(HttpMethod.GET, "/nouvelle-vente").permitAll()
+					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
+					.requestMatchers(HttpMethod.GET, "/nouvelle-vente").permitAll()
+					.requestMatchers("/enregistrer-nouvelle-vente").permitAll()
 					.requestMatchers(HttpMethod.GET, "/profil").authenticated()
 					.requestMatchers(HttpMethod.GET, "/mon-profil").authenticated()
 					.requestMatchers("/enregistrer-nouveau-profil").permitAll()
