@@ -24,13 +24,10 @@
 <!-- Connexion -->
 		<span class="col-2" th:if="${#authentication ne null and #authentication.principal ne null and #authentication.principal ne 'anonymousUser'}">
 		    <a data-th-href="@{logout}" >Déconnexion</a>
-
 		</span>
-		
 		<span class="col-2" th:if="${#authentication eq null or #authentication.principal eq null or #authentication.principal eq 'anonymousUser'}">
 		    <a data-th-href="@{creer}" >Inscription</a>
 		    <a data-th-href="@{connexion}" >Connexion</a>
-
 		</span>
 <!-- Fin connexion -->
     </div>
@@ -47,9 +44,6 @@
               <li class="nav-item">
                 <a class="nav-link textNav" aria-current="page" data-th-href="@{nouvelle-vente}">Vendre</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link textNav" data-th-href="@{encherir}">Enchérir</a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle textNav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Profil
@@ -59,11 +53,8 @@
                   <li><a class="dropdown-item textNav" data-th-href="@{connexion}">Se connecter</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item textNav" data-th-href="@{mon-profil}">Mon Profil</a></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{acquisition}">Liste des acquisitions</a></li>
+                  <li><a class="dropdown-item textNav" data-th-href="@{acquisition}">Mes acquisitions</a></li>
                 </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link textNav disabled">Exemple de lien désactivé</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
