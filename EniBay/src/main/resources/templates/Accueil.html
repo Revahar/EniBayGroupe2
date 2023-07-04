@@ -28,9 +28,9 @@
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
         <div class="container">
           <div class="carousel-caption text-start">
-            <h2>Exemple enchère 1</h2>
-            <p class="opacity-75">Ici on intègre la description de l'enchère</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Ici on met un bouton pour accéder à l'enchère</a></p>
+            <h2 th:text="${articles.get(articles.size()-1).nom_article}">Exemple enchère 1</h2>
+            <p class="opacity-75" th:text="${articles.get(articles.size()-1).description}">Ici on intègre la description de l'enchère</p>
+            <p><a class="btn btn-lg btn-primary" th:href="@{encherir(no_article=${articles.get(articles.size()-1).no_article})}">Enchérir</a></p>
           </div>
         </div>
       </div>
@@ -38,9 +38,9 @@
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
         <div class="container">
           <div class="carousel-caption">
-            <h2>Exemple enchère 2</h2>
-           <p class="opacity-75">Ici on intègre la description de l'enchère</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Ici on met un bouton pour accéder à l'enchère</a></p>
+            <h2 th:text="${articles.get(articles.size()-2).nom_article}">Exemple enchère 2</h2>
+           <p class="opacity-75" th:text="${articles.get(articles.size()-2).description}">Ici on intègre la description de l'enchère</p>
+            <p><a class="btn btn-lg btn-primary" th:href="@{encherir(no_article=${articles.get(articles.size()-2).no_article})}">Enchérir</a></p>
           </div>
         </div>
       </div>
@@ -48,9 +48,9 @@
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
         <div class="container">
           <div class="carousel-caption text-end">
-             <h2>Exemple enchère 3</h2>
-            <p class="opacity-75">Ici on intègre la description de l'enchère</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Ici on met un bouton pour accéder à l'enchère</a></p>
+             <h2 th:text="${articles.get(articles.size()-3).nom_article}">Exemple enchère 3</h2>
+            <p class="opacity-75" th:text="${articles.get(articles.size()-3).description}">Ici on intègre la description de l'enchère</p>
+            <p><a class="btn btn-lg btn-primary" th:href="@{encherir(no_article=${articles.get(articles.size()-3).no_article})}">Enchérir</a></p>
           </div>
         </div>
       </div>
@@ -82,7 +82,9 @@
               <p class="card-text" th:text="${item.description}">Ici, la description de l'enchère.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                <a th:href="@{encherir(no_article=${item.no_article})}">
+                	<button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </a>                  
                 </div>
                 <small class="text-body-secondary" th:text="'Prix initial : ' + ${item.prix_initial} + ' EniCoin'">ici, le prix initial</small>
               </div>
