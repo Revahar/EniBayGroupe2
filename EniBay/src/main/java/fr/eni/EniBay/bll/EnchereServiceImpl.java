@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import fr.eni.EniBay.bo.ArticleVendu;
 import fr.eni.EniBay.bo.Enchere;
+import fr.eni.EniBay.bo.Utilisateur;
 import fr.eni.EniBay.dal.EnchereDAO;
 
 
@@ -25,14 +27,14 @@ public class EnchereServiceImpl implements EnchereService{
     }
     
     @Override
-    public void ajouterEnchere(Enchere enchere) {
+    public void ajouterEnchere(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
         lstEncheres.add(enchere);
-        afficher(enchere);
+        afficher(enchere, article, utilisateur);
     }
 
     @Override
-    public void afficher(Enchere enchere) {
-        enchereDAO.save(enchere);
+    public void afficher(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
+        enchereDAO.save(enchere, article, utilisateur);
     }
 
     

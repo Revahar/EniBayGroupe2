@@ -250,6 +250,7 @@ public class EniBayController {
 			if(article != null) {
 				model.addAttribute("article", article);
 				model.addAttribute("utilisateur", utilisateur);
+				model.addAttribute("enchere", new Enchere());
 				return "Encherir";
 			} else {
 				System.out.println("Article inconnu");
@@ -265,7 +266,7 @@ public class EniBayController {
 	public String enregistrerEnchere(Model model, @ModelAttribute("enchere") Enchere enchere, @ModelAttribute ("article") ArticleVendu article, Principal principal) {
 		System.out.println("enregistrer enchere");
 		var utilisateur = utilisateurService.findByName(principal.getName());
-		enchereService.ajouterEnchere(enchere);
+		enchereService.ajouterEnchere(enchere, article, utilisateur);
 		articleVenduService.ajouterArticleVendu(article, utilisateur);
 		return "redirect/accueil";
 	}

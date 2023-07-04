@@ -1,7 +1,9 @@
 package fr.eni.EniBay.dal;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.context.annotation.Primary;
@@ -15,6 +17,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import fr.eni.EniBay.bo.ArticleVendu;
 import fr.eni.EniBay.bo.Enchere;
 import fr.eni.EniBay.bo.Utilisateur;
 import fr.eni.EniBay.dal.UtilisateurDAOSqlServeurImpl.UtilisateurRowMapper;
@@ -72,19 +75,17 @@ public class EnchereDAOSqlServerImpl implements EnchereDAO {
 	}
 
 	@Override
-	public void save(Enchere enchere) {
+	public void save(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
 		if (enchere.getNo_article() == null) {
 			// insert
 			String query = INSERT;
 			SqlParameterSource parameters = new MapSqlParameterSource()
-					.addValue("no_utilisateur", enchere.getNo_utilisateur())
-					.addValue("no_article", enchere.getNo_article())
-					.addValue("date_enchere", enchere.getDate_enchere())
+					.addValue("no_utilisateur", utilisateur.getNo_utilisateur())
+					.addValue("no_article", article.getNo_article())
+					.addValue("date_enchere", LocalDate.now())
 					.addValue("montant_enchere", enchere.getMontant());
-
-			KeyHolder keyHolder = new GeneratedKeyHolder();
-			namedParameterJdbcTemplate.update(query, parameters, keyHolder);
-			enchere.setNo_article(keyHolder.getKey().intValue());
+			
+			namedParameterJdbcTemplate.update(query, parameters);
 			System.out.println("Insert enchere: " + enchere);
 		} else {
 			// update
