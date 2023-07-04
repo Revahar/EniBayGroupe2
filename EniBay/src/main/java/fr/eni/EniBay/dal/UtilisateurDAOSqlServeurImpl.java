@@ -106,6 +106,5 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 		Utilisateur utilisateur = namedParameterJdbcTemplate.queryForObject(FIND_BY_NAME, mapSrc, new UtilisateurRowMapper());
 		return utilisateur;
 	}
-
 	
 }

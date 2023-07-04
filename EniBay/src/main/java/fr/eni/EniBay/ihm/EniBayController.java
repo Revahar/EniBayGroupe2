@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import fr.eni.EniBay.bll.ArticleVenduService;
 import fr.eni.EniBay.bll.CategorieService;
@@ -56,21 +57,17 @@ public class EniBayController {
 	
     @GetMapping({"/", "/accueil"})
     public String afficherAccueil(Model model, Principal principal) {
-
         List<Retrait> lstCategorie = retraitService.getRetraits();
-
         model.addAttribute("retrait", lstCategorie);
- 
         return "Accueil";
     }
 	
 	
 	@PostMapping("/connecter")
 	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
-
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
-
+			model.addAttribute("user", loginForm.getUsername());
 			Utilisateur utilisateur = utilisateurService.findByName(loginForm.getUsername());
 	        return "redirect:/accueil";
 	    } else {
@@ -83,12 +80,7 @@ public class EniBayController {
 
 	@GetMapping("/connexion")
 	public String versConnexion(Model model) {
-	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm
-	    
-	   
-	   
-	 
-	    
+	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm  
 	    return "Connexion";
 	}
 
@@ -143,7 +135,7 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/mon-profil")
-	public String afficherMonProfil(Model model) {
+	public String afficherMonProfil(Model model, @SessionAttribute("user") String username) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getName());
 		
