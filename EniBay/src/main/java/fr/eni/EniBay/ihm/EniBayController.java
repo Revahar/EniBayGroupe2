@@ -85,8 +85,7 @@ public class EniBayController {
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
 			model.addAttribute("user", loginForm.getUsername());
-			Utilisateur utilisateur = utilisateurService.findByName(loginForm.getUsername());
-	        return "redirect:/accueil";
+			return "redirect:/accueil";
 	    } else {
 	        model.addAttribute("error", "Identifiants incorrects"); // Ajouter un message d'erreur au modèle
 	        System.out.println("erreur");
@@ -124,9 +123,12 @@ public class EniBayController {
 	public String enregistrerNouveauProfil(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
 										   BindingResult bindingResult) {
 		System.out.println("enregistrer nouveau profil");
-		if (bindingResult.hasErrors()) {
-			return "Creation";
-		}
+
+		if (bindingResult.hasErrors()) {return "Creation";}
+
+		if (utilisateurService.findByName(utilisateur.getPseudo()) != null) {return "Creation";}
+		if (utilisateurService.findByName(utilisateur.getEmail()) != null) {return "Creation";}
+//		System.out.println("Pseudo or Email already taken, sorry m8");
 		utilisateurService.ajouterUtilisateur(utilisateur);
 		
 		return "redirect:/accueil";
@@ -145,34 +147,34 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/profil")
-	public String afficherProfil(/*@RequestParam Utilisateur utilisateur, Model model*/) {
+	public String afficherProfil(@RequestParam Utilisateur utilisateur, Model model) {
 		System.out.println("afficher profil");
-		//model.addAttribute("utilisateur", utilisateur);
+		model.addAttribute("utilisateur", utilisateur);
 		return "Profil";
 	}
 	
 	@GetMapping("/mon-profil")
 	public String afficherMonProfil(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(authentication.getName());
-		
 		System.out.println("afficher mon profil");
-		model.addAttribute("utilisateur", utilisateurService.findById(1));
+		model.addAttribute("utilisateur", utilisateurService.findByName(authentication.getName()));
 		return "Profil";
 	}
 	
 	@GetMapping("/modifier-profil")
-	public String versModifProfil(@RequestParam Integer no_utilisateur, Model model) {
-		model.addAttribute("utilisateur", utilisateurService.findById(no_utilisateur));
+	public String versModifProfil(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		model.addAttribute("utilisateur", utilisateurService.findByName(authentication.getName()));
 		return "ModifProfil";
 	}
 	
 	@PostMapping("/enregistrer-modifs")
 	public String enregistrerModifsProfil(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
 										  BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return "ModifProfil";
-		}
+		if (bindingResult.hasErrors()) {return "ModifProfil";}
+
+		if (utilisateurService.findByName(utilisateur.getPseudo()) != null) {return "ModifProfil";}
+		if (utilisateurService.findByName(utilisateur.getEmail()) != null) {return "ModifProfil";}
 		utilisateurService.save(utilisateur);
 		System.out.println("enregistrer modifs profil");
 		return "redirect:/mon-profil";
