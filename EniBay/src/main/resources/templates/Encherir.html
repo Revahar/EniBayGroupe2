@@ -20,26 +20,27 @@
 <h2>Enchérir</h2>
 <br><hr>
 <div>
-	<span th:text="${article.nom_article}"></span>
+	<p>Nom de l'article: <span th:text="${article.nom_article}"></span></p>
 	<br>
-	<span th:text="${article.description}"></span>
+	<p>Description: <span th:text="${article.description}"></span></p>
 	<br>
-	<span th:text="${categorie.libelle}"></span>
+	<!--<p>Catégorie: <span th:text="${categorie.libelle}"></span></p>-->
 	<br>
-	<span th:text="${article.prix_vente}"></span>
+	<p>Prix de vente: <span th:text="${article.prix_vente}"></span></p>
 	<br>
-	<span th:text="${article.prix_initial}"></span>
+	<p>Prix initial: <span th:text="${article.prix_initial}"></span></p>
 	<br>
-	<span th:text="${article.date_fin_encheres}"></span>
+	<p>Date de la fin des enchères: <span th:text="${article.date_fin_encheres}"></span></p>
 	<br>
-	<span th:text="${retrait.rue} + ' ' + ${retrait.code_postal} + ' ' + ${retrait.ville}"></span>
+	<p>Adresse de retrait: <span th:text="${utilisateur.rue} + ' ' + ${utilisateur.code_postal} + ' ' + ${utilisateur.ville}"></span></p>
 	<br>
-	<span th:text="${utilisateur.pseudo}"></span>
-	<form th:action="@{enregistrer-enchere}" method="post">
+	<p>Vendeur: <span th:text="${utilisateur.pseudo}"></span></p>
+	<form th:action="@{enregistrer-enchere}" th:object="${article}" method="post">
 		<div>
 			<label for="enchereInput">Ma proposition: </label>
 			<input type="number" th:field="*{prix_vente}" data-th-value="${article.prix_vente}" id="enchereInput">
 		</div>
+		<button type="submit">Enchérir</button>
 	</form>
 </div>
 
