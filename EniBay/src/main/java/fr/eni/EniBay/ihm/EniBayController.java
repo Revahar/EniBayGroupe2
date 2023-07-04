@@ -173,16 +173,23 @@ public class EniBayController {
 										  BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {return "ModifProfil";}
 
-		if (utilisateurService.findByName(utilisateur.getPseudo()) != null) {return "ModifProfil";}
-		if (utilisateurService.findByName(utilisateur.getEmail()) != null) {return "ModifProfil";}
+		if (utilisateurService.findByName(utilisateur.getPseudo()) != null
+			|| utilisateurService.findByName(utilisateur.getPseudo()).getPseudo().equals(utilisateur.getPseudo())) {
+			return "ModifProfil";
+		}
+		if (utilisateurService.findByName(utilisateur.getEmail()) != null
+			|| utilisateurService.findByName(utilisateur.getEmail()).getEmail().equals(utilisateur.getEmail())) {
+			return "ModifProfil";
+		}
 		utilisateurService.save(utilisateur);
 		System.out.println("enregistrer modifs profil");
 		return "redirect:/mon-profil";
 	}
 
-	@PostMapping("/supprimer-profil")
-	public String supprimerProfil(Utilisateur utilisateur) {
-		utilisateurService.delete(utilisateur);
+	@GetMapping("/supprimer-profil")
+	public String supprimerProfil() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		utilisateurService.delete(utilisateurService.findByName(authentication.getName()));
 		System.out.println("supprimer profil");
 		return "redirect:/accueil";
 	}
