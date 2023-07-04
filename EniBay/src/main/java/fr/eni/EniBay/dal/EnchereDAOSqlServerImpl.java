@@ -1,9 +1,12 @@
 package fr.eni.EniBay.dal;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,28 +16,51 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.EniBay.bo.Enchere;
+import fr.eni.EniBay.bo.Utilisateur;
+import fr.eni.EniBay.dal.UtilisateurDAOSqlServeurImpl.UtilisateurRowMapper;
 
 @Repository
 @Primary
 public class EnchereDAOSqlServerImpl implements EnchereDAO {
 
-	private final static String SELECT_ALL = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
+	//private final static String SELECT_ALL = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
 	private final static String INSERT = "INSERT INTO encheres (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (:no_utilisateur, :no_article, :date_enchere, :montant_enchere)";
 	private final static String UPDATE = "UPDATE encheres SET no_utilisateur = :no_utilisateur, no_article = :no_article, date_enchere = :date_enchere, montant_enchere = :montant_enchere WHERE id = :id";
 	private final static String SELECT_BY_ID = "SELECT enchere.no_article, enchere.no_utilisateur, enchere.date_enchere, enchere.montant_enchere AS enchere_ " +
 			"FROM enchere enchere " +
 			"WHERE enchere.no_article = :no_article";
 	private final static String DELETE = "DELETE FROM enchere WHERE no_article = :no_article";
+	private final static String FIND_ALL = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
+	class EnchereRowMapper implements RowMapper<Enchere>{
+		@Override
+		public Enchere mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Enchere enchere = new Enchere();
+			enchere.setNo_utilisateur(rs.getInt("no_utilisateur"));
+			enchere.setNo_article(rs.getInt("no_article"));
+			enchere.setDate_enchere(rs.getDate("date_enchere"));
+			enchere.setMontant(rs.getInt("montant_enchere"));
+			System.out.println(enchere);
+			return enchere;
+		}
+	}
 
 	public EnchereDAOSqlServerImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 
+//	@Override
+//	public List<Enchere> findAll() {
+//		return namedParameterJdbcTemplate.query(SELECT_ALL, new BeanPropertyRowMapper<>(Enchere.class));
+//	}
+	
 	@Override
 	public List<Enchere> findAll() {
-		return namedParameterJdbcTemplate.query(SELECT_ALL, new BeanPropertyRowMapper<>(Enchere.class));
+		List<Enchere> encheres;
+		encheres = namedParameterJdbcTemplate.query(FIND_ALL, new  EnchereRowMapper());
+		return encheres;
 	}
 
 	@Override

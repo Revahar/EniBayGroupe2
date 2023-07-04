@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import fr.eni.EniBay.bo.ArticleVendu;
 import fr.eni.EniBay.bo.Retrait;
+import fr.eni.EniBay.bo.Utilisateur;
 import fr.eni.EniBay.dal.RetraitDAO;
 
 @Service
@@ -24,13 +26,13 @@ public class RetraitServiceImpl implements RetraitService{
     }
     
     @Override
-    public void ajouterRetrait(Retrait retrait) {
+    public void ajouterRetrait(Retrait retrait, ArticleVendu article, Utilisateur utilisateur) {
     	lstRetraits.add(retrait);
-        afficher(retrait);
+        save(retrait, article, utilisateur);
     }
 
     @Override
-    public void afficher(Retrait retrait) {
-    	retraitDAO.save(retrait);
+    public void save(Retrait retrait, ArticleVendu article, Utilisateur utilisateur) {
+    	retraitDAO.save(retrait, article, utilisateur);
     }
 }
