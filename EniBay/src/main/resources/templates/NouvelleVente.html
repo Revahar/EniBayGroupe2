@@ -56,22 +56,26 @@
 						    <input type="date" th:field="*{date_fin_encheres}" data-th-value="${article.date_fin_encheres}" class="form-control" id="finEnchere" placeholder="Date de fin" value="" required>
 						</div>
 
-						<div class="border border-secondary rounded position-relative" th:if="${utilisateur}">
-	  						<span class="border-overlay">Retrait</span><br>
-	          				<div class="col-md-12">
-	              				<label for="adresse" class="form-label">Adresse</label>
-	              				<input type="text" data-th-value="${utilisateur.rue}" class="form-control" id="adresse" placeholder="1 rue de la soif" required>
+						<div class="border border-secondary rounded position-relative" th:object="${utilisateur}" th:if="${utilisateur}">
+							<div th:object="${retrait}">							
+		  						<span class="border-overlay">Retrait</span><br>
+		          				<div class="col-md-12">
+		              				<label for="adresse" class="form-label">Adresse</label>
+		              				<input type="text" th:fields="${retrait.rue}" data-th-value="${utilisateur.rue}" class="form-control" id="adresse" placeholder="1 rue de la soif" required>
+		           				</div>
+		           				<div class="col-md-12">
+		              				<label for="ville" class="form-label">Ville</label>
+		              				<input type="text" th:fields="${retrait.ville}" data-th-value="${utilisateur.ville}" class="form-control" id="ville" placeholder="Pétaouchnok" required>
+		           				</div>
+		           				<div class="col-md-12">
+		              				<label for="zip" class="form-label">Code postal</label>
+		              				<input type="text" th:fields="${retrait.code_postal}" data-th-value="${utilisateur.code_postal}" class="form-control" id="zip" placeholder="01000" required>
+		           				</div>		      
+		           				<br>
 	           				</div>
-	           				<div class="col-md-12">
-	              				<label for="ville" class="form-label">Ville</label>
-	              				<input type="text" data-th-value="${utilisateur.ville}" class="form-control" id="ville" placeholder="Pétaouchnok" required>
-	           				</div>
-	           				<div class="col-md-12">
-	              				<label for="zip" class="form-label">Code postal</label>
-	              				<input type="text" data-th-value="utilisateur.code_postal" class="form-control" id="zip" placeholder="01000" required>
-	           				</div>
-	           				<br>
+	           				<input type="hidden" th:fields="${article.no_utilisateur}" data-th-value="${utilisateur.no_utilisateur}">
         				</div>
+        				
         			</div>
 			 		<div class="col-12 mt-3">
 			        	<div class="row">

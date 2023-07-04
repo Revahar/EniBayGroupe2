@@ -6,10 +6,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import fr.eni.EniBay.bo.ArticleVendu;
 import fr.eni.EniBay.bo.Retrait;
+import fr.eni.EniBay.bo.Utilisateur;
 
 @Repository
 public class RetraitDAOSqlServeurImpl implements RetraitDAO{
@@ -47,16 +53,17 @@ public class RetraitDAOSqlServeurImpl implements RetraitDAO{
 	}
 
 	@Override
-	public void save(Retrait retrait) {
-		// TODO Auto-generated method stub
+	public void save(Retrait retrait, ArticleVendu article, Utilisateur utilisateur) {
+		if(retrait.getNo_article() == null) {			
+			MapSqlParameterSource mapSrc = new MapSqlParameterSource("rue", utilisateur.getRue());
+			mapSrc.addValue("ville", utilisateur.getVille());
+			mapSrc.addValue("code_postal", utilisateur.getCode_postal());
+			mapSrc.addValue("no_article", article.getNo_article());
+			
+			namedParameterJdbcTemplate.update(INSERT, mapSrc);
+		} else {
+			namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(retrait));
+		}
 		
-	}
-
-	public RetraitDAO getRetraitDAO() {
-		return retraitDAO;
-	}
-
-	public void setRetraitDAO(RetraitDAO retraitDAO) {
-		this.retraitDAO = retraitDAO;
 	}
 }

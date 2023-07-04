@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
@@ -46,11 +47,13 @@ public class EniBayController {
 	private ArticleVenduService articleVenduService;
 	private EnchereService enchereService;
 	
-	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, ArticleVenduService articleVenduService) {
+	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, 
+			ArticleVenduService articleVenduService, EnchereService enchereService) {
 		this.categorieService = categorieService;
 		this.retraitService = retraitService;
 		this.utilisateurService = utilisateurService;
 		this.articleVenduService = articleVenduService;
+		this.enchereService = enchereService;
 	}
 
     
@@ -150,7 +153,7 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/mon-profil")
-	public String afficherMonProfil(Model model, @SessionAttribute("user") String username) {
+	public String afficherMonProfil(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getName());
 		
@@ -184,60 +187,90 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/nouvelle-vente")
-	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
-		//model.addAttribute("utilisateur", utilisateur);
+	public String versNouvelleVente(Model model, Principal principal) {
 	
 		System.out.println("arrivee nouvelle vente");
-
+		System.out.println(principal.getName());
+		
+		var pseudoUtilisateur = principal.getName();
+		model.addAttribute("utilisateur", utilisateurService.findByName(pseudoUtilisateur));
 		model.addAttribute("article", new ArticleVendu());
+		model.addAttribute("retrait", new Retrait());
 		return "NouvelleVente";
 	}
 	
 	@PostMapping("/enregistrer-nouvelle-vente")
-	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, @RequestParam("imageFile") MultipartFile imageFile, @RequestParam("imageFile") String image ) {
-	    System.out.println("Enregistrer nouvelle vente");
-	    
-	    // Enregistrer l'article vendu
-	    articleVenduService.ajouterArticleVendu(article);
-	    System.out.println(image);
-	    // Vérifier si un fichier image a été sélectionné
-	    if (!imageFile.isEmpty()) {
-	        try {
-	            // Obtenir le nom d'origine du fichier
-	            String originalFilename = imageFile.getOriginalFilename();
-	            System.out.println(originalFilename);
+	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, Retrait retrait, Principal principal, @RequestParam("imageFile") MultipartFile imageFile) {
+		System.out.println("enregistrer nouvelle vente");
+		var utilisateur = utilisateurService.findByName(principal.getName());
+		do
+			articleVenduService.ajouterArticleVendu(article, utilisateur);
+		while (article.getNo_article() == null);
+		
+		retraitService.ajouterRetrait(retrait, article, utilisateur);
+		
+		try {
+			String image = Base64.getEncoder().encodeToString(imageFile.getBytes());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	            // Extraire l'extension du fichier
-	            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
-	            System.out.println(fileExtension);
-
-	            // Renommer le fichier selon le modèle "no_article.jpg"
-	            String newFilename = article.getNo_article() + fileExtension;
-	            System.out.println(newFilename);
-
-	            // Renommer et enregistrer le fichier dans le répertoire souhaité
-	            Path filePath = Paths.get("src/main/resources/static/images/", newFilename);
-	            Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-	            // Enregistrement
-	            //articleVendu.setNom_article(newFilename);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
+//	    // Vérifier si un fichier image a été sélectionné
+//	    if (!imageFile.isEmpty()) {
+//	        try {
+//	            // Obtenir le nom d'origine du fichier
+//	            String originalFilename = imageFile.getOriginalFilename();
+//	            System.out.println(originalFilename);
+//
+//	            // Extraire l'extension du fichier
+//	            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
+//	            System.out.println(fileExtension);
+//
+//	            // Renommer le fichier selon le modèle "no_article.jpg"
+//	            String newFilename = article.getNo_article() + fileExtension;
+//	            System.out.println(newFilename);
+//
+//	            // Renommer et enregistrer le fichier dans le répertoire souhaité
+//	            Path filePath = Paths.get("src/main/resources/static/images/", newFilename);
+//	            Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+//
+//	            // Enregistrement
+//	            //articleVendu.setNom_article(newFilename);
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	        }
+//	    }
 	    return "redirect:/accueil";
 	}
 
 
 	@GetMapping("/encherir")
-	public String encherir() {
+	public String encherir(Model model, @RequestParam(name = "no_article", required = true) Integer no_article, Principal principal){		
 		System.out.println("arrivee encherir");
-		return "Encherir";
+		//principal.getName()
+		if(no_article > 0) {
+			ArticleVendu article = articleVenduService.getArticleVenduById(no_article);
+			if(article != null) {
+				model.addAttribute("article", article);
+				return "Encherir";
+			} else {
+				System.out.println("Article inconnu");
+			} 
+		} else {
+			System.out.println("Numero d'article inconnu");
+		}
+		
+		return "redirect:/accueil";
 	}
 	
 	@PostMapping("/enregistrer_enchere")
-	public String enregistrerEnchere() {
+	public String enregistrerEnchere(Model model, @ModelAttribute("enchere") Enchere enchere, @ModelAttribute ("article") ArticleVendu article, Principal principal) {
 		System.out.println("enregistrer enchere");
+		var utilisateur = utilisateurService.findByName(principal.getName());
+		enchereService.ajouterEnchere(enchere);
+		articleVenduService.ajouterArticleVendu(article, utilisateur);
 		return "redirect/accueil";
 	}
 	
