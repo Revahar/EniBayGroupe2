@@ -28,9 +28,13 @@ public class Utilisateur  {
 	private String mot_de_passe;
 	private Integer credit = 0;
 	private Boolean administrateur = false;
+    private String messageErreurColor = "red"; //<- sert à afficher le message d'erreur en rouge
+
+
 	
 	public Utilisateur() {
-		// TODO Auto-generated constructor stub
+		
+
 	}
 	
 	public Utilisateur(Integer no_utilisateur, @NotBlank String pseudo, @NotBlank String nom, @NotBlank String prenom,
@@ -48,6 +52,7 @@ public class Utilisateur  {
 		this.mot_de_passe = mot_de_passe;
 		this.credit = credit;
 		this.administrateur = administrateur;
+
 	}
 
 	public Integer getNo_utilisateur() {
@@ -152,6 +157,16 @@ public class Utilisateur  {
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", code_postal="
 				+ code_postal + ", ville=" + ville + ", mot_de_passe=" + mot_de_passe + ", credit=" + credit
 				+ ", administrateur=" + administrateur + "]";
+	}
+
+	
+	// getter et setter pour afficher les messages d'erreurs en rouge
+	public String getMessageErreurColor() {
+		return messageErreurColor;
+	}
+
+	public void setMessageErreurColor(String messageErreurColor) {
+		this.messageErreurColor = messageErreurColor;
 	}
 	
 }
