@@ -101,10 +101,10 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 
 	@Override
 	public Utilisateur findByName(String id) {
-		MapSqlParameterSource mapSrc = new MapSqlParameterSource();
-		mapSrc.addValue("id", id);
-		Utilisateur utilisateur = namedParameterJdbcTemplate.queryForObject(FIND_BY_NAME, mapSrc, new UtilisateurRowMapper());
-		return utilisateur;
+		MapSqlParameterSource mapSrc = new MapSqlParameterSource("id", id);
+		List<Utilisateur> utilisateur = namedParameterJdbcTemplate.query(FIND_BY_NAME, mapSrc, new UtilisateurRowMapper());
+	if (utilisateur.isEmpty()) {return null;}
+	return utilisateur.get(0);
 	}
 	
 }
