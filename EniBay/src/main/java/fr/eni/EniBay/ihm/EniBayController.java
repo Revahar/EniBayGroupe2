@@ -194,12 +194,12 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-nouvelle-vente")
-	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu articleVendu, @RequestParam("imageFile") MultipartFile imageFile) {
+	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, @RequestParam("imageFile") MultipartFile imageFile, @RequestParam("imageFile") String image ) {
 	    System.out.println("Enregistrer nouvelle vente");
 	    
 	    // Enregistrer l'article vendu
-	    articleVenduService.ajouterArticleVendu(articleVendu);
-	    //System.out.println(image);
+	    articleVenduService.ajouterArticleVendu(article);
+	    System.out.println(image);
 	    // Vérifier si un fichier image a été sélectionné
 	    if (!imageFile.isEmpty()) {
 	        try {
@@ -212,7 +212,7 @@ public class EniBayController {
 	            System.out.println(fileExtension);
 
 	            // Renommer le fichier selon le modèle "no_article.jpg"
-	            String newFilename = articleVendu.getNo_article() + fileExtension;
+	            String newFilename = article.getNo_article() + fileExtension;
 	            System.out.println(newFilename);
 
 	            // Renommer et enregistrer le fichier dans le répertoire souhaité
