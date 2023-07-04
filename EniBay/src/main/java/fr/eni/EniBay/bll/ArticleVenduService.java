@@ -3,11 +3,14 @@ package fr.eni.EniBay.bll;
 import java.util.List;
 
 import fr.eni.EniBay.bo.ArticleVendu;
+import fr.eni.EniBay.bo.Utilisateur;
 
 public interface ArticleVenduService {
 	List<ArticleVendu> getArticlesVendus();
 
-	void ajouterArticleVendu(ArticleVendu articleVendu);
+	void ajouterArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateur);
+	
+	ArticleVendu getArticleVenduById(Integer no_article);
 
-	void save(ArticleVendu articleVendu);
+	void save(ArticleVendu articleVendu, Utilisateur utilisateur);
 }

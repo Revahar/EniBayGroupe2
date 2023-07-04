@@ -14,6 +14,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.EniBay.bo.ArticleVendu;
+import fr.eni.EniBay.bo.Utilisateur;
 
 @Repository
 public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
@@ -68,7 +69,7 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	}
 
 	@Override
-	public void save(ArticleVendu article) {
+	public void save(ArticleVendu article, Utilisateur utilisateur) {
 		if(article.getNo_article() == null) {
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			
@@ -92,4 +93,6 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	public void delete(ArticleVendu articleVendu) {
 		namedParameterJdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(articleVendu));
 	}
+
+
 }
