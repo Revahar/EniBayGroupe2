@@ -71,7 +71,7 @@ public class SecurityConfig{
 					.requestMatchers("/css/style.css").permitAll()
 					.requestMatchers("/css/*").permitAll()
 					.requestMatchers("/images/*").permitAll()
-					//.anyRequest().authenticated()
+					.anyRequest().authenticated()
 					;
 		});
 		

@@ -76,13 +76,6 @@
             <input type="text" th:field="*{code_postal}">
             <span th:if="${#fields.hasErrors('code_postal')}" th:errors="*{code_postal}"></span>
         </div>
-        <div class="profilColonneUne">
-            <label>Crédits :</label>
-        </div>
-        <div class="profilColonneDeux">
-            <input type="hidden" th:field="*{credit}">
-        </div>
-        <input type="hidden" th:field="*{administrateur}"  />
 
         <a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{enregistrer-modifs}">
             <button type="button" class="btn btn-outline-primary btn-lg">Enregistrer</button>
