@@ -8,16 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -65,8 +61,8 @@ public class SecurityConfig{
 					.requestMatchers("/connecter").permitAll()
 					.requestMatchers(HttpMethod.GET, "/connecter").permitAll()
 					.requestMatchers(HttpMethod.GET, "/creer").permitAll()
-					.requestMatchers(HttpMethod.GET, "/nouvelle-vente").permitAll()
-					.requestMatchers("/enregistrer-nouvelle-vente").permitAll()
+					.requestMatchers(HttpMethod.GET, "/nouvelle-vente").authenticated()
+					.requestMatchers("/enregistrer-nouvelle-vente").authenticated()
 					.requestMatchers(HttpMethod.GET, "/profil").authenticated()
 					.requestMatchers(HttpMethod.GET, "/mon-profil").authenticated()
 					.requestMatchers("/enregistrer-nouveau-profil").permitAll()
