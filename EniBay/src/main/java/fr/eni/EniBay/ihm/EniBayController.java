@@ -240,11 +240,14 @@ public class EniBayController {
 	@GetMapping("/encherir")
 	public String encherir(Model model, @RequestParam(name = "no_article", required = true) Integer no_article, Principal principal){		
 		System.out.println("arrivee encherir");
-		//principal.getName()
+		
 		if(no_article > 0) {
 			ArticleVendu article = articleVenduService.getArticleVenduById(no_article);
+			System.out.println(article);
+			var utilisateur = utilisateurService.findByName(principal.getName());
 			if(article != null) {
 				model.addAttribute("article", article);
+				model.addAttribute("utilisateur", utilisateur);
 				return "Encherir";
 			} else {
 				System.out.println("Article inconnu");
@@ -256,7 +259,7 @@ public class EniBayController {
 		return "redirect:/accueil";
 	}
 	
-	@PostMapping("/enregistrer_enchere")
+	@PostMapping("/enregistrer-enchere")
 	public String enregistrerEnchere(Model model, @ModelAttribute("enchere") Enchere enchere, @ModelAttribute ("article") ArticleVendu article, Principal principal) {
 		System.out.println("enregistrer enchere");
 		var utilisateur = utilisateurService.findByName(principal.getName());

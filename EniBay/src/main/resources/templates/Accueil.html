@@ -82,7 +82,9 @@
               <p class="card-text" th:text="${item.description}">Ici, la description de l'enchère.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                <a th:href="@{encherir(no_article=${item.no_article})}">
+                	<button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </a>                  
                 </div>
                 <small class="text-body-secondary" th:text="'Prix initial : ' + ${item.prix_initial} + ' EniCoin'">ici, le prix initial</small>
               </div>
