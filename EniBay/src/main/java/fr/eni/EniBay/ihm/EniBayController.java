@@ -1,5 +1,10 @@
 package fr.eni.EniBay.ihm;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
 
@@ -14,7 +19,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import fr.eni.EniBay.bll.ArticleVenduService;
 import fr.eni.EniBay.bll.CategorieService;
 import fr.eni.EniBay.bll.EnchereService;
@@ -62,10 +69,15 @@ public class EniBayController {
 	
     @GetMapping({"/", "/accueil"})
     public String afficherAccueil(Model model, Principal principal) {
-        List<Retrait> lstCategorie = retraitService.getRetraits();
-        model.addAttribute("retrait", lstCategorie);
+        List<Retrait> lstRetraits = retraitService.getRetraits();
+        model.addAttribute("retraits", lstRetraits);
+        List<ArticleVendu> lstArticles = articleVenduService.getArticlesVendus();
+        model.addAttribute("articles", lstArticles);
+//        List<Enchere> lstEncheres = enchereService.getEncheres();
+//        model.addAttribute("encheres", lstEncheres);
         return "Accueil";
     }
+
 	
 	
 	@PostMapping("/connecter")
@@ -187,7 +199,7 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-nouvelle-vente")
-	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, Retrait retrait, Principal principal) {
+	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, Retrait retrait, Principal principal, @RequestParam("imageFile") MultipartFile imageFile) {
 		System.out.println("enregistrer nouvelle vente");
 		var utilisateur = utilisateurService.findByName(principal.getName());
 		do
@@ -195,9 +207,36 @@ public class EniBayController {
 		while (article.getNo_article() == null);
 		
 		retraitService.ajouterRetrait(retrait, article, utilisateur);
-		return "redirect:/accueil";
+	    //System.out.println(image);
+	    // Vérifier si un fichier image a été sélectionné
+	    if (!imageFile.isEmpty()) {
+	        try {
+	            // Obtenir le nom d'origine du fichier
+	            String originalFilename = imageFile.getOriginalFilename();
+	            System.out.println(originalFilename);
+
+	            // Extraire l'extension du fichier
+	            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
+	            System.out.println(fileExtension);
+
+	            // Renommer le fichier selon le modèle "no_article.jpg"
+	            String newFilename = article.getNo_article() + fileExtension;
+	            System.out.println(newFilename);
+
+	            // Renommer et enregistrer le fichier dans le répertoire souhaité
+	            Path filePath = Paths.get("src/main/resources/static/images/", newFilename);
+	            Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+	            // Enregistrement
+	            //articleVendu.setNom_article(newFilename);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return "redirect:/accueil";
 	}
-	
+
+
 	@GetMapping("/encherir")
 	public String encherir(Model model, @RequestParam(name = "no_article", required = true) Integer no_article, Principal principal){		
 		System.out.println("arrivee encherir");

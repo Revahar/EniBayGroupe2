@@ -69,130 +69,22 @@
   <!-- Liste enchères -->
    <div class="album py-5 bg-body-tertiary">
     <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
+    
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+        <div class="col col-md-4" data-th-each="item: ${articles}">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
+            <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${item.no_article} + '.jpg'}" th:alt="${item.nom_article}" th:title="${item.nom_article}" style="background-color:grey;" width="100%" height="225" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            	<title th:text="${item.nom_article}">Placeholder</title>
+            		<rect width="100%" height="100%" fill="#55595c"/>
+            			<text x="50%" y="50%" fill="#eceeef" dy=".3em" th:text="${item.nom_article}">ici, le titre de l'enchère</text>
+            </svg>
             <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
+              <p class="card-text" th:text="${item.description}">Ici, la description de l'enchère.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
                 </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
-            <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
-              </div>
-            </div>
-          </div>
-        </div>
-       <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
-            <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
-              </div>
-            </div>
-          </div>
-        </div>
-	<div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
-            <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
-              </div>
-            </div>
-          </div>
-        </div>
-     <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
-            <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
-            <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
-              </div>
-            </div>
-          </div>
-        </div>
-       <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
-            <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
-            <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
-              </div>
-            </div>
-          </div>
-        </div>
-     <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ici, le titre de l'enchère</text></svg>
-            <div class="card-body">
-              <p class="card-text">Ici, la description de l'enchère.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                </div>
-                <small class="text-body-secondary">ici, un petit texte</small>
+                <small class="text-body-secondary" th:text="'Prix initial : ' + ${item.prix_initial} + ' EniCoin'">ici, le prix initial</small>
               </div>
             </div>
           </div>

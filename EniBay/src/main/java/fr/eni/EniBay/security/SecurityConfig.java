@@ -20,12 +20,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
-
-
-
 @Configuration
 @EnableWebSecurity
-
 public class SecurityConfig{
 	protected final Log logger = LogFactory.getLog(getClass());
 	private final String SELECT_USER = "select email, password ,1 from UTILISATEURS where email=?";

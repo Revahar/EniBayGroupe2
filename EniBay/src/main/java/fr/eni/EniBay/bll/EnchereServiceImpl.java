@@ -36,11 +36,11 @@ public class EnchereServiceImpl implements EnchereService{
     }
 
     
-    //pour afficher les enchères dans le carousel
-	@Override
-	public List<Enchere> getTroisDernieresEncheres() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//    //pour afficher les enchères dans le carousel
+//	@Override
+//	public List<Enchere> getTroisDernieresEncheres() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
    
 }

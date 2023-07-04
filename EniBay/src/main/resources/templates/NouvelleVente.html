@@ -23,7 +23,7 @@
       			<br><hr>
     		</div>
 		    <div class="col-md-5 col-lg-7">
-		        <form th:action="@{enregistrer-nouvelle-vente}" method="post" th:object="${article}" class="needs-validation" novalidate>
+		        <form th:action="@{enregistrer-nouvelle-vente}" method="post" th:object="${article}" class="needs-validation" novalidate enctype="multipart/form-data">
 		            <div class="row g-3 ">
 			            <div class="col-sm-6">
 			            	<label for="article" class="input-group-text">Article</label>
@@ -41,7 +41,7 @@
 			            </div>
 						<div class="col-12">
 							<label class="input-group-text" for="inputGroupFile01">Importer une image</label>
-							<input type="file" class="form-control" id="inputGroupFile01" required>
+							<input type="file" class="form-control" id="inputGroupFile01" name="imageFile" required>
 						</div>
 						<div class="col-12">
 						<label class="input-group-text" for="prix">Mise à prix</label>
