@@ -16,7 +16,7 @@
 
 <body class="bg-white h-100">
 
-<form th:object="${utilisateur}" method="post">
+<form th:object="${utilisateur}" method="post" action="@{/enregistrer-modifs}">
     <h2>Modification de profil</h2>
     <div class="grid">
         <input type="hidden" th:field="*{no_utilisateur}"  />
@@ -76,14 +76,11 @@
             <input type="text" th:field="*{code_postal}">
             <span th:if="${#fields.hasErrors('code_postal')}" th:errors="*{code_postal}"></span>
         </div>
-
-        <a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{enregistrer-modifs}">
-            <button type="button" class="btn btn-outline-primary btn-lg">Enregistrer</button>
-        </a>
-        <a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{supprimer-profil}">
-            <button type="button" class="btn btn-outline-primary btn-lg">Supprimer mon compte</button>
-        </a>
+            <button type="submit" class="btn btn-outline-primary btn-lg">Enregistrer</button>
     </div>
+    <a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{supprimer-profil}">
+    <button type="submit" class="btn btn-outline-primary btn-lg">Supprimer mon compte</button>
+    </a>
 </form>
 </body>
 
