@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import fr.eni.EniBay.bll.ArticleVenduService;
 import fr.eni.EniBay.bll.CategorieService;
+import fr.eni.EniBay.bll.EnchereService;
 import fr.eni.EniBay.bll.RetraitService;
 import fr.eni.EniBay.bll.UtilisateurService;
 import fr.eni.EniBay.bo.ArticleVendu;
+import fr.eni.EniBay.bo.Enchere;
 import fr.eni.EniBay.bo.LoginForm;
 import fr.eni.EniBay.bo.Retrait;
 import fr.eni.EniBay.bo.Utilisateur;
@@ -35,12 +37,15 @@ public class EniBayController {
 	private RetraitService retraitService;
 	private UtilisateurService utilisateurService;
 	private ArticleVenduService articleVenduService;
+	private EnchereService enchereService;
 	
-	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, ArticleVenduService articleVenduService) {
+	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, 
+			ArticleVenduService articleVenduService, EnchereService enchereService) {
 		this.categorieService = categorieService;
 		this.retraitService = retraitService;
 		this.utilisateurService = utilisateurService;
 		this.articleVenduService = articleVenduService;
+		this.enchereService = enchereService;
 	}
 
     
@@ -135,7 +140,7 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/mon-profil")
-	public String afficherMonProfil(Model model, @SessionAttribute("user") String username) {
+	public String afficherMonProfil(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getName());
 		
@@ -169,31 +174,55 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/nouvelle-vente")
-	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
-		//model.addAttribute("utilisateur", utilisateur);
+	public String versNouvelleVente(Model model, Principal principal) {
 	
 		System.out.println("arrivee nouvelle vente");
-
+		System.out.println(principal.getName());
+		
+		var pseudoUtilisateur = principal.getName();
+		model.addAttribute("utilisateur", utilisateurService.findByName(pseudoUtilisateur));
 		model.addAttribute("article", new ArticleVendu());
+		model.addAttribute("retrait", new Retrait());
 		return "NouvelleVente";
 	}
 	
 	@PostMapping("/enregistrer-nouvelle-vente")
-	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article) {
+	public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, Retrait retrait, Principal principal) {
 		System.out.println("enregistrer nouvelle vente");
-		articleVenduService.ajouterArticleVendu(article);
+		var utilisateur = utilisateurService.findByName(principal.getName());
+		do
+			articleVenduService.ajouterArticleVendu(article, utilisateur);
+		while (article.getNo_article() == null);
+		
+		retraitService.ajouterRetrait(retrait, article, utilisateur);
 		return "redirect:/accueil";
 	}
 	
 	@GetMapping("/encherir")
-	public String encherir() {
+	public String encherir(Model model, @RequestParam(name = "no_article", required = true) Integer no_article, Principal principal){		
 		System.out.println("arrivee encherir");
-		return "Encherir";
+		//principal.getName()
+		if(no_article > 0) {
+			ArticleVendu article = articleVenduService.getArticleVenduById(no_article);
+			if(article != null) {
+				model.addAttribute("article", article);
+				return "Encherir";
+			} else {
+				System.out.println("Article inconnu");
+			} 
+		} else {
+			System.out.println("Numero d'article inconnu");
+		}
+		
+		return "redirect:/accueil";
 	}
 	
 	@PostMapping("/enregistrer_enchere")
-	public String enregistrerEnchere() {
+	public String enregistrerEnchere(Model model, @ModelAttribute("enchere") Enchere enchere, @ModelAttribute ("article") ArticleVendu article, Principal principal) {
 		System.out.println("enregistrer enchere");
+		var utilisateur = utilisateurService.findByName(principal.getName());
+		enchereService.ajouterEnchere(enchere);
+		articleVenduService.ajouterArticleVendu(article, utilisateur);
 		return "redirect/accueil";
 	}
 	

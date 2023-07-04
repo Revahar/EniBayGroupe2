@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import fr.eni.EniBay.bo.ArticleVendu;
+import fr.eni.EniBay.bo.Utilisateur;
 import fr.eni.EniBay.dal.ArticleVenduDAO;
 
 @Service
@@ -24,13 +25,18 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 	    }
 	    
 	    @Override
-	    public void ajouterArticleVendu(ArticleVendu articleVendu) {
+	    public void ajouterArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateur) {
 	        lstArticlesVendus.add(articleVendu);
-	        save(articleVendu);
+	        save(articleVendu, utilisateur);
 	    }
 
 	    @Override
-	    public void save(ArticleVendu articleVendu) {
-	    	articleVenduDAO.save(articleVendu);
+	    public void save(ArticleVendu articleVendu, Utilisateur utilisateur) {
+	    	articleVenduDAO.save(articleVendu, utilisateur);
 	    }
+
+		@Override
+		public ArticleVendu getArticleVenduById(Integer no_article) {
+			return articleVenduDAO.findById(no_article);
+		}
 }
