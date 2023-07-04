@@ -2,36 +2,25 @@ package fr.eni.EniBay.security;
 
 import javax.sql.DataSource;
 
-import javax.sql.DataSource;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 
 
 
@@ -46,6 +35,26 @@ public class SecurityConfig {
 	private final String SELECT_ROLES = "select email, 'admin' from UTILISATEURS where email=?";
 	//private final String SELECT_ROLES = "select u.email, r.role from UTILISATEURS u inner join ROLES r on r.IS_ADMIN = m.admin where m.email = ?";
 
+	@Autowired
+	private DataSource dataSource ;
+
+	private final PasswordEncoder passwordEncoder  = new BCryptPasswordEncoder() ;
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return passwordEncoder;
+	}
+
+	@Autowired
+	public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
+		auth.jdbcAuthentication()
+			.dataSource( dataSource )
+			.passwordEncoder( passwordEncoder )
+			.usersByUsernameQuery( " SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE ? IN ( pseudo , email ) " )
+			.authoritiesByUsernameQuery( " SELECT pseudo, ( CASE WHEN administrateur = 1 THEN 'admin' ELSE 'user' END ) FROM utilisateurs WHERE ? IN ( pseudo , email ) " )
+			;
+	}
+	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http.authorizeHttpRequests(auth -> {
@@ -86,6 +95,10 @@ public class SecurityConfig {
 
 		http.formLogin(form -> form
 				.loginPage("/connexion")
+				.loginProcessingUrl("/connecter")
+				.failureUrl("/connexion")
+				.usernameParameter("username")
+				.passwordParameter("password")
 				.permitAll()
 				);
 		
@@ -101,15 +114,15 @@ public class SecurityConfig {
 	}
 
 	
-	@Bean
-	UserDetailsManager userDetailsManager(DataSource dataSource) {
-		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-
-		jdbcUserDetailsManager.setUsersByUsernameQuery(SELECT_USER);
-		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(SELECT_ROLES);
-
-		return jdbcUserDetailsManager;
-	}
+//	@Bean
+//	UserDetailsManager userDetailsManager(DataSource dataSource) {
+//		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//
+//		jdbcUserDetailsManager.setUsersByUsernameQuery(SELECT_USER);
+//		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(SELECT_ROLES);
+//
+//		return jdbcUserDetailsManager;
+//	}
 	
 //	@Bean
 //	public UserDetailsService userDetailsService(DataSource dataSource) {
@@ -119,13 +132,13 @@ public class SecurityConfig {
 //	    return userDetailsManager;
 //	}
 	
-	@Bean
-	public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
-	    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-	    authenticationProvider.setUserDetailsService(userDetailsService);
-	    authenticationProvider.setPasswordEncoder(passwordEncoder());
-	    return authenticationProvider;
-	}
+//	@Bean
+//	public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
+//	    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//	    authenticationProvider.setUserDetailsService(userDetailsService);
+//	    authenticationProvider.setPasswordEncoder(passwordEncoder());
+//	    return authenticationProvider;
+//	}
 	
 
 
@@ -147,10 +160,7 @@ public class SecurityConfig {
 //        return new InMemoryUserDetailsManager(user1, user2, admin);
 //    }
 	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
-	}
+
 
 	
 	@Bean

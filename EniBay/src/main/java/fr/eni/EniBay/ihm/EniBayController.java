@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
-
-import org.springframework.web.bind.annotation.SessionAttributes;
-
-import fr.eni.EniBay.bll.*;
-import fr.eni.EniBay.bo.*;
+import fr.eni.EniBay.bll.ArticleVenduService;
+import fr.eni.EniBay.bll.CategorieService;
+import fr.eni.EniBay.bll.RetraitService;
+import fr.eni.EniBay.bll.UtilisateurService;
+import fr.eni.EniBay.bo.ArticleVendu;
+import fr.eni.EniBay.bo.LoginForm;
+import fr.eni.EniBay.bo.Retrait;
+import fr.eni.EniBay.bo.Utilisateur;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,12 +41,7 @@ public class EniBayController {
 		this.utilisateurService = utilisateurService;
 		this.articleVenduService = articleVenduService;
 	}
-	
-	//Méthode de vérifiaction de connexion (sert à rendre dynamique les liens) 
-    private boolean isConnected() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.isAuthenticated();
-    }
+
     
     //Méthode pour se déconnecter
     @GetMapping("/deconnexion")
@@ -59,26 +56,21 @@ public class EniBayController {
 	
     @GetMapping({"/", "/accueil"})
     public String afficherAccueil(Model model, Principal principal) {
-        boolean isConnected = isConnected();
-        if (isConnected) {
-            System.out.println(isConnected);
-            //System.out.println(principal.getName());
-        }
+
         List<Retrait> lstCategorie = retraitService.getRetraits();
 
         model.addAttribute("retrait", lstCategorie);
-        model.addAttribute("isConnected", isConnected);
+ 
         return "Accueil";
     }
 	
 	
 	@PostMapping("/connecter")
 	public String connexionProfil(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
-		boolean isConnected = isConnected();
+
 	    // Effectuer la vérification des informations de connexion et renvoyer les erreurs si nécessaire
 	    if (utilisateurService.verifierConnexion(loginForm)) {
-	        System.out.println("connexion ok, username = " + loginForm.getUsername() + " & isConnected = " + isConnected);
-	        model.addAttribute("isConnected", isConnected);
+
 			Utilisateur utilisateur = utilisateurService.findByName(loginForm.getUsername());
 	        return "redirect:/accueil";
 	    } else {
@@ -93,9 +85,9 @@ public class EniBayController {
 	public String versConnexion(Model model) {
 	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm
 	    
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    boolean isConnected = authentication.isAuthenticated();
-	    model.addAttribute("isConnected", isConnected); // Ajout de la variable isConnected
+	   
+	   
+	 
 	    
 	    return "Connexion";
 	}
@@ -114,8 +106,7 @@ public class EniBayController {
 	
 	@GetMapping("/creer")
 	public String versCreation(Model model) {
-		boolean isConnected = isConnected();
-		model.addAttribute("isConnected", isConnected);
+
 		model.addAttribute("utilisateur", new Utilisateur());
 		return "Creation";
 	}
@@ -188,10 +179,9 @@ public class EniBayController {
 	@GetMapping("/nouvelle-vente")
 	public String versNouvelleVente(Model model/*, @RequestParam Utilisateur utilisateur*/) {
 		//model.addAttribute("utilisateur", utilisateur);
-		boolean isConnected = isConnected();
+	
 		System.out.println("arrivee nouvelle vente");
-		model.addAttribute("isConnected", isConnected);
-		System.out.println(isConnected);
+
 		model.addAttribute("article", new ArticleVendu());
 		return "NouvelleVente";
 	}

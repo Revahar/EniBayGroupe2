@@ -22,10 +22,15 @@
     <!-- Fin titre -->
 
 <!-- Connexion -->
-		<span class="col-2">
-		    <a data-th-href="@{creer}" th:unless="${isConnected}">Inscription</a>
-		    <a data-th-href="@{connexion}" th:unless="${isConnected}">Connexion</a>
-		    <a data-th-href="@{logout}" th:if="${isConnected}">Déconnexion</a>
+		<span class="col-2" th:if="${#authentication ne null and #authentication.principal ne null and #authentication.principal ne 'anonymousUser'}">
+		    <a data-th-href="@{logout}" >Déconnexion</a>
+
+		</span>
+		
+		<span class="col-2" th:if="${#authentication eq null or #authentication.principal eq null or #authentication.principal eq 'anonymousUser'}">
+		    <a data-th-href="@{creer}" >Inscription</a>
+		    <a data-th-href="@{connexion}" >Connexion</a>
+
 		</span>
 <!-- Fin connexion -->
     </div>
