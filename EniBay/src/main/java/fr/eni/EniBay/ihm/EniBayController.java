@@ -274,10 +274,19 @@ public class EniBayController {
 		System.out.println(enchere.getNo_article());
 		System.out.println(enchere.getMontant());
 		var utilisateur = utilisateurService.findByName(principal.getName());
-		article.setPrix_vente(enchere.getMontant());
+		if((utilisateur.getCredit() - enchere.getMontant()) >= 0) {
+			if(enchere.getMontant() > article.getPrix_vente()) {
+				article.setPrix_vente(enchere.getMontant());
+				
+				enchereService.ajouterEnchere(enchere, article, utilisateur);
+				articleVenduService.ajouterArticleVendu(article, utilisateur);
+			} else {
+				System.out.println("Le montant de l'enchère doit être supérieur au prix de vente actuel");
+			}			
+		} else {
+			System.out.println("Pas assez de crédits pour cette enchère");
+		}
 		
-		enchereService.ajouterEnchere(enchere, article, utilisateur);
-		articleVenduService.ajouterArticleVendu(article, utilisateur);
 		return "redirect:/accueil";
 	}
 	
