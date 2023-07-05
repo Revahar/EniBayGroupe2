@@ -59,8 +59,10 @@ public class EniBayController {
     
     //Méthode pour se déconnecter
     @GetMapping("/deconnexion")
-    public String deconnexion(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    public String deconnexion(HttpServletRequest request, HttpServletResponse response, Model model) throws ServletException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<ArticleVendu> lstArticles = articleVenduService.getArticlesVendus();
+        model.addAttribute("articles", lstArticles);
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
@@ -76,6 +78,7 @@ public class EniBayController {
         model.addAttribute("articles", lstArticles);
 //        List<Enchere> lstEncheres = enchereService.getEncheres();
 //        model.addAttribute("encheres", lstEncheres);
+        System.out.println(lstArticles);
         return "Accueil";
     }
 
@@ -175,11 +178,11 @@ public class EniBayController {
 		if (bindingResult.hasErrors()) {return "ModifProfil";}
 
 		if (utilisateurService.findByName(utilisateur.getPseudo()) != null
-			|| utilisateurService.findByName(utilisateur.getPseudo()).getPseudo().equals(utilisateur.getPseudo())) {
+			&& !utilisateurService.findByName(utilisateur.getPseudo()).getPseudo().equals(utilisateur.getPseudo())) {
 			return "ModifProfil";
 		}
 		if (utilisateurService.findByName(utilisateur.getEmail()) != null
-			|| utilisateurService.findByName(utilisateur.getEmail()).getEmail().equals(utilisateur.getEmail())) {
+			&& !utilisateurService.findByName(utilisateur.getEmail()).getEmail().equals(utilisateur.getEmail())) {
 			return "ModifProfil";
 		}
 		utilisateurService.save(utilisateur);
