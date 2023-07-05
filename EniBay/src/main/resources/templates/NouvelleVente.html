@@ -57,8 +57,17 @@
 						</div>
 
 						<div class="border border-secondary rounded position-relative" th:object="${utilisateur}" th:if="${utilisateur}">
-							<div th:object="${retrait}">							
-		  						<span class="border-overlay">Retrait</span><br>
+							<div th:object="${retrait}">
+							<style>
+							    .border-overlay {
+							        position: absolute;
+							        top: -10px;
+							        left: 10px;
+							        background-color: white;
+							        padding: 0 10px;
+							    }
+							</style>
+		  						<span class="border-overlay top-left">Retrait</span><br>
 		          				<div class="col-md-12">
 		              				<label for="adresse" class="form-label">Adresse</label>
 		              				<input type="text" th:fields="${retrait.rue}" data-th-value="${utilisateur.rue}" class="form-control" id="adresse" placeholder="1 rue de la soif" required>
