@@ -80,8 +80,8 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 			mapSrc.addValue("date_debut_encheres", article.getDate_debut_encheres());
 			mapSrc.addValue("date_fin_encheres", article.getDate_fin_encheres());
 			mapSrc.addValue("prix_initial", article.getPrix_initial());
-			mapSrc.addValue("prix_vente", article.getPrix_vente());
-			mapSrc.addValue("no_utilisateur", article.getNo_utilisateur());
+			mapSrc.addValue("prix_vente", article.getPrix_initial());
+			mapSrc.addValue("no_utilisateur", utilisateur.getNo_utilisateur());
 			mapSrc.addValue("no_categorie", article.getNo_categorie());
 			
 			namedParameterJdbcTemplate.update(INSERT, mapSrc, keyHolder);			
