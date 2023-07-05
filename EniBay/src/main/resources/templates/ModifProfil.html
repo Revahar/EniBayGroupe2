@@ -73,7 +73,7 @@
 				            <label for="telephone" class="input-group-text">Téléphone :</label>
 				        </div>
 				        <div class="col-md-6">
-				            <input id="telephone" class="form-control" type="tel" pattern="([0-9]{2} ){4}[0-9]{2}" th:field="*{telephone}">
+				            <input id="telephone" class="form-control" type="tel" th:field="*{telephone}">
 				            <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
 				        </div>
 				    </div><br>

@@ -29,7 +29,6 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     
     @Override
     public void ajouterUtilisateur(Utilisateur utilisateur) {
-    	utilisateur.setMot_de_passe(passwordEncoder.encode(utilisateur.getMot_de_passe()));
     	lstUtilisateurs.add(utilisateur);
         save(utilisateur);
     }
@@ -45,7 +44,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     	System.out.println("vrai");
     	return;
     }
-
+    
     @Override
     public Utilisateur findById(Integer id) {
         return utilisateurDAO.findById(id);
