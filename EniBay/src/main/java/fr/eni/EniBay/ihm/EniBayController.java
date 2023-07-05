@@ -266,12 +266,19 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-enchere")
-	public String enregistrerEnchere(Model model, @ModelAttribute("enchere") Enchere enchere, @ModelAttribute ("article") ArticleVendu article, Principal principal) {
+	public String enregistrerEnchere(Model model, @ModelAttribute("enchere") Enchere enchere, Principal principal,
+			@RequestParam(value = "no_article") String no_article) {
+		ArticleVendu article = articleVenduService.getArticleVenduById(Integer.parseInt(no_article));
 		System.out.println("enregistrer enchere");
+		System.out.println(article.getNo_article());
+		System.out.println(enchere.getNo_article());
+		System.out.println(enchere.getMontant());
 		var utilisateur = utilisateurService.findByName(principal.getName());
+		article.setPrix_vente(enchere.getMontant());
+		
 		enchereService.ajouterEnchere(enchere, article, utilisateur);
 		articleVenduService.ajouterArticleVendu(article, utilisateur);
-		return "redirect/accueil";
+		return "redirect:/accueil";
 	}
 	
 	@GetMapping("/acquisition")

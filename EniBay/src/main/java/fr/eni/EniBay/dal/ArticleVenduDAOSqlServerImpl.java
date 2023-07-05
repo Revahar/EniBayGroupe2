@@ -14,6 +14,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.EniBay.bo.ArticleVendu;
+import fr.eni.EniBay.bo.Enchere;
 import fr.eni.EniBay.bo.Utilisateur;
 
 @Repository
@@ -24,8 +25,9 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	private final static String INSERT = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) "
 			+ "VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
 	
-	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article= :nom_article, description= :description, date_debut_encheres= :date_debut_encheres, date_fin_encheres= :date_fin_encheres, prix_initial= :prix_initial, prix_vente= :prix_vente, no_utilisateur= :no_utilisateur, no_categorie= :no_categorie";
+	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article= :nom_article, description= :description, date_debut_encheres= :date_debut_encheres, date_fin_encheres= :date_fin_encheres, prix_initial= :prix_initial, prix_vente= :prix_vente, no_utilisateur= :no_utilisateur, no_categorie= :no_categorie WHERE no_article= :no_article";
 	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article= :no_article";
+	private final static String UPDATE_PRIX = "UPDATE ARTICLES_VENDUS SET prix_vente= :prix_vente WHERE no_article= :no_article";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -52,7 +54,7 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 			
 			return article;
 		}		
-	}	
+	}
 
 	@Override
 	public ArticleVendu findById(Integer idArticleVendu) {
@@ -88,7 +90,7 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 			namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(article));
 		}
 	}
-
+	
 	@Override
 	public void delete(ArticleVendu articleVendu) {
 		namedParameterJdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(articleVendu));
