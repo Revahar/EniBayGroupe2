@@ -29,13 +29,13 @@ public class UtilisateurServiceImpl implements UtilisateurService{
     
     @Override
     public void ajouterUtilisateur(Utilisateur utilisateur) {
-    	utilisateur.setMot_de_passe(passwordEncoder.encode(utilisateur.getMot_de_passe()));
     	lstUtilisateurs.add(utilisateur);
         save(utilisateur);
     }
 
     @Override
     public void save(Utilisateur utilisateur) {
+        System.out.println(utilisateur.getMot_de_passe());
         utilisateur.setMot_de_passe(passwordEncoder.encode(utilisateur.getMot_de_passe()));
         utilisateurDAO.save(utilisateur);
     }
