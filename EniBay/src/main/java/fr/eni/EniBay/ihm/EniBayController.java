@@ -175,11 +175,11 @@ public class EniBayController {
 		if (bindingResult.hasErrors()) {return "ModifProfil";}
 
 		if (utilisateurService.findByName(utilisateur.getPseudo()) != null
-			|| utilisateurService.findByName(utilisateur.getPseudo()).getPseudo().equals(utilisateur.getPseudo())) {
+			&& !utilisateurService.findByName(utilisateur.getPseudo()).getPseudo().equals(utilisateur.getPseudo())) {
 			return "ModifProfil";
 		}
 		if (utilisateurService.findByName(utilisateur.getEmail()) != null
-			|| utilisateurService.findByName(utilisateur.getEmail()).getEmail().equals(utilisateur.getEmail())) {
+			&& !utilisateurService.findByName(utilisateur.getEmail()).getEmail().equals(utilisateur.getEmail())) {
 			return "ModifProfil";
 		}
 		utilisateurService.save(utilisateur);

@@ -36,7 +36,8 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 
     @Override
     public void save(Utilisateur utilisateur) {
-    	utilisateurDAO.save(utilisateur);
+        utilisateur.setMot_de_passe(passwordEncoder.encode(utilisateur.getMot_de_passe()));
+        utilisateurDAO.save(utilisateur);
     }
     
     @Override

@@ -16,7 +16,7 @@
 
 <body class="bg-white h-100">
 
-<form th:object="${utilisateur}" method="post" action="@{/enregistrer-modifs}">
+<form th:object="${utilisateur}" method="post" th:action="@{/enregistrer-modifs}">
     <h2>Modification de profil</h2>
     <div class="grid">
         <input type="hidden" th:field="*{no_utilisateur}"  />
@@ -76,12 +76,22 @@
             <input type="text" th:field="*{code_postal}">
             <span th:if="${#fields.hasErrors('code_postal')}" th:errors="*{code_postal}"></span>
         </div>
-            <button type="submit" class="btn btn-outline-primary btn-lg">Enregistrer</button>
+    </div>
+    <div class="profilColonneUne">
+        <label>Mot de passe :</label>
+    </div>
+        <div class="profilColonneDeux">
+            <input type="password" th:field="*{mot_de_passe}">
+            <span th:if="${#fields.hasErrors('mot_de_passe')}" th:errors="*{mot_de_passe}"></span>
+        </div>
+            <button th:type="submit" class="btn btn-outline-primary btn-lg">Enregistrer</button>
     </div>
     <a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{supprimer-profil}">
-    <button type="submit" class="btn btn-outline-primary btn-lg">Supprimer mon compte</button>
+    <button type="button" class="btn btn-outline-primary btn-lg">Supprimer mon compte</button>
     </a>
 </form>
+<br><br><br><br><br>
+<br><br><br><br><br>
 </body>
 
 	<div data-th-replace="~{fragments/fragment-footer :: fragment-footer}"></div>
