@@ -23,12 +23,13 @@
 	   			<h2>Enchérir </h2>
 	   		</div>
 	   		
-	   			<form th:action="@{enregistrer-enchere}" th:object="${enchere}" method="post">
+	   			
 	   			
 					<div class="col-md-5 col-lg-7">
+					<form th:action="@{enregistrer-enchere}" th:object="${enchere}" method="post">
 						<div class="row g-3 justify-content-md-center"><hr>
 							<div class="col-md-3 ">
-					    		<label for="nom" class="input-group-text" th:text="${article.nom_article}">Nom de l'article : </label>
+					    		<label for="nom" class="input-group-text" >Nom de l'article : </label>
 					    		<input type="hidden" th:name="no_article" data-th-value="${article.no_article}">
 						    </div> 
 							<div class="col-md-6 text-center ">
@@ -120,8 +121,8 @@
 			            		</div>	
 							</div>
 						</div>
+						</form><br><hr>
 					</div>
-				</form><br><hr>
 			</div>
 		</div>
 </body>
