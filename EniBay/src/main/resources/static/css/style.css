@@ -85,6 +85,13 @@
     grid-column: 5;
 }
 
+.text-outline {
+	color: white;
+	text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
+}
+
+
+
 
 
 
