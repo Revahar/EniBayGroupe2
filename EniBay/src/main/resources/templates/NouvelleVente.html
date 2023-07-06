@@ -28,7 +28,10 @@
 			            <div class="col-sm-6">
 			            	<label for="article" class="input-group-text">Article</label>
 			            	<input type="text" th:field="*{nom_article}" class="form-control" id="article" placeholder="nom de l'article" data-th-value="${article.nom_article}" required>
+			            	<span th:if="${#fields.hasErrors('nom_article')}" th:errors="*{nom_article}"></span>
 			            </div>
+			            
+			            
 			            <div class="col-sm-6">
 			               <label for="desc" class="input-group-text">Description</label>
 			               <textarea th:field="*{description}" data-th-value="${article.description}" class="form-control" aria-label="With textarea" placeholder="Description de l'article" required></textarea>
