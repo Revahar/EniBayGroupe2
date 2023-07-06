@@ -10,6 +10,8 @@ public interface EnchereService {
 
 	List<Enchere> getEncheres();
 
+	Enchere findByAtricle(Integer no_article);
+
 	void ajouterEnchere(Enchere enchere, ArticleVendu article, Utilisateur utilisateur);
 
 	void afficher(Enchere enchere, ArticleVendu article,Utilisateur utilisateur);

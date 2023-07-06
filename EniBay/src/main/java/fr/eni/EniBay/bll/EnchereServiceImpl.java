@@ -25,7 +25,12 @@ public class EnchereServiceImpl implements EnchereService{
     public List<Enchere> getEncheres() {
         return enchereDAO.findAll();
     }
-    
+
+    @Override
+    public Enchere findByAtricle(Integer no_article){
+        return enchereDAO.findByArticle(no_article);
+    }
+
     @Override
     public void ajouterEnchere(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
         lstEncheres.add(enchere);

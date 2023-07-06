@@ -34,7 +34,7 @@ public class EnchereDAOSqlServerImpl implements EnchereDAO {
 			"WHERE enchere.no_article = :no_article";
 	private final static String DELETE = "DELETE FROM ENCHERES WHERE no_article = :no_article";
 	private final static String FIND_ALL = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
-
+	private final static String SELECT_BY_ARTICLE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article = :no_article";
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	class EnchereRowMapper implements RowMapper<Enchere>{
@@ -72,6 +72,16 @@ public class EnchereDAOSqlServerImpl implements EnchereDAO {
 		src.setNo_article(no_article, no_utilisateur);
 		return namedParameterJdbcTemplate.queryForObject(SELECT_BY_ID, new BeanPropertySqlParameterSource(src),
 				new BeanPropertyRowMapper<>(Enchere.class));
+	}
+
+	@Override
+	public Enchere findByArticle(Integer noArticle) {
+		MapSqlParameterSource mapSrc = new MapSqlParameterSource("no_article", noArticle);
+		List<Enchere> enchere = namedParameterJdbcTemplate.query(
+				SELECT_BY_ARTICLE, mapSrc, new EnchereRowMapper()
+		);
+		if (enchere.isEmpty()) {return null;}
+		return enchere.get(0);
 	}
 
 	@Override
