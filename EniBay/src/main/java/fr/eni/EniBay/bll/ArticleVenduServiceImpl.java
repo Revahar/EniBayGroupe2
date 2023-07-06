@@ -56,4 +56,9 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 	    public List<ArticleVendu> getAllMyArticles(Utilisateur utilisateur) {
 	        return articleVenduDAO.findAllMyArticles(utilisateur);
 	    }
+
+		@Override
+		public ArticleVendu findById(Integer no_article) {
+			return articleVenduDAO.findById(no_article);
+		}
 }

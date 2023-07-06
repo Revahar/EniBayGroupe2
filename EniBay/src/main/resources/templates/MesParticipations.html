@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mes participations</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" data-th-href="@{/css/style.css}">
+
+</head>
+<br><br>
+<div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
+
+<body class="bg-white h-100">
+
+			<div class="py-5 text-center">
+	   			<h2>Mes participations</h2>
+	   		</div>
+	
+	
+	
+	<!-- Liste enchères -->
+   <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+    
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+        <div class="col col-md-4" data-th-each="item: ${mesParticipations}">
+          <div class="card shadow-sm">
+            <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${item.no_categorie} + '.jpg'}" th:alt="${item.nom_article}" th:title="${item.nom_article}" style="background-color:grey;" width="100%" height="225" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            	<title th:text="${item.nom_article}">Placeholder</title>
+            		<rect width="100%" height="100%" fill="#55595c"/>
+            			<text x="50%" y="50%" fill="#eceeef" dy=".3em" th:text="${item.nom_article}">ici, le titre de l'enchère</text>
+       
+            <div class="card-body">
+              <p class="card-text" th:text="${item.description}">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                <a th:href="@{encherir(no_article=${item.no_article})}">
+                	<button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </a>                  
+                </div>
+				<small class="text-body-secondary" th:if="${item.prix_vente == 0}" th:block>Pas d'enchère en cours. Prix initial : <span th:text="${item.prix_initial}"></span> EniCoin</small>
+				<small class="text-body-secondary" th:unless="${item.prix_vente == 0}" th:block>Montant de l'enchère : <span th:text="${item.prix_vente}"></span> EniCoin</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin liste des enchères -->
+
+
+</body>
+
+	<div data-th-replace="~{fragments/fragment-footer :: fragment-footer}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</html>

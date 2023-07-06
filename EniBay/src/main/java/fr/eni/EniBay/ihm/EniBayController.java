@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -358,6 +359,18 @@ public class EniBayController {
         model.addAttribute("mesArticles", lstMesArticles);
         System.out.println(lstMesArticles);
         return "MesVentes";
+    }
+    
+    @GetMapping("/MesParticipations")
+    public String afficherMesParticipations(Model model, Principal principal) {
+    	List<ArticleVendu> lstArticles = new ArrayList<ArticleVendu>();
+        List<Enchere> lstMesParticipations = enchereService.findByUtilisateur(utilisateurService.findByName(principal.getName()).getNo_utilisateur());
+        for (Enchere enchere : lstMesParticipations) {
+        	lstArticles.add(articleVenduService.findById(enchere.getNo_article()));
+		}
+        model.addAttribute("mesParticipations", lstArticles);
+        System.out.println("liste de mes participations : " + lstMesParticipations);
+        return "MesParticipations";
     }
 	
 	

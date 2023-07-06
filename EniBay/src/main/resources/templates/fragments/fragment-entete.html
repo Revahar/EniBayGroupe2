@@ -66,7 +66,7 @@
                 		</ul>
               		</li>
               		<li class="navbar-brand" th:if="${#authentication ne null and #authentication.principal ne null and #authentication.principal ne 'anonymousUser'}">
-                		<a class="nav-link textNav" aria-current="page" data-th-href="@{nouvelle-vente}">Mes participations</a>
+                		<a class="nav-link textNav" aria-current="page" data-th-href="@{MesParticipations}">Mes participations</a>
               		</li>
               		<li class="navbar-brand" th:if="${#authentication eq null or #authentication.principal eq null or #authentication.principal eq 'anonymousUser'}">
                   		<a class="nav-link textNav disabled" >Mes participations</a>

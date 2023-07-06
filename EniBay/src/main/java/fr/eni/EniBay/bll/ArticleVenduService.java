@@ -19,5 +19,7 @@ public interface ArticleVenduService {
 
 	List<ArticleVendu> getAllMyArticles(Utilisateur utilisateur);
 
+	ArticleVendu findById(Integer no_article);
+
 
 }
