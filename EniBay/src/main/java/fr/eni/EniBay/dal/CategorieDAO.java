@@ -13,4 +13,5 @@ public interface CategorieDAO {
 	void save(Categorie categorie);
 	
 	Map<Integer, Categorie> getMapCategories();
+	
 }

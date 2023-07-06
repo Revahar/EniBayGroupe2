@@ -29,11 +29,11 @@ public class EnchereServiceImpl implements EnchereService{
     @Override
     public void ajouterEnchere(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
         lstEncheres.add(enchere);
-        afficher(enchere, article, utilisateur);
+        save(enchere, article, utilisateur);
     }
 
     @Override
-    public void afficher(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
+    public void save(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
         enchereDAO.save(enchere, article, utilisateur);
     }
 

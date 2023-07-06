@@ -27,16 +27,21 @@ public class CategorieServiceImpl implements CategorieService{
     @Override
     public void ajouterCategorie(Categorie categorie) {
         lstCategories.add(categorie);
-        afficher(categorie);
+        save(categorie);
     }
 
     @Override
-    public void afficher(Categorie categorie) {
+    public void save(Categorie categorie) {
         categorieDAO.save(categorie);
     }
 
 	@Override
 	public Map<Integer, Categorie> getMapCategories() {
 		return categorieDAO.getMapCategories();
+	}
+
+	@Override
+	public Categorie getCategorieById(Integer no_categorie) {
+		return categorieDAO.findById(no_categorie);
 	}
 }
