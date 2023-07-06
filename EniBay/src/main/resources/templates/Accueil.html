@@ -85,16 +85,9 @@
                 <a th:href="@{encherir(no_article=${item.no_article})}">
                 	<button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
                 </a>                  
-                </div><!-- 
-                <small class="text-body-secondary" th:text="'Prix initial : ' + ${item.prix_initial} + ' EniCoin'">ici, le prix initial</small>
-                <small class="text-body-secondary" th:text="'Prix actuel : ' + ${item.prix_vente} + ' EniCoin'">ici, le prix actuel</small>
-                 -->
+                </div>
 				<small class="text-body-secondary" th:if="${item.prix_vente == 0}" th:block>Pas d'enchère en cours. Prix initial : <span th:text="${item.prix_initial}"></span> EniCoin</small>
 				<small class="text-body-secondary" th:unless="${item.prix_vente == 0}" th:block>Montant de l'enchère : <span th:text="${item.prix_vente}"></span> EniCoin</small>
-
-
-
-                
               </div>
             </div>
           </div>
