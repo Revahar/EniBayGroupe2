@@ -9,6 +9,7 @@ import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -185,8 +186,18 @@ public class EniBayController {
 			&& !utilisateurService.findByName(utilisateur.getEmail()).getEmail().equals(utilisateur.getEmail())) {
 			return "ModifProfil";
 		}
-		utilisateurService.save(utilisateur);
 		System.out.println("enregistrer modifs profil");
+
+		Utilisateur sqlUtilisateur = utilisateurService.findByName(utilisateur.getPseudo());
+
+		if (!sqlUtilisateur.getPseudo().equals(utilisateur.getPseudo())
+			|| !sqlUtilisateur.getEmail().equals(utilisateur.getEmail())
+			|| !sqlUtilisateur.getMot_de_passe().equals(utilisateur.getMot_de_passe())) {
+			utilisateurService.save(utilisateur);
+			return "redirect:/logout";
+		}
+		utilisateurService.save(utilisateur);
+
 		return "redirect:/mon-profil";
 	}
 
