@@ -32,9 +32,10 @@ public class EnchereDAOSqlServerImpl implements EnchereDAO {
 	private final static String SELECT_BY_ID = "SELECT enchere.no_article, enchere.no_utilisateur, enchere.date_enchere, enchere.montant_enchere AS enchere_ " +
 			"FROM enchere enchere " +
 			"WHERE enchere.no_article = :no_article";
-	private final static String DELETE = "DELETE FROM ENCHERES WHERE no_article = :no_article";
+	private final static String DELETE = "DELETE FROM ENCHERES WHERE no_article = :no_article AND no_utilisateur = :no_utilisateur";
 	private final static String FIND_ALL = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
-	private final static String SELECT_BY_ARTICLE = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article = :no_article";
+	private final static String SELECT_BY_ARTICLE = "SELECT TOP 1 no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article = :no_article ORDER BY montant_enchere DESC";
+	private final static String SELECT_BY_UTILISATEUR = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_utilisateur = :no_utilisateur";
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	class EnchereRowMapper implements RowMapper<Enchere>{
@@ -85,9 +86,22 @@ public class EnchereDAOSqlServerImpl implements EnchereDAO {
 	}
 
 	@Override
+	public List<Enchere> findByUtilisateur(Integer noUtilisateur) {
+		MapSqlParameterSource mapSrc = new MapSqlParameterSource("no_utilisateur", noUtilisateur);
+		List<Enchere> enchere = namedParameterJdbcTemplate.query(
+				SELECT_BY_UTILISATEUR, mapSrc, new EnchereRowMapper()
+		);
+		if (enchere.isEmpty()) {return null;}
+		return enchere;
+	}
+
+	@Override
 	public void save(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
 		if (enchere.getNo_article() != null) {
-			namedParameterJdbcTemplate.update(DELETE, new MapSqlParameterSource("no_article", article.getNo_article()));
+			MapSqlParameterSource mapsrc = new MapSqlParameterSource()
+					.addValue("no_article", article.getNo_article())
+					.addValue("no_utilisateur", utilisateur.getNo_utilisateur());
+			namedParameterJdbcTemplate.update(DELETE, mapsrc);
 		}
 		// insert
 		String query = INSERT;

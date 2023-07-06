@@ -106,5 +106,9 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 	if (utilisateur.isEmpty()) {return null;}
 	return utilisateur.get(0);
 	}
-	
+
+	@Override
+	public void updateCredit(Utilisateur utilisateur) {
+		save(utilisateur);
+	}
 }

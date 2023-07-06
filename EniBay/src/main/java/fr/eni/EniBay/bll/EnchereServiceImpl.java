@@ -14,11 +14,9 @@ import fr.eni.EniBay.dal.EnchereDAO;
 @Service
 public class EnchereServiceImpl implements EnchereService{
     private final EnchereDAO enchereDAO;
-    private final List<Enchere> lstEncheres;
 
     public EnchereServiceImpl(EnchereDAO enchereDAO) {
         this.enchereDAO = enchereDAO;
-        this.lstEncheres = new ArrayList<>();
     }
     
     @Override
@@ -32,9 +30,8 @@ public class EnchereServiceImpl implements EnchereService{
     }
 
     @Override
-    public void ajouterEnchere(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
-        lstEncheres.add(enchere);
-        save(enchere, article, utilisateur);
+    public List<Enchere> findByUtilisateur(Integer no_utilisateur) {
+        return enchereDAO.findByUtilisateur(no_utilisateur);
     }
 
     @Override

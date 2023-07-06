@@ -14,6 +14,6 @@ public interface UtilisateurDAO {
 	void delete(Utilisateur utilisateur);
 
 	Utilisateur findByName(String id);
-	
-	
+
+	void updateCredit(Utilisateur utilisateur);
 }
