@@ -291,14 +291,24 @@ public class EniBayController {
 			@RequestParam(value = "no_article") String no_article) {
 		ArticleVendu article = articleVenduService.getArticleVenduById(Integer.parseInt(no_article));
 		System.out.println("enregistrer enchere");
-		System.out.println(article.getNo_article());
+/*		System.out.println(article.getNo_article());
 		System.out.println(enchere.getNo_article());
-		System.out.println(enchere.getMontant());
+		System.out.println(enchere.getMontant());*/
 		var utilisateur = utilisateurService.findByName(principal.getName());
 		if((utilisateur.getCredit() - enchere.getMontant()) >= 0) {
 			if(enchere.getMontant() > article.getPrix_vente()) {
+
 				article.setPrix_vente(enchere.getMontant());
-				
+				Enchere sqlEnchere = enchereService.findByAtricle(enchere.getNo_article());
+				if (sqlEnchere != null) {
+					Utilisateur ancienUtilisateur = utilisateurService.findById(sqlEnchere.getNo_utilisateur());
+
+					ancienUtilisateur.setCredit(ancienUtilisateur.getCredit() + sqlEnchere.getMontant());
+					utilisateurService.save(ancienUtilisateur);
+				}
+				utilisateur.setCredit(utilisateur.getCredit()-enchere.getMontant());
+				utilisateurService.save(utilisateur);
+
 				enchereService.ajouterEnchere(enchere, article, utilisateur);
 				articleVenduService.ajouterArticleVendu(article, utilisateur);
 			} else {

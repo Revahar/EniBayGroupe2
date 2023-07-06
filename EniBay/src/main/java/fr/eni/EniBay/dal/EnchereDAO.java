@@ -18,4 +18,5 @@ public interface EnchereDAO {
 
 	void delete(Integer no_article, Integer no_utilisateur);
 
+	Enchere findByArticle(Integer noArticle);
 }
