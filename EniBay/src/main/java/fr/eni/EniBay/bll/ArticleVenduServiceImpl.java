@@ -39,4 +39,16 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 		public ArticleVendu getArticleVenduById(Integer no_article) {
 			return articleVenduDAO.findById(no_article);
 		}
+		
+		public List<ArticleVendu> getArticlesEnCours(String libelle, String nom_article) {
+		    if (libelle != null && nom_article != null) {
+		        return articleVenduDAO.findByCategorieAndNomArticleContainingIgnoreCase(libelle, nom_article);
+		    } else if (libelle != null) {
+		        return articleVenduDAO.findByCategorie(libelle);
+		    } else if (nom_article != null) {
+		        return articleVenduDAO.findByNomArticleContainingIgnoreCase(nom_article);
+		    } else {
+		        return articleVenduDAO.findAll();
+		    }
+		}
 }

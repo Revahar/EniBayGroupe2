@@ -14,9 +14,8 @@ public interface EnchereService {
 
 	void ajouterEnchere(Enchere enchere, ArticleVendu article, Utilisateur utilisateur);
 
-	void afficher(Enchere enchere, ArticleVendu article,Utilisateur utilisateur);
+	void save(Enchere enchere, ArticleVendu article,Utilisateur utilisateur);
 
-
-	//List<Enchere> getTroisDernieresEncheres();
+	List<Enchere> getEncheresEnCours(String categorie, String nom_article);
 
 }

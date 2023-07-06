@@ -47,7 +47,7 @@
 							</div>
 						</div><br>
 				
-						<!--
+						
 						<div class="row g-3 justify-content-md-center">
 							<div class="col-md-3 ">
 					    		<label for="desc" class="input-group-text">Catégorie : </label>
@@ -55,7 +55,7 @@
 							<div class="col-md-6 text-center">
 								<span id="desc" th:text="${categorie.libelle}"></span>
 							</div>
-						</div><br>-->
+						</div><br>
 				
 				
 						<div class="row g-3 justify-content-md-center">
@@ -90,7 +90,7 @@
 					    		<label for="desc" class="input-group-text">Adresse de retrait : </label>
 						    </div> 
 							<div class="col-md-6 text-center">
-								<span id="desc" th:text="${utilisateur.rue} + ' ' + ${utilisateur.code_postal} + ' ' + ${utilisateur.ville}"></span>
+								<span id="desc" th:text="${utilisateur.rue} + ', ' + ${utilisateur.code_postal} + ', ' + ${utilisateur.ville}"></span>
 							</div>
 						</div><br>
 				

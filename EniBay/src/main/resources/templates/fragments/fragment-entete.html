@@ -8,20 +8,20 @@
 <header xmlns:th="http://www.thymeleaf.org" data-th-fragment="fragment-entete">
 
     <!-- Titre -->
-    <div class="row align-items-center">
-	    <div class="col">
-	    	<a data-th-href="@{accueil}" style="text-decoration: none;">
-		        <h1 class="titre">
-		            <span>E</span>
-		            <span>ni</span>
-		            <span>B</span>
-		            <span>ay</span>
-		        </h1>
-		      </a>
-	      </div>
-    <!-- Fin titre -->
-
-<!-- Connexion -->
+	<div class="row align-items-center">
+		<div class="col">
+			<h1 class="titre">
+				<a data-th-href="@{accueil}" style="text-decoration: none;">
+					<span style="color: red; font-size: 150%;">E</span>
+					<span style="color: blue; font-size: 150%;">ni</span>
+					<span style="color: gold; font-size: 150%;">B</span>
+					<span style="color: green; font-size: 150%;">ay</span>
+				</a>
+			</h1>
+		</div>
+	<!-- Fin titre -->
+    
+	<!-- Connexion -->
 		<span class="col-2" th:if="${#authentication ne null and #authentication.principal ne null and #authentication.principal ne 'anonymousUser'}">
 		    <a data-th-href="@{logout}" >Déconnexion</a>
 		</span>
@@ -29,41 +29,54 @@
 		    <a data-th-href="@{creer}" >Inscription</a>
 		    <a data-th-href="@{connexion}" >Connexion</a>
 		</span>
-<!-- Fin connexion -->
+	<!-- Fin connexion -->
     </div>
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg bg-body-primary-emphasis ">
         <div class="container-fluid">
-          <a class="navbar-brand textNav" data-th-href="@{accueil}">Accueil</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link textNav" aria-current="page" data-th-href="@{nouvelle-vente}">Vendre</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle textNav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Profil
-                </a>
-                <ul class="dropdown-menu bg-body-secondary-emphasis">
-                  <li><a class="dropdown-item textNav" data-th-href="@{creer}">S'enregistrer</a></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{connexion}">Se connecter</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{mon-profil}">Mon Profil</a></li>
-                  <li><a class="dropdown-item textNav" data-th-href="@{acquisition}">Mes acquisitions</a></li>
-                </ul>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="..." aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Rechercher</button>
-            </form>
-          </div>
-        </div>
-      </nav>
+        	<a class="navbar-brand textNav" data-th-href="@{accueil}">Accueil</a>
+        	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            	<span class="navbar-toggler-icon"></span>
+          	</button>
+          	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+            	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              		<li class="nav-item">
+                		<a class="nav-link textNav" aria-current="page" data-th-href="@{nouvelle-vente}">Vendre</a>
+              		</li>
+              		<li class="nav-item dropdown">
+                		<a class="nav-link dropdown-toggle textNav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  		Profil
+                		</a>
+                		<ul class="dropdown-menu bg-body-secondary-emphasis">
+                  			<li><a class="dropdown-item textNav" data-th-href="@{creer}">S'enregistrer</a></li>
+                  			<li><a class="dropdown-item textNav" data-th-href="@{connexion}">Se connecter</a></li>
+                  			<li><hr class="dropdown-divider"></li>
+                  			<li><a class="dropdown-item textNav" data-th-href="@{mon-profil}">Mon Profil</a></li>
+                  			<li><a class="dropdown-item textNav" data-th-href="@{acquisition}">Mes acquisitions</a></li>
+                		</ul>
+              		</li>
+            	</ul>
+				<form action="/acquisition" method="GET" class="d-flex" role="search">
+					<div class="row g-3">
+						<div class="col-sm-6">
+						<label class="input-group-text mb-1" for="categorie">Filtre par catégorie </label>
+							<select class="form-select" id="categorie" name="categorie">
+								<option value="">Toutes les catégories</option>
+								<option th:each="categorie : ${@CategorieService.getListCategories()}" th:value="${categorie.libelle}" th:text="${categorie.libelle}"></option>
+							</select>
+						</div>
+						<div class="col-sm-6">
+							<div class="d-flex">
+							<input class="form-control me-2" type="text" placeholder="Nom d'article" aria-label="Search" name="nom_article">
+							<button class="btn btn-outline-success" type="submit">Rechercher</button>
+							</div>
+						</div>
+					</div>
+				</form>
+ 			</div>
+		</div>
+	</nav>
     <!-- Fin NavBar -->
 </header>
 

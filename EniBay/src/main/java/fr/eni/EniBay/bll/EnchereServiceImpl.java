@@ -34,13 +34,19 @@ public class EnchereServiceImpl implements EnchereService{
     @Override
     public void ajouterEnchere(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
         lstEncheres.add(enchere);
-        afficher(enchere, article, utilisateur);
+        save(enchere, article, utilisateur);
     }
 
     @Override
-    public void afficher(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
+    public void save(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
         enchereDAO.save(enchere, article, utilisateur);
     }
+
+	@Override
+	public List<Enchere> getEncheresEnCours(String categorie, String nom_article) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     
 //    //pour afficher les enchères dans le carousel
@@ -49,5 +55,7 @@ public class EnchereServiceImpl implements EnchereService{
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
+    
+    
    
 }
