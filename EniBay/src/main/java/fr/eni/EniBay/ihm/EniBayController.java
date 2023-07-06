@@ -313,11 +313,11 @@ public class EniBayController {
 		return "redirect:/accueil";
 	}
 	
-	@GetMapping("/acquisition")
-	public String versAcquisition() {
-		System.out.println("arrivee acquisition");
-		return "Acquisition";
-	}
+//	@GetMapping("/acquisition")
+//	public String versAcquisition() {
+//		System.out.println("arrivee acquisition");
+//		return "Acquisition";
+//	}
 	
 	@GetMapping("/details-fin-enchere")
 	public String detailsFinEnchere() {
@@ -330,4 +330,16 @@ public class EniBayController {
 		System.out.println("retrait article");
 		return "redirect:/accueil";
 	}
+	
+	@GetMapping("/acquisition")
+	public String listerEncheresEnCours(Model model,
+	                                    @RequestParam(value = "categorie", required = false) String categorie,
+	                                    @RequestParam(value = "nom_article", required = false) String nom_article) {
+	    List<ArticleVendu> encheresEnCours = articleVenduService.getArticlesEnCours(categorie, nom_article);
+	    model.addAttribute("encheres", encheresEnCours);
+	    System.out.println(encheresEnCours);
+	    return "Acquisition";
+	}
+	
+	
 }

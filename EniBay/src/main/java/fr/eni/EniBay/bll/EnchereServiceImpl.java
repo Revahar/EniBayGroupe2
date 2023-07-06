@@ -37,6 +37,12 @@ public class EnchereServiceImpl implements EnchereService{
         enchereDAO.save(enchere, article, utilisateur);
     }
 
+	@Override
+	public List<Enchere> getEncheresEnCours(String categorie, String nom_article) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
     
 //    //pour afficher les enchères dans le carousel
 //	@Override
@@ -44,5 +50,7 @@ public class EnchereServiceImpl implements EnchereService{
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
+    
+    
    
 }

@@ -14,7 +14,6 @@ public interface EnchereService {
 
 	void afficher(Enchere enchere, ArticleVendu article,Utilisateur utilisateur);
 
-
-	//List<Enchere> getTroisDernieresEncheres();
+	List<Enchere> getEncheresEnCours(String categorie, String nom_article);
 
 }

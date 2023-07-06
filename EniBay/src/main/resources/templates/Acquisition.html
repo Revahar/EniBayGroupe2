@@ -16,7 +16,42 @@
 
 <body class="bg-white h-100">
 
-<h2>Aquisition</h2>
+			<div class="py-5 text-center">
+	   			<h2>Ma recherche</h2>
+	   		</div>
+	
+	
+	
+	<!-- Liste enchères -->
+   <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+    
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+        <div class="col col-md-4" data-th-each="article: ${encheres}">
+          <div class="card shadow-sm">
+            <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${article.no_categorie} + '.jpg'}" th:alt="${article.nom_article}" th:title="${article.nom_article}" style="background-color:grey;" width="100%" height="225" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            	<title th:text="${article.nom_article}">Placeholder</title>
+            		<rect width="100%" height="100%" fill="#55595c"/>
+            			<text x="50%" y="50%" fill="#eceeef" dy=".3em" th:text="${article.nom_article}">ici, le titre de l'enchère</text>
+       
+            <div class="card-body">
+              <p class="card-text" th:text="${article.description}">Ici, la description de l'enchère.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                <a th:href="@{encherir(no_article=${article.no_article})}">
+                	<button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+                </a>                  
+                </div>
+				<small class="text-body-secondary" th:if="${article.prix_vente == 0}" th:block>Pas d'enchère en cours. Prix initial : <span th:text="${article.prix_initial}"></span> EniCoin</small>
+				<small class="text-body-secondary" th:unless="${article.prix_vente == 0}" th:block>Montant de l'enchère : <span th:text="${article.prix_vente}"></span> EniCoin</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin liste des enchères -->
 
 
 </body>

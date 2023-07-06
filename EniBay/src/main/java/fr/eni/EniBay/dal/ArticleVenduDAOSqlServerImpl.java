@@ -96,5 +96,42 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 		namedParameterJdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(articleVendu));
 	}
 
+	@Override
+	public List<ArticleVendu> findByCategorieAndNomArticleContainingIgnoreCase(String libelle, String nom_article) {
+	    String sql = SELECT_ALL + " WHERE ARTICLES_VENDUS.no_categorie = :no_categorie AND LOWER(ARTICLES_VENDUS.nom_article) LIKE LOWER(:nom_article)";
+	    MapSqlParameterSource paramMap = new MapSqlParameterSource();
+	    paramMap.addValue("no_categorie", getCategorieIdByLibelle(libelle));
+	    paramMap.addValue("nom_article", "%" + nom_article + "%");
+	    return namedParameterJdbcTemplate.query(sql, paramMap, new ArticleRowMapper());
+	}
+
+	 
+
+	@Override
+	public List<ArticleVendu> findByCategorie(String libelle) {
+	    String sql = SELECT_ALL + " WHERE ARTICLES_VENDUS.no_categorie = :no_categorie";
+	    MapSqlParameterSource paramMap = new MapSqlParameterSource();
+	    paramMap.addValue("no_categorie", getCategorieIdByLibelle(libelle));
+	    return namedParameterJdbcTemplate.query(sql, paramMap, new ArticleRowMapper());
+	}
+
+	 
+
+	@Override
+	public List<ArticleVendu> findByNomArticleContainingIgnoreCase(String nom_article) {
+	    String sql = SELECT_ALL + " WHERE LOWER(ARTICLES_VENDUS.nom_article) LIKE LOWER(:nom_article)";
+	    MapSqlParameterSource paramMap = new MapSqlParameterSource();
+	    paramMap.addValue("nom_article", "%" + nom_article + "%");
+	    return namedParameterJdbcTemplate.query(sql, paramMap, new ArticleRowMapper());
+	}
+
+	 
+
+	private Integer getCategorieIdByLibelle(String libelle) {
+	    String sql = "SELECT no_categorie FROM CATEGORIES WHERE LOWER(libelle) = LOWER(:libelle)";
+	    MapSqlParameterSource paramMap = new MapSqlParameterSource("libelle", libelle);
+	    return namedParameterJdbcTemplate.queryForObject(sql, paramMap, Integer.class);
+	}
+
 
 }
