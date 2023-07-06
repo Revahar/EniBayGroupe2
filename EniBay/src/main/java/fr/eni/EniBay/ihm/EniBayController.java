@@ -329,6 +329,8 @@ public class EniBayController {
 		return "redirect:/accueil";
 	}
 	
+	
+	// méthode pour la recherche non connecté
 	@GetMapping("/acquisition")
 	public String listerEncheresEnCours(Model model,
 	                                    @RequestParam(value = "categorie", required = false) String categorie,
@@ -338,6 +340,36 @@ public class EniBayController {
 	    System.out.println(encheresEnCours);
 	    return "Acquisition";
 	}
+	
+	
+	
+	//méthodes pour les recherches en mode connectés
+	 
+
+//	@GetMapping("/mes-enchères")
+//	public String listerMesEncheres(Model model, Principal principal) {
+//	    List<ArticleVendu> mesEncheres = enchereService.getMesEncheres(principal.getName());
+//	    model.addAttribute("mesEncheres", mesEncheres);
+//	    return "MesEncheres";
+//	}
+//
+//	 
+//
+//	@GetMapping("/enchères-gagnées")
+//	public String listerEncheresGagnees(Model model, Principal principal) {
+//	    List<ArticleVendu> encheresGagnees = enchereService.getEncheresGagnees(principal.getName());
+//	    model.addAttribute("encheresGagnees", encheresGagnees);
+//	    return "EncheresGagnees";
+//	}
+
+	 
+
+//	@GetMapping("/mes-ventes")
+//	public String listerMesVentes(Model model, Principal principal) {
+//	    List<Vente> mesVentes = venteService.getMesVentes(principal.getName());
+//	    model.addAttribute("mesVentes", mesVentes);
+//	    return "MesVentes";
+//	}
 	
 	
 }
