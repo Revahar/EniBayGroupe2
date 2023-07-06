@@ -49,6 +49,7 @@ public class EniBayController {
 	private ArticleVenduService articleVenduService;
 	private EnchereService enchereService;
 	private final PasswordEncoder passwordEncoder;
+	private Utilisateur Principal;
 	
 	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, 
 			ArticleVenduService articleVenduService, EnchereService enchereService, PasswordEncoder passwordEncoder) {
@@ -341,14 +342,14 @@ public class EniBayController {
 	
 	
 	// méthode pour la recherche non connecté
-	@GetMapping("/acquisition")
+	@GetMapping("/recherche")
 	public String listerEncheresEnCours(Model model,
 	                                    @RequestParam(value = "categorie", required = false) String categorie,
 	                                    @RequestParam(value = "nom_article", required = false) String nom_article) {
 	    List<ArticleVendu> encheresEnCours = articleVenduService.getArticlesEnCours(categorie, nom_article);
 	    model.addAttribute("encheres", encheresEnCours);
 	    System.out.println(encheresEnCours);
-	    return "Acquisition";
+	    return "Recherche";
 	}
 	
 	
@@ -356,30 +357,6 @@ public class EniBayController {
 	//méthodes pour les recherches en mode connectés
 	 
 
-//	@GetMapping("/mes-enchères")
-//	public String listerMesEncheres(Model model, Principal principal) {
-//	    List<ArticleVendu> mesEncheres = enchereService.getMesEncheres(principal.getName());
-//	    model.addAttribute("mesEncheres", mesEncheres);
-//	    return "MesEncheres";
-//	}
-//
-//	 
-//
-//	@GetMapping("/enchères-gagnées")
-//	public String listerEncheresGagnees(Model model, Principal principal) {
-//	    List<ArticleVendu> encheresGagnees = enchereService.getEncheresGagnees(principal.getName());
-//	    model.addAttribute("encheresGagnees", encheresGagnees);
-//	    return "EncheresGagnees";
-//	}
-
-	 
-
-//	@GetMapping("/mes-ventes")
-//	public String listerMesVentes(Model model, Principal principal) {
-//	    List<Vente> mesVentes = venteService.getMesVentes(principal.getName());
-//	    model.addAttribute("mesVentes", mesVentes);
-//	    return "MesVentes";
-//	}
 	
 	
 }
