@@ -39,10 +39,12 @@
 			 					<option th:each="categorie : ${@CategorieService.getListCategories()}" th:value="${categorie.no_categorie}" th:text="${categorie.libelle}"></option>
 			 				</select>
 			            </div>
+			            <!-- 
 						<div class="col-12">
 							<label class="input-group-text" for="inputGroupFile01">Importer une image</label>
 							<input type="file" class="form-control" id="inputGroupFile01" name="imageFile" required>
 						</div>
+						-->
 						<div class="col-12">
 						<label class="input-group-text" for="prix">Mise à prix</label>
 						<input type="number" th:field="*{prix_initial}" data-th-value="${article.prix_initial}" class="form-control" placeholder="Prix de l'article">

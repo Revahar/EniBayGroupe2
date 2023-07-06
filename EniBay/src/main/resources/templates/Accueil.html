@@ -25,7 +25,7 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        	<img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${articles.get(articles.size()-1).no_article} + '.jpg'}" th:alt="${articles.get(articles.size()-1).nom_article}" th:title="${articles.get(articles.size()-1).nom_article}" width="" height=""></img>
+        	<img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${articles.get(articles.size()-1).no_categorie} + '.jpg'}" th:alt="${articles.get(articles.size()-1).nom_article}" th:title="${articles.get(articles.size()-1).nom_article}" width="" height=""></img>
         <div class="container">
           <div class="carousel-caption text-start">
           		<h2 class="text-outline" th:text="${articles.get(articles.size()-1).nom_article}">Exemple enchère 1</h2>
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${articles.get(articles.size()-2).no_article} + '.jpg'}" th:alt="${articles.get(articles.size()-2).nom_article}" th:title="${articles.get(articles.size()-2).nom_article}" width="" height=""></img>
+        <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${articles.get(articles.size()-2).no_categorie} + '.jpg'}" th:alt="${articles.get(articles.size()-2).nom_article}" th:title="${articles.get(articles.size()-2).nom_article}" width="" height=""></img>
         <div class="container">
           <div class="carousel-caption">
             <h2 class="text-outline" th:text="${articles.get(articles.size()-2).nom_article}">Exemple enchère 2</h2>
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${articles.get(articles.size()-3).no_article} + '.jpg'}" th:alt="${articles.get(articles.size()-3).nom_article}" th:title="${articles.get(articles.size()-3).nom_article}" width="" height=""></img>
+        <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${articles.get(articles.size()-3).no_categorie} + '.jpg'}" th:alt="${articles.get(articles.size()-3).nom_article}" th:title="${articles.get(articles.size()-3).nom_article}" width="" height=""></img>
         <div class="container">
           <div class="carousel-caption text-end">
              <h2 class="text-outline" th:text="${articles.get(articles.size()-3).nom_article}">Exemple enchère 3</h2>
@@ -73,7 +73,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
         <div class="col col-md-4" data-th-each="item: ${articles}">
           <div class="card shadow-sm">
-            <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${item.no_article} + '.jpg'}" th:alt="${item.nom_article}" th:title="${item.nom_article}" style="background-color:grey;" width="100%" height="225" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${item.no_categorie} + '.jpg'}" th:alt="${item.nom_article}" th:title="${item.nom_article}" style="background-color:grey;" width="100%" height="225" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
             	<title th:text="${item.nom_article}">Placeholder</title>
             		<rect width="100%" height="100%" fill="#55595c"/>
             			<text x="50%" y="50%" fill="#eceeef" dy=".3em" th:text="${item.nom_article}">ici, le titre de l'enchère</text>
@@ -85,8 +85,16 @@
                 <a th:href="@{encherir(no_article=${item.no_article})}">
                 	<button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
                 </a>                  
-                </div>
+                </div><!-- 
                 <small class="text-body-secondary" th:text="'Prix initial : ' + ${item.prix_initial} + ' EniCoin'">ici, le prix initial</small>
+                <small class="text-body-secondary" th:text="'Prix actuel : ' + ${item.prix_vente} + ' EniCoin'">ici, le prix actuel</small>
+                 -->
+				<small class="text-body-secondary" th:if="${item.prix_vente == 0}" th:block>Pas d'enchère en cours. Prix initial : <span th:text="${item.prix_initial}"></span> EniCoin</small>
+				<small class="text-body-secondary" th:unless="${item.prix_vente == 0}" th:block>Montant de l'enchère : <span th:text="${item.prix_vente}"></span> EniCoin</small>
+
+
+
+                
               </div>
             </div>
           </div>

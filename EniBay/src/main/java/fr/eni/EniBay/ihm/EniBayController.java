@@ -212,7 +212,7 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-nouvelle-vente")
-    public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, Retrait retrait, Principal principal, @RequestParam("imageFile") MultipartFile imageFile) {
+    public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, Retrait retrait, Principal principal) { //@RequestParam("imageFile") MultipartFile imageFile sert à importer des images, à ne pas utiliser pour le moment
         System.out.println("enregistrer nouvelle vente");
         var utilisateur = utilisateurService.findByName(principal.getName());
         do
@@ -221,26 +221,26 @@ public class EniBayController {
         retraitService.ajouterRetrait(retrait, article, utilisateur);
         //System.out.println(image);
         // Vérifier si un fichier image a été sélectionné
-        if (!imageFile.isEmpty()) {
-            try {
-                // Obtenir le nom d'origine du fichier
-                String originalFilename = imageFile.getOriginalFilename();
-                System.out.println(originalFilename);
-                // Extraire l'extension du fichier
-                String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
-                System.out.println(fileExtension);
-                // Renommer le fichier selon le modèle "no_article.jpg"
-                String newFilename = article.getNo_article() + fileExtension;
-                System.out.println(newFilename);
-                // Renommer et enregistrer le fichier dans le répertoire souhaité
-                Path filePath = Paths.get("src/main/resources/static/images/", newFilename);
-                Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                // Enregistrement
-                //articleVendu.setNom_article(newFilename);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        if (!imageFile.isEmpty()) { <- sert à importer des images, à ne pas utiliser pour le moment
+//            try {
+//                // Obtenir le nom d'origine du fichier
+//                String originalFilename = imageFile.getOriginalFilename();
+//                System.out.println(originalFilename);
+//                // Extraire l'extension du fichier
+//                String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
+//                System.out.println(fileExtension);
+//                // Renommer le fichier selon le modèle "no_article.jpg"
+//                String newFilename = article.getNo_article() + fileExtension;
+//                System.out.println(newFilename);
+//                // Renommer et enregistrer le fichier dans le répertoire souhaité
+//                Path filePath = Paths.get("src/main/resources/static/images/", newFilename);
+//                Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+//                // Enregistrement
+//                //articleVendu.setNom_article(newFilename);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
         return "redirect:/accueil";
     }
 
