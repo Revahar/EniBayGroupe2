@@ -39,7 +39,12 @@ public class UtilisateurServiceImpl implements UtilisateurService{
         utilisateur.setMot_de_passe(passwordEncoder.encode(utilisateur.getMot_de_passe()));
         utilisateurDAO.save(utilisateur);
     }
-    
+
+    @Override
+    public void updateCredit(Utilisateur utilisateur) {
+        utilisateurDAO.updateCredit(utilisateur);
+    }
+
     @Override
     public void signIn(String identifiant, String password) {
     	System.out.println("vrai");

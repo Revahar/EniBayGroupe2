@@ -305,12 +305,12 @@ public class EniBayController {
 					Utilisateur ancienUtilisateur = utilisateurService.findById(sqlEnchere.getNo_utilisateur());
 
 					ancienUtilisateur.setCredit(ancienUtilisateur.getCredit() + sqlEnchere.getMontant());
-					utilisateurService.save(ancienUtilisateur);
+					utilisateurService.updateCredit(ancienUtilisateur);
 				}
 				utilisateur.setCredit(utilisateur.getCredit()-enchere.getMontant());
-				utilisateurService.save(utilisateur);
+				utilisateurService.updateCredit(utilisateur);
 
-				enchereService.ajouterEnchere(enchere, article, utilisateur);
+				enchereService.save(enchere, article, utilisateur);
 				articleVenduService.ajouterArticleVendu(article, utilisateur);
 			} else {
 				System.out.println("Le montant de l'enchère doit être supérieur au prix de vente actuel");

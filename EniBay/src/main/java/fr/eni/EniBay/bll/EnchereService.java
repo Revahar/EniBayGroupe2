@@ -11,8 +11,7 @@ public interface EnchereService {
 	List<Enchere> getEncheres();
 
 	Enchere findByAtricle(Integer no_article);
-
-	void ajouterEnchere(Enchere enchere, ArticleVendu article, Utilisateur utilisateur);
+	List<Enchere> findByUtilisateur(Integer no_utilisateur);
 
 	void save(Enchere enchere, ArticleVendu article,Utilisateur utilisateur);
 
