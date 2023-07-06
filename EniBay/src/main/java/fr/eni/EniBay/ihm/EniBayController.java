@@ -9,8 +9,10 @@ import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,14 +48,16 @@ public class EniBayController {
 	private UtilisateurService utilisateurService;
 	private ArticleVenduService articleVenduService;
 	private EnchereService enchereService;
+	private final PasswordEncoder passwordEncoder;
 	
 	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, 
-			ArticleVenduService articleVenduService, EnchereService enchereService) {
+			ArticleVenduService articleVenduService, EnchereService enchereService, PasswordEncoder passwordEncoder) {
 		this.categorieService = categorieService;
 		this.retraitService = retraitService;
 		this.utilisateurService = utilisateurService;
 		this.articleVenduService = articleVenduService;
 		this.enchereService = enchereService;
+		this.passwordEncoder = passwordEncoder;
 	}
 
     
@@ -174,7 +178,10 @@ public class EniBayController {
 	
 	@PostMapping("/enregistrer-modifs")
 	public String enregistrerModifsProfil(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
-										  BindingResult bindingResult) {
+										  BindingResult bindingResult, Principal principal) {
+		
+		Utilisateur sqlUtilisateur = utilisateurService.findByName(principal.getName());
+		
 		if (bindingResult.hasErrors()) {return "ModifProfil";}
 
 		if (utilisateurService.findByName(utilisateur.getPseudo()) != null
@@ -185,8 +192,21 @@ public class EniBayController {
 			&& !utilisateurService.findByName(utilisateur.getEmail()).getEmail().equals(utilisateur.getEmail())) {
 			return "ModifProfil";
 		}
-		utilisateurService.save(utilisateur);
 		System.out.println("enregistrer modifs profil");
+
+		var tempMdp =  passwordEncoder.encode(utilisateur.getMot_de_passe());
+		System.out.println(tempMdp);
+		System.out.println(utilisateur.getMot_de_passe());
+		System.out.println(sqlUtilisateur.getMot_de_passe());
+
+		if (!sqlUtilisateur.getPseudo().equals(utilisateur.getPseudo())
+			|| !sqlUtilisateur.getEmail().equals(utilisateur.getEmail())
+			|| !sqlUtilisateur.getMot_de_passe().equals(tempMdp) ){
+			utilisateurService.save(utilisateur);
+			return "redirect:/logout";
+		}
+		utilisateurService.save(utilisateur);
+
 		return "redirect:/mon-profil";
 	}
 

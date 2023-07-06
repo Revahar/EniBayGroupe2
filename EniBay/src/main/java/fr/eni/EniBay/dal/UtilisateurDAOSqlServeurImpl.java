@@ -47,7 +47,7 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 			utilisateur.setRue(rs.getString("rue"));
 			utilisateur.setCode_postal(rs.getString("code_postal"));
 			utilisateur.setVille(rs.getString("ville"));
-//			utilisateur.setMot_de_passe(rs.getString("mot_de_passe"));
+			utilisateur.setMot_de_passe(rs.getString("mot_de_passe"));
 			utilisateur.setCredit(rs.getInt("credit"));
 //			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
 			System.out.println(utilisateur);

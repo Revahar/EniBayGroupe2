@@ -117,6 +117,14 @@
 					    	<input id="password" class="form-control" type="password" th:field="*{mot_de_passe}">
 					    	<span th:if="${#fields.hasErrors('mot_de_passe')}" th:errors="*{mot_de_passe}"></span>
 					 	</div>
+					<div class="row g-3 justify-content-md-center">
+						<div class="col-md-3 ">
+							<label for="credit" class="input-group-text">credit :</label>
+						</div>
+						<div class="col-md-6">
+							<input id="credit" class="form-control" type="text" th:field="*{credit}">
+							<span th:if="${#fields.hasErrors('credit')}" th:errors="*{credit}"></span>
+						</div>
 					</div><br>
 		     
 		       		<div class="col-12 mt-3">
