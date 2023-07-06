@@ -28,7 +28,7 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	private final static String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article= :nom_article, description= :description, date_debut_encheres= :date_debut_encheres, date_fin_encheres= :date_fin_encheres, prix_initial= :prix_initial, prix_vente= :prix_vente, no_utilisateur= :no_utilisateur, no_categorie= :no_categorie WHERE no_article= :no_article";
 	private final static String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article= :no_article";
 	private final static String UPDATE_PRIX = "UPDATE ARTICLES_VENDUS SET prix_vente= :prix_vente WHERE no_article= :no_article";
-	private final static String SELECT_ALL_MY_ARTICLES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE ARTICLES_VENDUS.no_utilisateur= :no_utilisateur";
+	private final static String SELECT_ALL_MY_ARTICLES = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_utilisateur= :no_utilisateur";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -135,9 +135,13 @@ public class ArticleVenduDAOSqlServerImpl implements ArticleVenduDAO{
 	}
 	
 	@Override
-	public List<ArticleVendu> findAllMyArticles() {
+	public List<ArticleVendu> findAllMyArticles(Utilisateur utilisateur) {
+		MapSqlParameterSource mapSrc = new MapSqlParameterSource("no_utilisateur", utilisateur.getNo_utilisateur());
 		List<ArticleVendu> listMesArticles;
-		listMesArticles = namedParameterJdbcTemplate.query(SELECT_ALL_MY_ARTICLES, new ArticleRowMapper());
+		listMesArticles = namedParameterJdbcTemplate.query(SELECT_ALL_MY_ARTICLES, mapSrc, new ArticleRowMapper());
+		if (listMesArticles.isEmpty()) {
+			return null;
+		}
 		return listMesArticles;
 	}
 

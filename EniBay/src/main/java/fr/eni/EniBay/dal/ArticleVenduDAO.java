@@ -20,6 +20,6 @@ public interface ArticleVenduDAO {
 
 	List<ArticleVendu> findByNomArticleContainingIgnoreCase(String nom_article);
 
-	List<ArticleVendu> findAllMyArticles();
+	List<ArticleVendu> findAllMyArticles(Utilisateur utilisateur);
 
 }

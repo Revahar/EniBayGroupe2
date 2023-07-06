@@ -354,7 +354,7 @@ public class EniBayController {
 	
     @GetMapping("/MesVentes")
     public String afficherMesVentes(Model model, Principal principal) {
-        List<ArticleVendu> lstMesArticles = articleVenduService.getAllMyArticles();
+        List<ArticleVendu> lstMesArticles = articleVenduService.getAllMyArticles(utilisateurService.findByName(principal.getName()));
         model.addAttribute("mesArticles", lstMesArticles);
         System.out.println(lstMesArticles);
         return "MesVentes";

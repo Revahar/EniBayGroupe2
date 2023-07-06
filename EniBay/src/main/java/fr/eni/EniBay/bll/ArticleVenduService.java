@@ -17,7 +17,7 @@ public interface ArticleVenduService {
 
 	List<ArticleVendu> getArticlesEnCours(String categorie, String nom_article);
 
-	List<ArticleVendu> getAllMyArticles();
+	List<ArticleVendu> getAllMyArticles(Utilisateur utilisateur);
 
 
 }
