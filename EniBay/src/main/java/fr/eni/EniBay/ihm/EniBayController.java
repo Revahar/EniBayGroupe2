@@ -352,6 +352,14 @@ public class EniBayController {
 	    return "Recherche";
 	}
 	
+    @GetMapping("/MesVentes")
+    public String afficherMesVentes(Model model, Principal principal) {
+        List<ArticleVendu> lstMesArticles = articleVenduService.getAllMyArticles();
+        model.addAttribute("mesArticles", lstMesArticles);
+        System.out.println(lstMesArticles);
+        return "MesVentes";
+    }
+	
 	
 	
 	//méthodes pour les recherches en mode connectés

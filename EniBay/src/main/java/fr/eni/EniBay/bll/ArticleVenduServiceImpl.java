@@ -51,4 +51,9 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 		        return articleVenduDAO.findAll();
 		    }
 		}
+		
+	    @Override
+	    public List<ArticleVendu> getAllMyArticles() {
+	        return articleVenduDAO.findAllMyArticles();
+	    }
 }
