@@ -49,6 +49,7 @@ public class EniBayController {
 	private ArticleVenduService articleVenduService;
 	private EnchereService enchereService;
 	private final PasswordEncoder passwordEncoder;
+	private Utilisateur Principal;
 	
 	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, 
 			ArticleVenduService articleVenduService, EnchereService enchereService, PasswordEncoder passwordEncoder) {
@@ -339,15 +340,23 @@ public class EniBayController {
 		return "redirect:/accueil";
 	}
 	
-	@GetMapping("/acquisition")
+	
+	// méthode pour la recherche non connecté
+	@GetMapping("/recherche")
 	public String listerEncheresEnCours(Model model,
 	                                    @RequestParam(value = "categorie", required = false) String categorie,
 	                                    @RequestParam(value = "nom_article", required = false) String nom_article) {
 	    List<ArticleVendu> encheresEnCours = articleVenduService.getArticlesEnCours(categorie, nom_article);
 	    model.addAttribute("encheres", encheresEnCours);
 	    System.out.println(encheresEnCours);
-	    return "Acquisition";
+	    return "Recherche";
 	}
+	
+	
+	
+	//méthodes pour les recherches en mode connectés
+	 
+
 	
 	
 }
