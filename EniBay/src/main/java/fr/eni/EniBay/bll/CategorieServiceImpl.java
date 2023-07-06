@@ -27,11 +27,11 @@ public class CategorieServiceImpl implements CategorieService{
     @Override
     public void ajouterCategorie(Categorie categorie) {
         lstCategories.add(categorie);
-        afficher(categorie);
+        save(categorie);
     }
 
     @Override
-    public void afficher(Categorie categorie) {
+    public void save(Categorie categorie) {
         categorieDAO.save(categorie);
     }
 

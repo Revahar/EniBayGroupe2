@@ -10,7 +10,7 @@ public interface CategorieService {
 
 	void ajouterCategorie(Categorie categorie);
 
-	void afficher(Categorie categorie);
+	void save(Categorie categorie);
 	
 	public Map<Integer, Categorie> getMapCategories();
 }
