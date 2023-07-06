@@ -39,4 +39,9 @@ public class CategorieServiceImpl implements CategorieService{
 	public Map<Integer, Categorie> getMapCategories() {
 		return categorieDAO.getMapCategories();
 	}
+
+	@Override
+	public Categorie getCategorieById(Integer no_categorie) {
+		return categorieDAO.findById(no_categorie);
+	}
 }

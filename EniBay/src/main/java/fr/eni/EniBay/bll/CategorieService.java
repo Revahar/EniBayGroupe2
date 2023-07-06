@@ -13,4 +13,6 @@ public interface CategorieService {
 	void save(Categorie categorie);
 	
 	public Map<Integer, Categorie> getMapCategories();
+	
+	Categorie getCategorieById(Integer no_categorie);
 }

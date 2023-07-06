@@ -271,7 +271,9 @@ public class EniBayController {
             ArticleVendu article = articleVenduService.getArticleVenduById(no_article);
             System.out.println(article);
             var utilisateur = utilisateurService.findById(article.getNo_utilisateur());
+            var categorie = categorieService.getCategorieById(article.getNo_categorie());
             if(article != null) {
+            	model.addAttribute("categorie", categorie);
                 model.addAttribute("article", article);
                 model.addAttribute("utilisateur", utilisateur);
                 model.addAttribute("enchere", new Enchere());
