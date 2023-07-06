@@ -3,23 +3,26 @@ package fr.eni.EniBay.bo;
 import java.sql.Date;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ArticleVendu {
-	@NotBlank
+	@NotNull
 	private Integer no_article;
-	@NotBlank
+	@NotBlank(message = "L'article doit avoir un nom")
 	private String nom_article;
-	@NotBlank
+	@NotBlank(message = "L'article doit avoir une description")
 	private String description;
-	@NotBlank
+	@NotNull(message = "Sélectionnez une date de début des enchères")
 	private Date date_debut_encheres;
-	@NotBlank
+	@NotNull(message = "Sélectionnez une date de fin des enchères")
 	private Date date_fin_encheres;
+	
+	@NotNull(message = "Entrez un prix de mise en vente")
 	private Integer prix_initial;
 	private Integer prix_vente;
-	@NotBlank
+	@NotNull
 	private Integer no_utilisateur;
-	@NotBlank
+	@NotNull
 	private Integer no_categorie;
 
 	public ArticleVendu() {
