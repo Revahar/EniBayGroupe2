@@ -264,29 +264,6 @@ public class EniBayController {
         return "redirect:/accueil";
     }
 
-
-	@GetMapping("/encherir")
-	public String encherir(Model model, @RequestParam(name = "no_article", required = true) Integer no_article, Principal principal){		
-		System.out.println("arrivee encherir");
-		
-		if(no_article > 0) {
-			ArticleVendu article = articleVenduService.getArticleVenduById(no_article);
-			System.out.println(article);
-			var utilisateur = utilisateurService.findByName(principal.getName());
-			if(article != null) {
-				model.addAttribute("article", article);
-				model.addAttribute("utilisateur", utilisateur);
-				model.addAttribute("enchere", new Enchere());
-				return "Encherir";
-			} else {
-				System.out.println("Article inconnu");
-			} 
-		} else {
-			System.out.println("Numero d'article inconnu");
-		}
-		
-		return "redirect:/accueil";
-	}
 	
 	@PostMapping("/enregistrer-enchere")
 	public String enregistrerEnchere(Model model, @ModelAttribute("enchere") Enchere enchere, Principal principal,
