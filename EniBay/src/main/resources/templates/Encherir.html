@@ -99,7 +99,9 @@
 					    		<label for="desc" class="input-group-text">Vendeur : </label>
 						    </div> 
 							<div class="col-md-6 text-center">
-								<span id="desc" th:text="${utilisateur.pseudo}"></span>
+								<a th:href="@{profil(pseudo=${utilisateur.pseudo})}">
+									<span id="desc" th:text="${utilisateur.pseudo}"></span>
+								</a>
 							</div>
 						</div><br>
 				

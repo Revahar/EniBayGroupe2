@@ -157,10 +157,11 @@ public class EniBayController {
 	}
 	
 	@GetMapping("/profil")
-	public String afficherProfil(@RequestParam Utilisateur utilisateur, Model model) {
+	public String afficherProfil(@RequestParam(value = "pseudo") String pseudo, Model model) {
 		System.out.println("afficher profil");
+		Utilisateur utilisateur = utilisateurService.findByName(pseudo);
 		model.addAttribute("utilisateur", utilisateur);
-		return "Profil";
+		return "ProfilVisite";
 	}
 	
 	@GetMapping("/mon-profil")
