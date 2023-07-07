@@ -26,7 +26,6 @@ public class SecurityConfig{
 	protected final Log logger = LogFactory.getLog(getClass());
 	private final String SELECT_USER = "select email, password ,1 from UTILISATEURS where email=? AND actif=1";
 	private final String SELECT_ROLES = "select email, 'admin' from UTILISATEURS where email=?";
-	//private final String SELECT_ROLES = "select u.email, r.role from UTILISATEURS u inner join ROLES r on r.IS_ADMIN = m.admin where m.email = ?";
 
 	@Autowired
 	private DataSource dataSource ;
@@ -72,15 +71,6 @@ public class SecurityConfig{
 					;
 		});
 		
-		//http.formLogin(Customizer.withDefaults());
-		
-
-//		http.sessionManagement(session -> session
-//		        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//		        .invalidSessionUrl("/connexion")
-//		        .maximumSessions(1)
-//		        .sessionRegistry(sessionRegistry()));
-		
 		http.sessionManagement()
 	    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 	    .invalidSessionUrl("/connexion")
@@ -107,56 +97,6 @@ public class SecurityConfig{
 		return http.build();
 	}
 
-	
-//	@Bean
-//	UserDetailsManager userDetailsManager(DataSource dataSource) {
-//		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-//
-//		jdbcUserDetailsManager.setUsersByUsernameQuery(SELECT_USER);
-//		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(SELECT_ROLES);
-//
-//		return jdbcUserDetailsManager;
-//	}
-	
-//	@Bean
-//	public UserDetailsService userDetailsService(DataSource dataSource) {
-//	    JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-//	    userDetailsManager.setUsersByUsernameQuery(SELECT_USER);
-//	    // userDetailsManager.setAuthoritiesByUsernameQuery(SELECT_ROLES);
-//	    return userDetailsManager;
-//	}
-	
-//	@Bean
-//	public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
-//	    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//	    authenticationProvider.setUserDetailsService(userDetailsService);
-//	    authenticationProvider.setPasswordEncoder(passwordEncoder());
-//	    return authenticationProvider;
-//	}
-	
-
-
-	
-//	@Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails user1 = User.withUsername("user1@gmail.com")
-//            .password(passwordEncoder().encode("user1Pass"))
-//            .roles("USER")
-//            .build();
-//        UserDetails user2 = User.withUsername("user2")
-//            .password(passwordEncoder().encode("user2Pass"))
-//            .roles("USER")
-//            .build();
-//        UserDetails admin = User.withUsername("admin")
-//            .password(passwordEncoder().encode("adminPass"))
-//            .roles("ADMIN")
-//            .build();
-//        return new InMemoryUserDetailsManager(user1, user2, admin);
-//    }
-	
-
-
-	
 	@Bean
 	public SessionRegistry sessionRegistry() {
 	    return new SessionRegistryImpl();

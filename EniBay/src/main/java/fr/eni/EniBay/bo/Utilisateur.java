@@ -25,7 +25,7 @@ public class Utilisateur  {
 	private String ville;
 	@NotBlank(message = "ne doit pas être null")
 	private String mot_de_passe;
-	private Integer credit = 0;
+	private Integer credit = 100;
 	private Boolean administrateur = false;
 	private Boolean actif = true;
     private String messageErreurColor = "red"; //<- sert à afficher le message d'erreur en rouge

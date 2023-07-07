@@ -25,8 +25,6 @@ import fr.eni.EniBay.dal.UtilisateurDAOSqlServeurImpl.UtilisateurRowMapper;
 @Repository
 @Primary
 public class EnchereDAOSqlServerImpl implements EnchereDAO {
-
-	//private final static String SELECT_ALL = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
 	private final static String INSERT = "INSERT INTO encheres (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (:no_utilisateur, :no_article, :date_enchere, :montant_enchere)";
 	private final static String UPDATE = "UPDATE encheres SET no_utilisateur = :no_utilisateur, no_article = :no_article, date_enchere = :date_enchere, montant_enchere = :montant_enchere WHERE id = :id";
 	private final static String SELECT_BY_ID = "SELECT enchere.no_article, enchere.no_utilisateur, enchere.date_enchere, enchere.montant_enchere AS enchere_ " +
@@ -54,11 +52,6 @@ public class EnchereDAOSqlServerImpl implements EnchereDAO {
 	public EnchereDAOSqlServerImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
-
-//	@Override
-//	public List<Enchere> findAll() {
-//		return namedParameterJdbcTemplate.query(SELECT_ALL, new BeanPropertyRowMapper<>(Enchere.class));
-//	}
 	
 	@Override
 	public List<Enchere> findAll() {
@@ -74,7 +67,8 @@ public class EnchereDAOSqlServerImpl implements EnchereDAO {
 		return namedParameterJdbcTemplate.queryForObject(SELECT_BY_ID, new BeanPropertySqlParameterSource(src),
 				new BeanPropertyRowMapper<>(Enchere.class));
 	}
-
+	
+// ---------------------------------------------------------------------------------------------------------	
 	@Override
 	public Enchere findByArticle(Integer noArticle) {
 		MapSqlParameterSource mapSrc = new MapSqlParameterSource("no_article", noArticle);
@@ -94,7 +88,8 @@ public class EnchereDAOSqlServerImpl implements EnchereDAO {
 		if (enchere.isEmpty()) {return null;}
 		return enchere;
 	}
-
+// ---------------------------------------------------------------------------------------------------------
+	
 	@Override
 	public void save(Enchere enchere, ArticleVendu article, Utilisateur utilisateur) {
 		if (enchere.getNo_article() != null) {

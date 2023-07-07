@@ -82,8 +82,6 @@ public class EniBayController {
         model.addAttribute("retraits", lstRetraits);
         List<ArticleVendu> lstArticles = articleVenduService.getArticlesVendus();
         model.addAttribute("articles", lstArticles);
-//        List<Enchere> lstEncheres = enchereService.getEncheres();
-//        model.addAttribute("encheres", lstEncheres);
         System.out.println(lstArticles);
         return "Accueil";
     }
@@ -109,18 +107,6 @@ public class EniBayController {
 	    model.addAttribute("loginForm", new LoginForm()); // Initialiser le modèle LoginForm  
 	    return "Connexion";
 	}
-
-//	@GetMapping("/connexion")
-//	public String versConnexion(@ModelAttribute("loginForm")LoginForm loginForm) {
-//		System.out.println("arrivée connexion");
-//		return "Connexion";
-//	}
-	
-//	@PostMapping("/connecter")
-//	public String connexionProfil(@ModelAttribute("LoginForm")LoginForm loginForm) {
-//		System.out.println("connecter");
-//		return "redirect:/accueil";
-//	}
 	
 	@GetMapping("/creer")
 	public String versCreation(Model model) {
@@ -138,7 +124,6 @@ public class EniBayController {
 
 		if (utilisateurService.findByName(utilisateur.getPseudo()) != null) {return "Creation";}
 		if (utilisateurService.findByName(utilisateur.getEmail()) != null) {return "Creation";}
-//		System.out.println("Pseudo or Email already taken, sorry m8");
 		utilisateurService.ajouterUtilisateur(utilisateur);
 		
 		return "redirect:/connexion";
@@ -242,31 +227,10 @@ public class EniBayController {
             articleVenduService.ajouterArticleVendu(article, utilisateur);
         while (article.getNo_article() == null);
         retraitService.ajouterRetrait(retrait, article, utilisateur);
-        //System.out.println(image);
-        // Vérifier si un fichier image a été sélectionné
-//        if (!imageFile.isEmpty()) { <- sert à importer des images, à ne pas utiliser pour le moment
-//            try {
-//                // Obtenir le nom d'origine du fichier
-//                String originalFilename = imageFile.getOriginalFilename();
-//                System.out.println(originalFilename);
-//                // Extraire l'extension du fichier
-//                String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
-//                System.out.println(fileExtension);
-//                // Renommer le fichier selon le modèle "no_article.jpg"
-//                String newFilename = article.getNo_article() + fileExtension;
-//                System.out.println(newFilename);
-//                // Renommer et enregistrer le fichier dans le répertoire souhaité
-//                Path filePath = Paths.get("src/main/resources/static/images/", newFilename);
-//                Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-//                // Enregistrement
-//                //articleVendu.setNom_article(newFilename);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
         return "redirect:/accueil";
     }
 	
+// ---------------------------------------------------------------------------------------------------------	
     @GetMapping("/encherir")
     public String encherir(Model model, @RequestParam(name = "no_article", required = true) Integer no_article, Principal principal){        
         System.out.println("arrivee encherir");
@@ -296,15 +260,13 @@ public class EniBayController {
         }
         return "redirect:/accueil";
     }
-	
+ // ---------------------------------------------------------------------------------------------------------	
+    
 	@PostMapping("/enregistrer-enchere")
 	public String enregistrerEnchere(Model model, @ModelAttribute("enchere") Enchere enchere, Principal principal,
 			@RequestParam(value = "no_article") String no_article) {
 		ArticleVendu article = articleVenduService.getArticleVenduById(Integer.parseInt(no_article));
 		System.out.println("enregistrer enchere");
-/*		System.out.println(article.getNo_article());
-		System.out.println(enchere.getNo_article());
-		System.out.println(enchere.getMontant());*/
 		var utilisateur = utilisateurService.findByName(principal.getName());
 		if((utilisateur.getCredit() - enchere.getMontant()) >= 0) {
 			if(enchere.getMontant() > article.getPrix_vente()) {
@@ -331,12 +293,6 @@ public class EniBayController {
 		
 		return "redirect:/accueil";
 	}
-	
-//	@GetMapping("/acquisition")
-//	public String versAcquisition() {
-//		System.out.println("arrivee acquisition");
-//		return "Acquisition";
-//	}
 	
 	@GetMapping("/details-fin-enchere")
 	public String detailsFinEnchere() {
@@ -391,12 +347,4 @@ public class EniBayController {
     public String afficherTarifs() {
         return "Tarifs";
     }
-	
-	
-	
-	//méthodes pour les recherches en mode connectés
-	 
-
-	
-	
 }

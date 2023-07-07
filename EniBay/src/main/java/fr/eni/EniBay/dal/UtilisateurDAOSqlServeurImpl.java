@@ -49,7 +49,6 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 			utilisateur.setVille(rs.getString("ville"));
 			utilisateur.setMot_de_passe(rs.getString("mot_de_passe"));
 			utilisateur.setCredit(rs.getInt("credit"));
-//			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
 			utilisateur.setActif(rs.getBoolean("actif"));
 			System.out.println(utilisateur);
 			return utilisateur;
@@ -100,7 +99,8 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 	public void delete(Utilisateur utilisateur) {
 		namedParameterJdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(utilisateur));
 	}
-
+	
+// ---------------------------------------------------------------------------------------------------------	
 	@Override
 	public Utilisateur findByName(String id) {
 		MapSqlParameterSource mapSrc = new MapSqlParameterSource("id", id);
@@ -108,6 +108,7 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 	if (utilisateur.isEmpty()) {return null;}
 	return utilisateur.get(0);
 	}
+// ---------------------------------------------------------------------------------------------------------	
 
 	@Override
 	public void updateCredit(Utilisateur utilisateur) {
