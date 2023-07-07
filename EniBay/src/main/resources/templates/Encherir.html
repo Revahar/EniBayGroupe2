@@ -59,15 +59,11 @@
 						    </div> 
 							<div class="col-md-6 text-center">
 								<span id="prixVente" th:text="${article.prix_vente}"></span>
-							</div>
-							<div th:if="${maxEncherisseur} != null">
-								<div>
+								<span th:if="${maxEncherisseur} != null">
 									<label for="maxEncherisseur"> par </label>
-								</div>
-								<div>
 									<span id="maxEncherisseur" th:text="${maxEncherisseur.pseudo}"></span>
-								</div>
-							</div>							
+								</span>	
+							</div>			
 						</div><br>
 				
 						<div class="row g-3 justify-content-md-center">

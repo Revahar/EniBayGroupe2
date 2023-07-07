@@ -18,13 +18,13 @@ import fr.eni.EniBay.bo.Utilisateur;
 @Repository
 public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 	
-	private final static String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
-			+ "VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
-	private final static String FIND_ALL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit FROM UTILISATEURS";
-	private final static String FIND_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit FROM UTILISATEURS WHERE no_utilisateur= :no_utilisateur";
+	private final static String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, actif) "
+			+ "VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur, :actif)";
+	private final static String FIND_ALL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, actif FROM UTILISATEURS";
+	private final static String FIND_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, actif FROM UTILISATEURS WHERE no_utilisateur= :no_utilisateur";
 	private final static String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur= :no_utilisateur";
-	private final static String FIND_BY_NAME = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo= :id OR email= :id";
-	private final static String UPDATE = "UPDATE UTILISATEURS SET pseudo= :pseudo, nom= :nom, prenom= :prenom, email= :email, telephone= :telephone, rue= :rue, code_postal= :code_postal, ville= :ville, mot_de_passe= :mot_de_passe, credit= :credit, administrateur= :administrateur WHERE no_utilisateur= :no_utilisateur";
+	private final static String FIND_BY_NAME = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, actif FROM UTILISATEURS WHERE pseudo= :id OR email= :id";
+	private final static String UPDATE = "UPDATE UTILISATEURS SET pseudo= :pseudo, nom= :nom, prenom= :prenom, email= :email, telephone= :telephone, rue= :rue, code_postal= :code_postal, ville= :ville, mot_de_passe= :mot_de_passe, credit= :credit, administrateur= :administrateur, actif= :actif WHERE no_utilisateur= :no_utilisateur";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -50,6 +50,7 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 			utilisateur.setMot_de_passe(rs.getString("mot_de_passe"));
 			utilisateur.setCredit(rs.getInt("credit"));
 //			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+			utilisateur.setActif(rs.getBoolean("actif"));
 			System.out.println(utilisateur);
 			return utilisateur;
 		}
@@ -85,7 +86,8 @@ public class UtilisateurDAOSqlServeurImpl implements UtilisateurDAO{
 			mapSrc.addValue("mot_de_passe", utilisateur.getMot_de_passe());
 			mapSrc.addValue("credit", utilisateur.getCredit());
 			mapSrc.addValue("administrateur", utilisateur.getAdministrateur());
-			
+			mapSrc.addValue("actif", utilisateur.getActif());
+
 			namedParameterJdbcTemplate.update(INSERT, mapSrc, keyHolder);
 			utilisateur.setNo_utilisateur(keyHolder.getKey().intValue());
 			System.out.println(utilisateur);

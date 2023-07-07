@@ -27,8 +27,8 @@
         	<img class="image bd-placeholder-img card-img-top" th:src="@{'/images/' + ${articles.get(articles.size()-1).no_categorie} + '.jpg'}" th:alt="${articles.get(articles.size()-1).nom_article}" th:title="${articles.get(articles.size()-1).nom_article}" width="" height=""></img>
         <div class="container">
           <div class="carousel-caption text-start">
-          		<h2 class="text-outline" th:text="${articles.get(articles.size()-1).nom_article}">Exemple enchère 1</h2>
-            <p class="opacity-75 text-outline" th:text="${articles.get(articles.size()-1).description}">Ici on intègre la description de l'enchère</p>
+          	<h2 class="text-outline" th:text="${articles.get(articles.size()-1).nom_article}">Exemple enchère 1</h2>
+            <p class="text-outline" th:text="${articles.get(articles.size()-1).description}">Ici on intègre la description de l'enchère</p>
             <p><a class="btn btn-lg btn-primary" th:href="@{encherir(no_article=${articles.get(articles.size()-1).no_article})}">Enchérir</a></p>
           </div>
         </div>
@@ -38,7 +38,7 @@
         <div class="container">
           <div class="carousel-caption">
             <h2 class="text-outline" th:text="${articles.get(articles.size()-2).nom_article}">Exemple enchère 2</h2>
-           <p class="opacity-75 text-outline" th:text="${articles.get(articles.size()-2).description}">Ici on intègre la description de l'enchère</p>
+           	<p class="text-outline" th:text="${articles.get(articles.size()-2).description}">Ici on intègre la description de l'enchère</p>
             <p><a class="btn btn-lg btn-primary" th:href="@{encherir(no_article=${articles.get(articles.size()-2).no_article})}">Enchérir</a></p>
           </div>
         </div>
@@ -48,8 +48,8 @@
         <div class="container">
           <div class="carousel-caption text-end">
              <h2 class="text-outline" th:text="${articles.get(articles.size()-3).nom_article}">Exemple enchère 3</h2>
-            <p class="opacity-75 text-outline" th:text="${articles.get(articles.size()-3).description}">Ici on intègre la description de l'enchère</p>
-            <p><a class="btn btn-lg btn-primary" th:href="@{encherir(no_article=${articles.get(articles.size()-3).no_article})}">Enchérir</a></p>
+             <p class="text-outline" th:text="${articles.get(articles.size()-3).description}">Ici on intègre la description de l'enchère</p>
+             <p><a class="btn btn-lg btn-primary" th:href="@{encherir(no_article=${articles.get(articles.size()-3).no_article})}">Enchérir</a></p>
           </div>
         </div>
       </div>
