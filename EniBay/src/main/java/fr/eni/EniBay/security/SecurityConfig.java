@@ -24,7 +24,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig{
 	protected final Log logger = LogFactory.getLog(getClass());
-	private final String SELECT_USER = "select email, password ,1 from UTILISATEURS where email=?";
+	private final String SELECT_USER = "select email, password ,1 from UTILISATEURS where email=? AND actif=1";
 	private final String SELECT_ROLES = "select email, 'admin' from UTILISATEURS where email=?";
 	//private final String SELECT_ROLES = "select u.email, r.role from UTILISATEURS u inner join ROLES r on r.IS_ADMIN = m.admin where m.email = ?";
 
@@ -43,8 +43,8 @@ public class SecurityConfig{
 		auth.jdbcAuthentication()
 			.dataSource( dataSource )
 			.passwordEncoder( passwordEncoder )
-			.usersByUsernameQuery( " SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE ? IN ( pseudo , email ) " )
-			.authoritiesByUsernameQuery( " SELECT pseudo, ( CASE WHEN administrateur = 1 THEN 'admin' ELSE 'user' END ) FROM utilisateurs WHERE ? IN ( pseudo , email ) " )
+			.usersByUsernameQuery( " SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE actif=1 AND ? IN ( pseudo , email ) " )
+			.authoritiesByUsernameQuery( " SELECT pseudo, ( CASE WHEN administrateur = 1 THEN 'admin' ELSE 'user' END ) FROM utilisateurs WHERE actif=1 AND ? IN ( pseudo , email ) " )
 			;
 	}
 	
