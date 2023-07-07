@@ -386,6 +386,11 @@ public class EniBayController {
         System.out.println("liste de mes participations : " + lstMesParticipations);
         return "MesParticipations";
     }
+    
+    @GetMapping("/MesAchats")
+    public String afficherMesAchats() {
+        return "MesAchats";
+    }
 	
 	
 	
