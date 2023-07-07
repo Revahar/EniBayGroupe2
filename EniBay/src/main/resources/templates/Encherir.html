@@ -16,16 +16,12 @@
 <div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
 
 <body class="bg-white h-100">
-
 	<div class="container">
 		<div class="row justify-content-center align-items-center vh-50">
 			<div class="py-5 text-center">
 	   			<h2>Enchérir </h2>
 	   		</div>
-	   		
-	   			
-	   			
-					<div class="col-md-5 col-lg-7">
+				<div class="col-md-5 col-lg-7">
 					<form th:action="@{enregistrer-enchere}" th:object="${enchere}" method="post">
 						<div class="row g-3 justify-content-md-center"><hr>
 							<div class="col-md-3 ">
@@ -37,7 +33,6 @@
 							</div>
 						</div><br>
 				
-			
 						<div class="row g-3 justify-content-md-center">
 							<div class="col-md-3 ">
 					    		<label for="desc" class="input-group-text">Description : </label>
@@ -120,8 +115,8 @@
 			            		</div>	
 							</div>
 						</div>
-						</form><br>
-					</div>
+					</form><br>
+				</div>
 			</div>
 		</div>
 </body>

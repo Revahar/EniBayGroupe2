@@ -5,36 +5,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div xmlns:th="http://www.thymeleaf.org" data-th-fragment="fragment-footer">
-<div class="container">
-
-
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023 EniBay, Inc</p>
-
-     <!-- Titre -->
-	<div class="col-md-6 mb-0 text-body-secondary">
-		<div class="col">
-			<h1 class="titre">
-				<a data-th-href="@{accueil}" style="text-decoration: none;">
-					<span style="color: red; font-size: 75%;">E</span>
-					<span style="color: blue; font-size: 75%;">ni</span>
-					<span style="color: gold; font-size: 75%;">B</span>
-					<span style="color: green; font-size: 75%;">ay</span>
-				</a>
-			</h1>
+	<div xmlns:th="http://www.thymeleaf.org" data-th-fragment="fragment-footer">
+		<div class="container">
+		  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+		    <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023 EniBay, Inc</p>
+		     <!-- Titre -->
+			<div class="col-md-6 mb-0 text-body-secondary">
+				<div class="col">
+					<h1 class="titre">
+						<a data-th-href="@{accueil}" style="text-decoration: none;">
+							<span style="color: red; font-size: 75%;">E</span>
+							<span style="color: blue; font-size: 75%;">ni</span>
+							<span style="color: gold; font-size: 75%;">B</span>
+							<span style="color: green; font-size: 75%;">ay</span>
+						</a>
+					</h1>
+				</div>
+			</div>
+			<!-- Fin titre -->
+		    <ul class="nav col-md-12 justify-content-end">
+		      <li class="nav-item"><a data-th-href="@{accueil}" class="nav-link px-2 text-body-secondary">Accueil</a></li>
+		      <li class="nav-item"><a data-th-href="@{accueil}" class="nav-link px-2 text-body-secondary">Tarif (soon &trade;)</a></li>
+		      <li class="nav-item"><a href="https://github.com/Revahar/EniBayGroupe2.git" class="nav-link px-2 text-body-secondary">À propos</a></li>
+		    </ul>
+		  </footer>
 		</div>
 	</div>
-	
-	<!-- Fin titre -->
-
-    <ul class="nav col-md-12 justify-content-end">
-      <li class="nav-item"><a data-th-href="@{accueil}" class="nav-link px-2 text-body-secondary">Accueil</a></li>
-      <li class="nav-item"><a data-th-href="@{accueil}" class="nav-link px-2 text-body-secondary">Tarif (soon &trade;)</a></li>
-      <li class="nav-item"><a href="https://github.com/Revahar/EniBayGroupe2.git" class="nav-link px-2 text-body-secondary">À propos</a></li>
-    </ul>
-  </footer>
-</div>
-</div>
 </body>
 </html>
