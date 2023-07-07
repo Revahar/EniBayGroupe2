@@ -280,7 +280,15 @@ public class EniBayController {
             System.out.println(article);
             var utilisateur = utilisateurService.findById(article.getNo_utilisateur());
             var categorie = categorieService.getCategorieById(article.getNo_categorie());
+            var maxEnchere = enchereService.findByAtricle(no_article);
+            Utilisateur maxEncherisseur = null;
+            if(maxEnchere != null) {
+            	maxEncherisseur = utilisateurService.findById(maxEnchere.getNo_utilisateur());
+            }            
             if(article != null) {
+            	if(maxEncherisseur != null) {
+            		model.addAttribute("maxEncherisseur", maxEncherisseur);
+            	}            	
             	model.addAttribute("categorie", categorie);
                 model.addAttribute("article", article);
                 model.addAttribute("utilisateur", utilisateur);
