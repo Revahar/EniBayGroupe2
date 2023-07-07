@@ -12,9 +12,9 @@ public class ArticleVendu {
 	private String nom_article;
 	@NotBlank(message = "L'article doit avoir une description")
 	private String description;
-	@NotNull(message = "Sélectionnez une date de début des enchères")
+	//@NotNull(message = "Sélectionnez une date de début des enchères")
 	private Date date_debut_encheres;
-	@NotNull(message = "Sélectionnez une date de fin des enchères")
+	//@NotNull(message = "Sélectionnez une date de fin des enchères")
 	private Date date_fin_encheres;
 	
 	@NotNull(message = "Entrez un prix de mise en vente")

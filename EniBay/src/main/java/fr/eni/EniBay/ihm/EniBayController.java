@@ -235,12 +235,8 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-nouvelle-vente")
-    public String enregistrerNouvelleVente(@Valid @ModelAttribute ArticleVendu article, BindingResult bindingResult, Retrait retrait, Principal principal) { //@RequestParam("imageFile") MultipartFile imageFile sert à importer des images, à ne pas utiliser pour le moment
+    public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, Retrait retrait, Principal principal) { //@RequestParam("imageFile") MultipartFile imageFile sert à importer des images, à ne pas utiliser pour le moment
         System.out.println("enregistrer nouvelle vente");
-        
-        if(bindingResult.hasErrors()) {
-        	return "redirect:/nouvelle-vente";
-        }
         
         var utilisateur = utilisateurService.findByName(principal.getName());
         do
@@ -280,7 +276,7 @@ public class EniBayController {
             System.out.println(article);
             var utilisateur = utilisateurService.findById(article.getNo_utilisateur());
             var categorie = categorieService.getCategorieById(article.getNo_categorie());
-            var maxEnchere = enchereService.findByAtricle(no_article);
+            Enchere maxEnchere = enchereService.findByAtricle(no_article);
             Utilisateur maxEncherisseur = null;
             if(maxEnchere != null) {
             	maxEncherisseur = utilisateurService.findById(maxEnchere.getNo_utilisateur());
