@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr" class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profil utilisateur</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" data-th-href="@{/css/style.css}">
+
+</head>
+<br><br>
+<div data-th-replace="~{fragments/fragment-entete :: fragment-entete}"></div>
+
+<body>
+
+	<div class="grid">
+		<h2 class="profilTitre">Profil</h2>
+	</div>
+	<div class="grid" th:object="${utilisateur}">
+		<div class="profilColonneUne">
+			<label>Pseudo :</label>
+		</div>
+		<div class="profilColonneDeux">
+			<label th:text="${utilisateur.pseudo}">Le pseudo a intégrer</label>
+		</div>
+		<div class="profilColonneUne">
+			<label>Nom :</label>
+		</div>
+		<div class="profilColonneDeux">
+			<label th:text="${utilisateur.nom}">Le nom a intégrer</label>
+		</div>
+		<div class="profilColonneUne">
+			<label>Prénom :</label>
+		</div>
+		<div class="profilColonneDeux">
+			<label th:text="${utilisateur.prenom}">Le prénom a intégrer</label>
+		</div>
+		<div class="profilColonneUne">
+			<label>Email :</label>
+		</div>
+		<div class="profilColonneDeux">
+			<label th:text="${utilisateur.email}">Le mail a intégrer</label>
+		</div>
+			<div class="profilColonneUne">
+			<label>Téléphone :</label>
+		</div>
+		<div class="profilColonneDeux">
+			<label th:text="${utilisateur.telephone}">Le téléphone a intégrer</label>
+		</div>
+		<div class="profilColonneUne">
+			<label>Adresse :</label>
+		</div>
+		<div class="profilColonneDeux">
+			<label th:text="${utilisateur.rue}">L'adresse à intégrer</label>
+		</div>
+		<div class="profilColonneUne">
+			<label>Code Postal :</label>
+		</div>
+		<div class="profilColonneDeux">
+			<label th:text="${utilisateur.code_postal}">Le code postal à intégrer</label>
+		</div>
+		<div class="profilColonneUne">
+			<label>Ville :</label>
+		</div>
+		<div class="profilColonneDeux">
+			<label th:text="${utilisateur.ville}">La ville a intégrer</label>
+		</div>
+	  	
+	</div>
+	<br><br><br><br><br>
+	<br><br><br><br><br>
+</body>
+
+	<div data-th-replace="~{fragments/fragment-footer :: fragment-footer}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</html>
