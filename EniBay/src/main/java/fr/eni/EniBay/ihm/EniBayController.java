@@ -141,7 +141,7 @@ public class EniBayController {
 //		System.out.println("Pseudo or Email already taken, sorry m8");
 		utilisateurService.ajouterUtilisateur(utilisateur);
 		
-		return "redirect:/accueil";
+		return "redirect:/connexion";
 	}
 	
 	@GetMapping("/encheres")
@@ -235,12 +235,12 @@ public class EniBayController {
 	}
 	
 	@PostMapping("/enregistrer-nouvelle-vente")
-    public String enregistrerNouvelleVente(@Valid @ModelAttribute ArticleVendu article, BindingResult bindingResult, Retrait retrait, Principal principal) { //@RequestParam("imageFile") MultipartFile imageFile sert à importer des images, à ne pas utiliser pour le moment
+    public String enregistrerNouvelleVente(@ModelAttribute ArticleVendu article, Retrait retrait, Principal principal) { //@RequestParam("imageFile") MultipartFile imageFile sert à importer des images, à ne pas utiliser pour le moment
         System.out.println("enregistrer nouvelle vente");
-        
-        if(bindingResult.hasErrors()) {
-        	return "redirect:/nouvelle-vente";
-        }
+//        @Valid , BindingResult bindingResult
+//        if(bindingResult.hasErrors()) {
+//        	return "redirect:/nouvelle-vente";
+//        }
         
         var utilisateur = utilisateurService.findByName(principal.getName());
         do
@@ -390,6 +390,11 @@ public class EniBayController {
     @GetMapping("/MesAchats")
     public String afficherMesAchats() {
         return "MesAchats";
+    }
+    
+    @GetMapping("/Tarifs")
+    public String afficherTarifs() {
+        return "Tarifs";
     }
 	
 	
