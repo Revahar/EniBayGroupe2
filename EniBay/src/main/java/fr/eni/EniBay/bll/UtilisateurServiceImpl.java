@@ -72,8 +72,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	    // Vérifiez si les informations de connexion sont valides en les comparant à celles stockées dans la base de données
 	    
 	    Utilisateur utilisateur = utilisateurDAO.findByName(email); // Supposons que vous avez une méthode findByPseudo dans votre DAO
-
-	    return true;
+	    return utilisateur.getActif();
 	}
 
 }

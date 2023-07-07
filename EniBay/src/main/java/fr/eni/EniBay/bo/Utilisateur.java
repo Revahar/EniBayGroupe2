@@ -27,6 +27,7 @@ public class Utilisateur  {
 	private String mot_de_passe;
 	private Integer credit = 0;
 	private Boolean administrateur = false;
+	private Boolean actif = true;
     private String messageErreurColor = "red"; //<- sert à afficher le message d'erreur en rouge
 
 
@@ -38,7 +39,7 @@ public class Utilisateur  {
 	
 	public Utilisateur(Integer no_utilisateur, @NotBlank String pseudo, @NotBlank String nom, @NotBlank String prenom,
 			@NotBlank String email, String telephone, @NotBlank String rue, @NotBlank String code_postal,
-			@NotBlank String ville, @NotBlank String mot_de_passe, Integer credit, Boolean administrateur) {
+			@NotBlank String ville, @NotBlank String mot_de_passe, Integer credit, Boolean administrateur, Boolean actif) {
 		this.no_utilisateur = no_utilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -51,7 +52,7 @@ public class Utilisateur  {
 		this.mot_de_passe = mot_de_passe;
 		this.credit = credit;
 		this.administrateur = administrateur;
-
+		this.actif = actif;
 	}
 
 	public Integer getNo_utilisateur() {
@@ -144,6 +145,14 @@ public class Utilisateur  {
 
 	public Boolean getAdministrateur() {
 		return administrateur;
+	}
+
+	public Boolean getActif() {
+		return actif;
+	}
+
+	public void setActif(Boolean actif) {
+		this.actif = actif;
 	}
 
 	public void setAdministrateur(Boolean administrateur) {
