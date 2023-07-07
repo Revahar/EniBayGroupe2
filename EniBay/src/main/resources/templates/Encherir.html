@@ -55,47 +55,51 @@
 				
 						<div class="row g-3 justify-content-md-center">
 							<div class="col-md-3 ">
-					    		<label for="desc" class="input-group-text">Prix de vente : </label>
+					    		<label for="prixVente" class="input-group-text">Prix de vente : </label>
 						    </div> 
 							<div class="col-md-6 text-center">
-								<span id="desc" th:text="${article.prix_vente}"></span>
+								<span id="prixVente" th:text="${article.prix_vente}"></span>
+								<span th:if="${maxEncherisseur} != null">
+									<label for="maxEncherisseur"> par </label>
+									<span id="maxEncherisseur" th:text="${maxEncherisseur.pseudo}"></span>
+								</span>	
+							</div>			
+						</div><br>
+				
+						<div class="row g-3 justify-content-md-center">
+							<div class="col-md-3 ">
+					    		<label for="prixInit" class="input-group-text">Prix initial : </label>
+						    </div> 
+							<div class="col-md-6 text-center">
+								<span id="prixInit" th:text="${article.prix_initial}"></span>
 							</div>
 						</div><br>
 				
 						<div class="row g-3 justify-content-md-center">
 							<div class="col-md-3 ">
-					    		<label for="desc" class="input-group-text">Prix initial : </label>
+					    		<label for="dateFin" class="input-group-text">Date de fin d'enchère : </label>
 						    </div> 
 							<div class="col-md-6 text-center">
-								<span id="desc" th:text="${article.prix_initial}"></span>
+								<span id="dateFin" th:text="${article.date_fin_encheres}"></span>
 							</div>
 						</div><br>
 				
 						<div class="row g-3 justify-content-md-center">
 							<div class="col-md-3 ">
-					    		<label for="desc" class="input-group-text">Date de fin d'enchère : </label>
+					    		<label for="adresse" class="input-group-text">Adresse de retrait : </label>
 						    </div> 
 							<div class="col-md-6 text-center">
-								<span id="desc" th:text="${article.date_fin_encheres}"></span>
+								<span id="adresse" th:text="${utilisateur.rue} + ', ' + ${utilisateur.code_postal} + ', ' + ${utilisateur.ville}"></span>
 							</div>
 						</div><br>
 				
 						<div class="row g-3 justify-content-md-center">
 							<div class="col-md-3 ">
-					    		<label for="desc" class="input-group-text">Adresse de retrait : </label>
-						    </div> 
-							<div class="col-md-6 text-center">
-								<span id="desc" th:text="${utilisateur.rue} + ', ' + ${utilisateur.code_postal} + ', ' + ${utilisateur.ville}"></span>
-							</div>
-						</div><br>
-				
-						<div class="row g-3 justify-content-md-center">
-							<div class="col-md-3 ">
-					    		<label for="desc" class="input-group-text">Vendeur : </label>
+					    		<label for="vendeur" class="input-group-text">Vendeur : </label>
 						    </div> 
 							<div class="col-md-6 text-center">
 								<a th:href="@{profil(pseudo=${utilisateur.pseudo})}">
-									<span id="desc" th:text="${utilisateur.pseudo}"></span>
+									<span id="vendeur" th:text="${utilisateur.pseudo}"></span>
 								</a>
 							</div>
 						</div><br>
