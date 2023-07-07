@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mon profil</title>
+    <title>Profil utilisateur</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" data-th-href="@{/css/style.css}">
@@ -17,7 +17,7 @@
 <body>
 
 	<div class="grid">
-		<h2 class="profilTitre">Mon Profil</h2>
+		<h2 class="profilTitre">Profil</h2>
 	</div>
 	<div class="grid" th:object="${utilisateur}">
 		<div class="profilColonneUne">
@@ -68,16 +68,6 @@
 		<div class="profilColonneDeux">
 			<label th:text="${utilisateur.ville}">La ville a intégrer</label>
 		</div>
-		<div class="profilColonneUne">
-			<label>Crédits :</label>
-		</div>
-		<div class="profilColonneDeux">
-			<label th:text="${utilisateur.credit}">Le nombre de crédits</label>
-		</div>
-	
-		<a class="nav-link textNav profilBouton" aria-current="page" data-th-href="@{modifier-profil}">
-	  		<button type="button" class="btn btn-outline-primary btn-lg">Modifier</button>
-	  	</a>	
 	  	
 	</div>
 	<br><br><br><br><br>
