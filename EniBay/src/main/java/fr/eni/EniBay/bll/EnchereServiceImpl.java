@@ -1,6 +1,5 @@
 package fr.eni.EniBay.bll;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -41,7 +40,6 @@ public class EnchereServiceImpl implements EnchereService{
 
 	@Override
 	public List<Enchere> getEncheresEnCours(String categorie, String nom_article) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

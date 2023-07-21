@@ -1,6 +1,5 @@
 package fr.eni.EniBay.dal;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,14 +12,11 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.EniBay.bo.ArticleVendu;
 import fr.eni.EniBay.bo.Enchere;
 import fr.eni.EniBay.bo.Utilisateur;
-import fr.eni.EniBay.dal.UtilisateurDAOSqlServeurImpl.UtilisateurRowMapper;
 
 @Repository
 @Primary

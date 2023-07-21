@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "MSSQLSERVER02",
+            "database": "ENIBAY_DB",
+            "username": "saNath",
+            "password": "Arwbp4ri!"
+        }
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
+}

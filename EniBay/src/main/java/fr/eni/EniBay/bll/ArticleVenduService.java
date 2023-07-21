@@ -3,7 +3,6 @@ package fr.eni.EniBay.bll;
 import java.util.List;
 
 import fr.eni.EniBay.bo.ArticleVendu;
-import fr.eni.EniBay.bo.Enchere;
 import fr.eni.EniBay.bo.Utilisateur;
 
 public interface ArticleVenduService {

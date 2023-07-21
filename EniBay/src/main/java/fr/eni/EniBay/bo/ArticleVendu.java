@@ -26,7 +26,6 @@ public class ArticleVendu {
 	private Integer no_categorie;
 
 	public ArticleVendu() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ArticleVendu(@NotBlank Integer no_article, @NotBlank String nom_article, @NotBlank String description,

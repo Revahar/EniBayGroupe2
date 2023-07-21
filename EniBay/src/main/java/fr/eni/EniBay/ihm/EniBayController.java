@@ -1,16 +1,9 @@
 package fr.eni.EniBay.ihm;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,10 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.multipart.MultipartFile;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import fr.eni.EniBay.bll.ArticleVenduService;
 import fr.eni.EniBay.bll.CategorieService;
 import fr.eni.EniBay.bll.EnchereService;
@@ -50,7 +40,7 @@ public class EniBayController {
 	private ArticleVenduService articleVenduService;
 	private EnchereService enchereService;
 	private final PasswordEncoder passwordEncoder;
-	private Utilisateur Principal;
+	//private Utilisateur Principal;
 	
 	public EniBayController(CategorieService categorieService, RetraitService retraitService, UtilisateurService utilisateurService, 
 			ArticleVenduService articleVenduService, EnchereService enchereService, PasswordEncoder passwordEncoder) {

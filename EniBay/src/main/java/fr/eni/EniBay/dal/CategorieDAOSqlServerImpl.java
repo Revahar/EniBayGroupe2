@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+//import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +17,9 @@ public class CategorieDAOSqlServerImpl implements CategorieDAO{
 	
 	private final static String SELECT_ALL = "SELECT no_categorie, libelle FROM CATEGORIES";
 	private final static String SELECT_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie = :no_categorie";
-	private final static String INSERT = "INSERT INTO CATEGORIES (no_categorie, libelle) VALUES (:no_categorie, :libelle)";
-	private final static String UPDATE = "UPDATE CATEGORIES SET no_categorie = :no_categorie, libelle = :libelle";
-	private final static String DELETE = "delete  CATEGORIES where no_categorie = :no_categorie" ;
+	//private final static String INSERT = "INSERT INTO CATEGORIES (no_categorie, libelle) VALUES (:no_categorie, :libelle)";
+	//private final static String UPDATE = "UPDATE CATEGORIES SET no_categorie = :no_categorie, libelle = :libelle";
+	//private final static String DELETE = "delete  CATEGORIES where no_categorie = :no_categorie" ;
 
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -63,6 +63,5 @@ public class CategorieDAOSqlServerImpl implements CategorieDAO{
 	
 	@Override
 	public void save(Categorie categorie) {
-		// TODO Auto-generated method stub	
 	}	
 }

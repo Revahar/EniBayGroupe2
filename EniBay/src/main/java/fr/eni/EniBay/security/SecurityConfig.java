@@ -24,8 +24,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig{
 	protected final Log logger = LogFactory.getLog(getClass());
-	private final String SELECT_USER = "select email, password ,1 from UTILISATEURS where email=? AND actif=1";
-	private final String SELECT_ROLES = "select email, 'admin' from UTILISATEURS where email=?";
+	//private final String SELECT_USER = "select email, password ,1 from UTILISATEURS where email=? AND actif=1";
+	//private final String SELECT_ROLES = "select email, 'admin' from UTILISATEURS where email=?";
 
 	@Autowired
 	private DataSource dataSource ;

@@ -66,12 +66,8 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	@Override
 	public boolean verifierConnexion(LoginForm loginForm) {
 	    String email = loginForm.getUsername();
-	    String motDePasse = loginForm.getPassword();
-	    
-	    // Effectuez ici la logique de vérification des informations de connexion
-	    // Vérifiez si les informations de connexion sont valides en les comparant à celles stockées dans la base de données
-	    
-	    Utilisateur utilisateur = utilisateurDAO.findByName(email); // Supposons que vous avez une méthode findByPseudo dans votre DAO
+	    //String motDePasse = loginForm.getPassword();
+	    Utilisateur utilisateur = utilisateurDAO.findByName(email); 
 	    return utilisateur.getActif();
 	}
 

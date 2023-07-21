@@ -9,8 +9,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.EniBay.bo.ArticleVendu;
@@ -24,10 +22,10 @@ public class RetraitDAOSqlServeurImpl implements RetraitDAO{
 	private final static String SELECT_BY_ID = "SELECT no_article, rue, code_postal, ville FROM RETRAITS WHERE no_article = :no_article";
 	private final static String INSERT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (:no_article, :rue, :code_postal, :ville)";
 	private final static String UPDATE = "UPDATE RETRAITS SET no_article = :no_article, rue = :rue, code_postal = :code_postal, ville = :ville";
-	private final static String DELETE = "delete  RETRAITS where no_article = :no_article" ;
+	//private final static String DELETE = "delete  RETRAITS where no_article = :no_article" ;
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	private RetraitDAO retraitDAO;
+	//private RetraitDAO retraitDAO;
 
 	@Autowired
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
